@@ -2,3 +2,16 @@
 
 */
 
+table{
+    border-style: none;
+    margin: auto auto auto auto;
+    width: 700px;
+    height: 700px;
+    border-spacing: 0;
+}
+table tr,td{
+    border-style: none;
+    padding: 0px;
+    background-size: cover;
+    background-color: black;
+}

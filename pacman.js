@@ -2,6 +2,8 @@
     Here should be our names etc...
  */
 
+window.onload = function() { // to avoid the code running before the JS is costructed and cause errors
+
 		document.onkeydown = checkKey;
 		// Variables----------------------------------------------
 		var rows = 10;
@@ -18,38 +20,75 @@
 		var started = false;
 		var time = 150;
 		var saved = false;
-		var victim = 5;
-		
+                
+                //variables which are the symbols in the console matrix
+		var victim = 6; 
+                var wall=0;
+                var food = 1;
+                var empty = 2;
+                var pacman=3;
+                var specialFood =5;
+                var ghost = 4;
+               // var laid ='L';
+                // Some variables for the interface table
+                var img_pacman = 'url(imgs/p_right.png)';
+                var img_empty = 'url(imgs/empty.png)';
+                var img_food = 'url(imgs/food.png)';
+                var img_wall ='url(imgs/wall.png)';
+                var img_special_food ='url(imgs/special_food.png)'; 
+                var img_ghost= 'url(imgs/ghost.png)';
 		//Print Matrix---------------------------------------------
 		function printMatrix( matrix ){
 			var rows = matrix.length;
 			console.log("\n Matrix  \n");
 			console.log("Score: "+score+" Bombs: "+bombs+" Time: "+time+"\n");
 			for( var i = 0; i < rows; i++){
-				console.log("Row "+i+" "+matrix[i]);
+				console.log("Row "+i+" "+matrix[i]);                                
+            
 			}
+                        updateTable();
 		}
+                //Update table in the html file to be equal the matrix
+                function updateTable(){
+                    for( var i = 0; i < rows; i++){
+                        for( var j = 0; j < columns; j++){
+                            var newImg = obj.matrix[i][j]==wall?img_wall:obj.matrix[i][j]==food?img_food:obj.matrix[i][j]==empty?img_empty:obj.matrix[i][j]==pacman?img_pacman:obj.matrix[i][j]==ghost?img_ghost:img_special_food;
+
+                            document.getElementById("tableGame").rows[i].cells[j].style.backgroundImage = newImg; 
+                        }
+                    }
+                    
+                }
 		//Create Matrix-----------------------------------------------
 		function createMatrix(rows, columns, walls , prizes, obj){
 			var matrix = new Array(rows);
-			
+			var table="<table id=\"tableGame\">";
+                       
+                        
 			for(var i=0; i<rows; i++) {
-				matrix[i] = new Array(columns);
+				matrix[i] = new Array(columns);                                                              
 			}
-			
+                                              
+                        
 			for(var i = 0; i < rows; i++){
+                            table+="<tr>";  
 				for(var j = 0; j < columns; j++){
-					matrix[i][j] = "-";
+					matrix[i][j] = empty;
+                                        table+="<td></td>";        
 				}
+                            table+="</tr>";     
 			}
+                        
+                        table+="</table>";
+                        document.getElementById("divGame").innerHTML= table;
 			
-			createVictim(victim,matrix);
+			//createVictim(victim,matrix);
 			creatWalls(walls, matrix);
 			createPrizes(prizes, matrix);
 			
 			
-			//matrix[y][x] = "P";
-			matrix[0][0] = "P";
+			//matrix[y][x] = pacman;
+			matrix[0][0] = pacman;
 			
 			obj.matrix = matrix;
 			printMatrix(obj.matrix);
@@ -63,8 +102,8 @@
 			do{
 				x_aux = Math.floor(Math.random()*columns);
 				y_aux = Math.floor(Math.random()*rows);
-				if( matrix[y_aux][x_aux]== "-"){
-					matrix[y_aux][x_aux] = "W";
+				if( matrix[y_aux][x_aux]== empty){
+					matrix[y_aux][x_aux] = wall;
 					walls--;
 				}
 				//console.log("Wall: "+walls);
@@ -80,8 +119,8 @@
 			do{
 				x_aux = Math.floor(Math.random()*columns);
 				y_aux = Math.floor(Math.random()*rows);
-				if( matrix[y_aux][x_aux]== "-" ){
-					matrix[y_aux][x_aux] = "O";
+				if( matrix[y_aux][x_aux]== empty ){
+					matrix[y_aux][x_aux] = food;
 					prizes--;
 				}
 				//console.log("Prize: "+prizes);
@@ -98,8 +137,8 @@
 			do{
 				x_aux = Math.floor(Math.random()*columns);
 				y_aux = Math.floor(Math.random()*rows);
-				if( matrix[y_aux][x_aux]== "-"){
-					matrix[y_aux][x_aux] = "L";
+				if( matrix[y_aux][x_aux]== empty){
+					matrix[y_aux][x_aux] = specialFood;
 					victim--;
 				}
 				//console.log("Prize: "+prizes);
@@ -110,16 +149,16 @@
 		
 		function validateXLimits(  x , matrix ){
 			var xLimit = matrix[0].length;
-			if( x < 0 || x >= xLimit || matrix[y][x]=="W")
+			if( x < 0 || x >= xLimit || matrix[y][x]==wall)
 				return false;
 			else{
-				if(matrix[y][x]=="O"){
+				if(matrix[y][x]==food){
 					score+=10;
 				}
-				else if(matrix[y][x]=="L"){
+				else if(matrix[y][x]==specialFood){
 					if(time!=0){
 						saved = true;
-						alert("You save the laid!!!");
+						alert("You have super powers now!!!");
 					}
 				}
 					
@@ -130,10 +169,10 @@
 		function validateYLimits(  y , matrix  ){
 			var yLimit = matrix.length;
 			
-			if( y < 0 || y >= yLimit || matrix[y][x]=="W" )
+			if( y < 0 || y >= yLimit || matrix[y][x]==wall )
 				return false;
 			else{
-				if(matrix[y][x]=="O"){
+				if(matrix[y][x]==food){
 					score+=10;
 				}
 				return true;	
@@ -155,14 +194,14 @@
 					var x_aux = x-1;
 					for(var j = 0; j < 3; j++){
 						if( x_aux >= 0 && x_aux < columns){
-							matrix[y_aux][x_aux] = "-";
+							matrix[y_aux][x_aux] = empty;
 						}
 						x_aux++;
 					}
 				}
 				y_aux++;
 			}
-			matrix[y][x] = "P";
+			matrix[y][x] = pacman;
 		}
 		
 		
@@ -181,8 +220,8 @@
 				var valid = validateYLimits( y_aux, obj.matrix);
 				console.log("Valid Moviment: "+valid);
 				valid ? y = y_aux : y = y ;
-				obj.matrix[y_aux+1][x] = "-";
-				obj.matrix[y][x] = "P";
+				obj.matrix[y_aux+1][x] = empty;
+				obj.matrix[y][x] = pacman;
 				
 				printMatrix(obj.matrix);
 				
@@ -197,8 +236,8 @@
 				var valid = validateYLimits( y_aux, obj.matrix);
 				console.log("Valid Moviment: "+valid);
 				valid ? y = y_aux : y = y ;
-				obj.matrix[y_aux-1][x] = "-";
-				obj.matrix[y][x] = "P";
+				obj.matrix[y_aux-1][x] = empty;
+				obj.matrix[y][x] = pacman;
 				
 				printMatrix(obj.matrix);
 			}
@@ -212,8 +251,8 @@
 				var  valid = validateXLimits( x_aux, obj.matrix);
 				console.log("Valid Moviment: "+valid);
 				valid ? x = x_aux : x = x ;
-				obj.matrix[y][x_aux-1] = "-";
-				obj.matrix[y][x] = "P";
+				obj.matrix[y][x_aux-1] = empty;
+				obj.matrix[y][x] = pacman;
 				
 				printMatrix(obj.matrix);
 			}
@@ -227,8 +266,8 @@
 				var valid = validateXLimits( x_aux, obj.matrix);
 				console.log("Valid Moviment: "+valid);
 				valid ? x = x_aux : x = x ;
-				obj.matrix[y][x_aux+1] = "-";
-				obj.matrix[y][x] = "P";
+				obj.matrix[y][x_aux+1] = empty;
+				obj.matrix[y][x] = pacman;
 				
 				printMatrix(obj.matrix);
 			}
@@ -256,3 +295,4 @@
 			printMatrix(obj.matrix) ;
 		},1000);
 		printMatrix(obj.matrix);
+ };
