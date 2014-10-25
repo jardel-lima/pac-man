@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pac Man</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+</head>
+<body>
+	 <div id="divGame"></div>
+	<script>
+		// Variables----------------------------------------------
+		var ROWS    = 30;
+		var COLUMNS = 20;
+		var MATRIX = [];
+		var WALL = 'W';
+		var FOOD = '-';
+		var SPECIAL_FOOD = 'o';
+		var GHOST = 'G';
+		var PACMAN = 'P';
+		var EMPTY = 'e';
+		var NUMBER_OF_SPECIAL_FOOD = 5;
+		var IMG_PACMAN = 'url(../imgs/p_right.png)';
+        var IMG_EMPTY = 'url(../imgs/empty.png)';
+        var IMG_FOOD = 'url(../imgs/food.png)';
+        var IMG_WALL ='url(../imgs/wall.png)';
+        var IMG_SPECIAL_FOOD ='url(../imgs/special_food.png)'; 
+        var IMG_GHOST= 'url(../imgs/ghost.png)';
+		
+		var score = 0;
+		var quantityOfFood  = 0;
+		var hasStarted = false;
+		var pacmanDirection = null; /*UP|DOWN|RIGHT|LEFT*/
+		var saved = false;
+		var pacmanPositionY = 1;
+		var pacmanPositionX = 1;
+		
+		//Functions-----------------------------------------------
+		
+		//Initiate Matrix---------------------------------------
+		function initiateMatrix() {
+			var table="<table border='"+1+"' width='"+80+"%' align='center' id=\"tableGame\">";
+			for(var i = 0; i < ROWS; i++){
+				var matrix = [];
+				table+="<tr height='"+20+"'>"
+				for(var j = 0; j < COLUMNS; j++){
+					matrix.push(0);
+					table+="<td></td>"; 
+				}
+				MATRIX.push(matrix);
+				table+="</tr>"; 
+			}
+			
+			 table+="</table>";
+             document.getElementById("divGame").innerHTML= table;
+			
+		}
+		
+		//Print Matrix---------------------------------------------
+		function printMatrix(){
+			var rows = MATRIX.length;
+			console.log("\n Matrix  \n");
+			for( var i = 0; i < rows; i++){
+				console.log("Row "+i+" "+MATRIX[i]);
+			}
+			updateTable();
+		}
+		
+		//Update table in the html file to be equal the matrix
+        function updateTable(){
+            for( var i = 0; i < ROWS; i++){
+                for( var j = 0; j < COLUMNS; j++){
+                    var newImg = MATRIX[i][j]==WALL?IMG_WALL:MATRIX[i][j]==FOOD?IMG_FOOD:MATRIX[i][j]==EMPTY?IMG_EMPTY:MATRIX[i][j]==PACMAN?IMG_PACMAN:MATRIX[i][j]==GHOST?IMG_GHOST:IMG_SPECIAL_FOOD;
+
+                    document.getElementById("tableGame").rows[i].cells[j].style.backgroundImage = newImg; 
+                }
+            }
+            
+        }
+		
+		function readMap(map){
+			//console.log("map "+map);
+			for(var i = 0; i <  ROWS; i++){
+			    var aux = map.substr(i*(COLUMNS),COLUMNS)
+			    //console.log("sub "+aux);
+			    for(var j = 0; j < COLUMNS; j++){
+			    	if(aux.charAt(j)=='0'){
+			    		//console.log("auxAt row: "+i+" col: "+j+" "+aux.charAt(j));
+			    		MATRIX[i][j]= WALL;
+			    	}else{
+			    		//console.log("auxAt row: "+i+" col: "+j+" "+aux.charAt(j));
+			    		MATRIX[i][j]= FOOD;
+			    		quantityOfFood++; // Counts the quantity of food on the map
+			    	}
+			    }
+			}
+			MATRIX[pacmanPositionY][pacmanPositionX] = PACMAN;// The pacman will start in the same possition
+			quantityOfFood = quantityOfFood - 1/*pacman*/ - 4/*ghosts*/ - NUMBER_OF_SPECIAL_FOOD;
+		}
+		//The Ghosts will be always in the same place
+		function generateGhosts(){
+			MATRIX[14][8]= GHOST;
+			MATRIX[14][9]= GHOST;
+			MATRIX[14][10]= GHOST;
+			MATRIX[14][11]= GHOST;
+		}
+		
+		function generateSpecialFood(){
+			var x_aux;
+			var y_aux;
+			var specialFood = NUMBER_OF_SPECIAL_FOOD;
+			do{
+				x_aux = Math.floor(Math.random()*COLUMNS);
+				y_aux = Math.floor(Math.random()*ROWS);
+				if( MATRIX[y_aux][x_aux] == FOOD ){
+					MATRIX[y_aux][x_aux] = SPECIAL_FOOD;
+					specialFood--;
+				}
+				
+			}while(specialFood>0);
+		}
+		
+		function populateMATRIX(map){
+			readMap(map);
+			generateGhosts();
+			generateSpecialFood();
+			
+		}
+		
+		function validateXLimits( x ){
+			var xLimit = COLUMNS;
+			if( x < 0 || x >= xLimit || MATRIX[pacmanPositionY][x]==WALL)
+				return false;
+			else{
+				if(MATRIX[pacmanPositionY][x]==FOOD){
+					score+=10;
+				}
+				else if(MATRIX[pacmanPositionY][x]==SPECIAL_FOOD){
+					//if(time!=0){
+						saved = true;
+						alert("You have super powers now!!!");
+					}
+				
+				return true;	
+			}	
+		}
+		
+		function validateYLimits(y){
+			var yLimit = ROWS;
+			
+			if( y < 0 || y >= yLimit || MATRIX[y][pacmanPositionX]==WALL )
+				return false;
+			else{
+				if(MATRIX[y][pacmanPositionX]==FOOD){
+					score+=10;
+				}
+				return true;	
+			}	
+		}
+		
+		//Main-----------------------------------------------------
+		initiateMatrix();
+		var map = 	"00000000000000000000"+
+				  	"0                  0"+
+					"0 0000000  0000000 0"+
+					"0       0        0 0"+
+					"0 0000000  0000000 0"+
+					"0 0        0       0"+
+					"0 0000000  0000000 0"+
+					"0       0        0 0"+
+					"0 0000000  0000000 0"+
+					"0 0        0       0"+
+					"0 0000000  0000000 0"+
+					"0                  0"+
+					"0 0000000000000000 0"+
+					"0      0    000000 0"+
+					"0 000000    0      0"+
+					"0      0    000000 0"+
+					"0 0000000000000000 0"+
+					"0                  0"+
+					"0 0000000  0000000 0"+
+					"0       0        0 0"+
+					"0 0000000  0000000 0"+
+					"0 0        0       0"+
+					"0 0000000  0000000 0"+
+					"0       0        0 0"+
+					"0 0000000  0000000 0"+
+					"0 0        0       0"+
+					"0 0000000  0000000 0"+
+					"0 00  000    000   0"+
+					"0                  0"+
+					"00000000000000000000";
+					
+		populateMATRIX(map);
+		printMatrix();
+		
+		//keyboard events----------------------------------------------------
+		document.onkeydown = checkKey;
+		function checkKey(e) {
+
+			e = e || window.event;
+
+			if (e.keyCode == '38') {
+				// up arrow
+				console.log("Up");
+				if(!hasStarted)
+					hasStarted = true;
+				var y_aux = pacmanPositionY;
+				y_aux--;
+				var valid = validateYLimits(y_aux);
+				console.log("Valid Moviment: "+valid);
+				valid ? pacmanPositionY = y_aux : pacmanPositionY = pacmanPositionY ;
+				MATRIX[y_aux+1][pacmanPositionX] = EMPTY;
+				MATRIX[pacmanPositionY][pacmanPositionX] = PACMAN;
+				
+				printMatrix();
+				
+			}
+			else if (e.keyCode == '40') {
+				// down arrow
+				console.log("Down");
+				if(!hasStarted)
+					hasStarted = true;
+				var y_aux = pacmanPositionY;
+				y_aux++;
+				var valid = validateYLimits(y_aux);
+				console.log("Valid Moviment: "+valid);
+				valid ? pacmanPositionY = y_aux : pacmanPositionY = pacmanPositionY ;
+				MATRIX[y_aux-1][pacmanPositionX] = EMPTY;
+				MATRIX[pacmanPositionY][pacmanPositionX] = PACMAN;
+				
+				printMatrix();
+			}
+			else if (e.keyCode == '39') {
+				// right arrow
+				console.log("Right");
+				if(!hasStarted)
+					hasStarted = true;
+				var x_aux = pacmanPositionX;
+				x_aux++;
+				var  valid = validateXLimits( x_aux);
+				console.log("Valid Moviment: "+valid);
+				valid ? pacmanPositionX = x_aux : pacmanPositionX = pacmanPositionX ;
+				MATRIX[pacmanPositionY][x_aux-1] = EMPTY;
+				MATRIX[pacmanPositionY][pacmanPositionX] = PACMAN;
+				
+				printMatrix();
+			}
+			else if (e.keyCode == '37') {
+				// left arrow
+				console.log("Left");
+				if(!hasStarted)
+					hasStarted = true;
+				var x_aux = pacmanPositionX;
+				x_aux--;
+				var valid = validateXLimits( x_aux);
+				console.log("Valid Moviment: "+valid);
+				valid ? pacmanPositionX = x_aux : pacmanPositionX = pacmanPositionX ;
+				MATRIX[pacmanPositionY][x_aux+1] = EMPTY;
+				MATRIX[pacmanPositionY][pacmanPositionX] = PACMAN;
+				
+				printMatrix();
+			}
+			
+		}
+		
+	</script>
+</body>
+</html>

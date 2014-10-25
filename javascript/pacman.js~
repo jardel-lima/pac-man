@@ -31,12 +31,12 @@ window.onload = function() { // to avoid the code running before the JS is costr
                 var ghost = 4;
                // var laid ='L';
                 // Some variables for the interface table
-                var img_pacman = 'url(../imgs/p_right.png)';
-                var img_empty = 'url(../imgs/empty.png)';
-                var img_food = 'url(../imgs/food.png)';
-                var img_wall ='url(../imgs/wall.png)';
-                var img_special_food ='url(../imgs/special_food.png)'; 
-                var img_ghost= 'url(../imgs/ghost.png)';
+                var img_pacman = 'url(imgs/p_right.png)';
+                var img_empty = 'url(imgs/empty.png)';
+                var img_food = 'url(imgs/food.png)';
+                var img_wall ='url(imgs/wall.png)';
+                var img_special_food ='url(imgs/special_food.png)'; 
+                var img_ghost= 'url(imgs/ghost.png)';
 		//Print Matrix---------------------------------------------
 		function printMatrix( matrix ){
 			var rows = matrix.length;
