@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pac Man</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+    <link rel="stylesheet" type="text/css" href="../css/pacman.css">
+    <script type="text/javascript" src="../javascript/variables.js"></script>
+    <script type="text/javascript" src="../javascript/auxiliary.js"></script>
+    <script type="text/javascript" src="../javascript/Pacman.js"></script>
+    <script type="text/javascript" src="../javascript/Ghost.js"></script>
+    <script type="text/javascript" src="../javascript/Game.js"></script>
+</head>
+<body>
+	 <div id="divGame"></div>
+	<script>
+	
+	var game = new Game();
+	var map = 	"00000000000000000000"+
+				  	"0                  0"+
+					"0 0000000  0000000 0"+
+					"0       0        0 0"+
+					"0 0000000  0000000 0"+
+					"0 0        0       0"+
+					"0 0000000  0000000 0"+
+					"0       0        0 0"+
+					"0 0000000  0000000 0"+
+					"0 0        0       0"+
+					"0 0000000  0000000 0"+
+					"0                  0"+
+					"0 0000000000000000 0"+
+					"0      0    000000 0"+
+					"0 000000    0      0"+
+					"0      0    000000 0"+
+					"0 0000000000000000 0"+
+					"0                  0"+
+					"0 0000000  0000000 0"+
+					"0       0        0 0"+
+					"0 0000000  0000000 0"+
+					"0 0        0       0"+
+					"0 0000000  0000000 0"+
+					"0       0        0 0"+
+					"0 0000000  0000000 0"+
+					"0 0        0       0"+
+					"0 0000000  0000000 0"+
+					"0 00  000    000   0"+
+					"0                  0"+
+					"00000000000000000000";
+	game.initiate(map);
+	printMatrix();
+	
+	//keyboard events----------------------------------------------------
+		document.onkeydown = checkKey;
+		function checkKey(e) {
+
+			e = e || window.event;
+
+			if (e.keyCode == '38') {
+				// up arrow
+				console.log("Up");
+				if(game.status=="STOP")
+					game.status = "PLAY";
+				
+				pacman.direction = "UP"	
+				pacman.move();
+				
+			}
+			else if (e.keyCode == '40') {
+				// down arrow
+				console.log("Down");
+				if(game.status=="STOP")
+					game.status = "PLAY";
+				
+				pacman.direction = "DOWN"	
+				pacman.move();
+			}
+			else if (e.keyCode == '39') {
+				// right arrow
+				console.log("Right");
+				if(game.status=="STOP")
+					game.status = "PLAY";
+				
+				pacman.direction = "RIGHT"	
+				pacman.move();
+			}
+			else if (e.keyCode == '37') {
+				// left arrow
+				console.log("Left");
+				if(game.status=="STOP")
+					game.status = "PLAY";
+				
+				pacman.direction = "LEFT"	
+				pacman.move();
+			}
+			
+		}
+		
+		//Loop-------------------------
+		setInterval(function(){
+			if(!pacman.blocked)
+				pacman.move();
+		},200);
+		
+		var loop = function(){
+			if(!pacman.blocked)
+				pacman.move();
+		}
+	
+	
+		
+	</script>
+</body>
+</html>
