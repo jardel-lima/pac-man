@@ -6,7 +6,7 @@ window.onload = function() { // to avoid the code running before the JS is costr
 
 		document.onkeydown = checkKey;
 		// Variables----------------------------------------------
-		var rows = 10;
+		var rows = 15;
 		var columns = 10;
 		var walls = 50;
 		var prizes = 25;
