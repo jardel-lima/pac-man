@@ -1,0 +1,30 @@
+-Inrterface
+ - show score
+ - show lives
+ - show time
+ - show map number (eg: 1/5)
+ - show ranking(3 first)
+ - show game in a proper size
+ 
+-Pacman
+ -Moviment #Jardel
+ -What to do when eat:
+ 	-normal food
+ 	-special food
+ - What to do when find a ghost
+ 	-pacman with special power
+ 	-pacman without special power
+ 	
+-Ghost
+ -moviment
+ -what to do when find pacman
+ 	-weak(pacman with super power)
+ 	-no weak 	
+ 	
+-Game
+ -Load maps from the server (Ajax)
+ -Save puntuation on the server (DB)
+ -Change map(phase)
+ -Restart game
+ -What to do when the map is completed(new Map)
+ -What to do when all maps are completed
