@@ -7,66 +7,52 @@ function Pacman(){
 			this.superPower = false;
 			this.lives = 4;
 			
+			//Function that based on the pacman direction validate and change the possition of the pacman
 			this.move = function(){
 				if(this.direction != null){
 					var yAux = this.positionY;
 					var xAux = this.positionX;
 					switch(this.direction){
 					 case "UP":
-					 	yAux --;
+					 	yAux --;/*Changin pacman possition and image*/
+					 	IMG_PACMAN = IMG_PACMAN_UP;
 					 	break;
 					 case "DOWN":
 					 	yAux ++;
+					 	IMG_PACMAN = IMG_PACMAN_DOWN;
 					 	break;
 					 case "RIGHT":
 					 	xAux ++;
+					 	IMG_PACMAN = IMG_PACMAN_RIGHT;
 					 	break;
 					 case "LEFT":
 					 	xAux --;
+					 	IMG_PACMAN = IMG_PACMAN_LEFT;
 					 	break;			
 					}
 					
-					var validMoviment = validateMoviment(xAux, yAux);
+					var validMoviment = validateMoviment(xAux, yAux);//Validate the moviment
 					if(validMoviment!=null){
 						this.blocked = false;
+						
 						if(validMoviment==FOOD){
-							MATRIX[this.positionY][this.positionX] = EMPTY;
-							this.positionY = yAux;
-							this.positionX = xAux;
-							MATRIX[this.positionY][this.positionX] = PACMAN;
 							//TODO
-							printMatrix();
-							
+							applyPacmanMoviment(pacman.positionX, pacman.positionY, xAux, yAux);
 						}
 						else if(validMoviment==SPECIAL_FOOD){
-							MATRIX[this.positionY][this.positionX] = EMPTY;
-							this.positionY = yAux;
-							this.positionX = xAux;
-							MATRIX[this.positionY][this.positionX] = PACMAN;
 							//TODO
-							printMatrix();
+							applyPacmanMoviment(pacman.positionX, pacman.positionY, xAux, yAux);
 						}
 						else if(validMoviment==GHOST){
 							if(this.superPower){
-								MATRIX[this.positionY][this.positionX] = EMPTY;
-								this.positionY = yAux;
-								this.positionX = xAux;
-								MATRIX[this.positionY][this.positionX] = PACMAN;
-								//TODO
-								printMatrix();
-								
+								applyPacmanMoviment(pacman.positionX, pacman.positionY, xAux, yAux);
 							}
 							else{
 								//TODO
 							}
 						}
 						else if(validMoviment==EMPTY){
-							MATRIX[this.positionY][this.positionX] = EMPTY;
-							this.positionY = yAux;
-							this.positionX = xAux;
-							MATRIX[this.positionY][this.positionX] = PACMAN;
-							//TODO
-							printMatrix();
+							applyPacmanMoviment(pacman.positionX, pacman.positionY, xAux, yAux);
 						}
 						else if(validMoviment==WALL){
 							this.blocked = true;
@@ -76,5 +62,8 @@ function Pacman(){
 				}
 			}
 			
+			
 		}
+		
+		
 

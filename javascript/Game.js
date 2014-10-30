@@ -4,7 +4,7 @@ function Game(){
 	this.quantityOfFood = 0;
 	this.time = 0;
 	this.phase = 1;
-	this.status = "STOP";//START|PAUSE|STOP|OVER
+	this.status = "STOP";//PLAY|PAUSE|STOP|OVER
 	
 	this.initiate = function(map){
 			if(this.status == "STOP"){

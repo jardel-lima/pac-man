@@ -14,6 +14,7 @@
 			
 			 table+="</table>";
              document.getElementById("divGame").innerHTML= table;
+            
 			
 		}
 		
@@ -24,11 +25,11 @@
 			for( var i = 0; i < rows; i++){
 				console.log("Row "+i+" "+MATRIX[i]);
 			}
-			updateTable();
+			//updateTable();
 		}
 		
 		//Update table in the html file to be equal the matrix
-        function updateTable(){
+        function populateTable(){
             for( var i = 0; i < ROWS; i++){
                 for( var j = 0; j < COLUMNS; j++){
                     var newImg = MATRIX[i][j]==WALL?IMG_WALL:MATRIX[i][j]==FOOD?IMG_FOOD:MATRIX[i][j]==EMPTY?IMG_EMPTY:MATRIX[i][j]==PACMAN?IMG_PACMAN:MATRIX[i][j]==GHOST?IMG_GHOST:IMG_SPECIAL_FOOD;
@@ -48,8 +49,7 @@
 			    	if(aux.charAt(j)=='0'){
 			    		
 			    		MATRIX[i][j]= WALL;
-			    	}else{
-			    	
+			    	}else if(aux.charAt(j)==' '){
 			    		MATRIX[i][j]= FOOD;
 			    		quantityOfFood++; // Counts the quantity of food on the map
 			    	}
@@ -58,7 +58,7 @@
 			
 			pacman = new Pacman();
 			MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
-			quantityOfFood = quantityOfFood - 1/*pacman*/ - 4/*ghosts*/ - NUMBER_OF_SPECIAL_FOOD;
+			quantityOfFood = quantityOfFood - 1/*pacman*/
 			return quantityOfFood;
 		}
 		
@@ -68,6 +68,7 @@
 			MATRIX[14][9]= GHOST;  ghost2 = new Ghost(9,14);
 			MATRIX[14][10]= GHOST; ghost3 = new Ghost(10,14);
 			MATRIX[14][11]= GHOST; ghost4 = new Ghost(11,14);
+			ghost1.move()
 		}
 		
 		function generateSpecialFood(){
@@ -89,6 +90,7 @@
 			readMap(map);
 			generateGhosts();
 			generateSpecialFood();
+			populateTable();
 			
 		}
 		
@@ -100,5 +102,15 @@
 			else  
 				return MATRIX[y][x];
 				
+		}
+		
+		function applyPacmanMoviment(positionX, positionY, newPositionX, newPositionY){
+			MATRIX[positionY][positionX] = EMPTY;
+			document.getElementById("tableGame").rows[positionY].cells[positionX].style.backgroundImage = IMG_EMPTY;
+			pacman.positionY = newPositionY;
+			pacman.positionX = newPositionX;
+			MATRIX[pacman.positionY][pacman.positionX] = PACMAN;
+			document.getElementById("tableGame").rows[pacman.positionY].cells[pacman.positionX].style.backgroundImage = IMG_PACMAN;
+			printMatrix();
 		}
 		

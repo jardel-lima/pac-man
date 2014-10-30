@@ -9,7 +9,11 @@
 		var PACMAN = 'P';
 		var EMPTY = 'e';
 		var NUMBER_OF_SPECIAL_FOOD = 5;
-		var IMG_PACMAN = 'url(../imgs/p_right.png)';
+		var IMG_PACMAN_RIGHT = 'url(../imgs/p_right.png)';
+		var IMG_PACMAN_LEFT = 'url(../imgs/p_left.png)';
+		var IMG_PACMAN_UP = 'url(../imgs/p_up.png)';
+		var IMG_PACMAN_DOWN = 'url(../imgs/p_down.png)';
+		var IMG_PACMAN = IMG_PACMAN_RIGHT;
         var IMG_EMPTY = 'url(../imgs/empty.png)';
         var IMG_FOOD = 'url(../imgs/food.png)';
         var IMG_WALL ='url(../imgs/wall.png)';

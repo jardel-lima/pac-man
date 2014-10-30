@@ -29,9 +29,9 @@
 					"0 0000000  0000000 0"+
 					"0                  0"+
 					"0 0000000000000000 0"+
-					"0      0    000000 0"+
-					"0 000000    0      0"+
-					"0      0    000000 0"+
+					"0      0eeee000000 0"+
+					"0 000000GGGG0      0"+
+					"0      0eeee000000 0"+
 					"0 0000000000000000 0"+
 					"0                  0"+
 					"0 0000000  0000000 0"+
@@ -61,8 +61,13 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				pacman.direction = "UP"	
-				pacman.move();
+				if(game.status=="PLAY"){
+					if(MATRIX[pacman.positionY-1][pacman.positionX]!=WALL){
+						pacman.direction = "UP";
+						pacman.move();
+					}
+				}	
+				
 				
 			}
 			else if (e.keyCode == '40') {
@@ -71,8 +76,12 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				pacman.direction = "DOWN"	
-				pacman.move();
+				if(game.status=="PLAY"){
+					if(MATRIX[pacman.positionY+1][pacman.positionX]!=WALL){
+						pacman.direction = "DOWN";
+						pacman.move();
+					}
+				}	
 			}
 			else if (e.keyCode == '39') {
 				// right arrow
@@ -80,8 +89,12 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				pacman.direction = "RIGHT"	
-				pacman.move();
+				if(game.status=="PLAY"){
+					if(MATRIX[pacman.positionY][pacman.positionX+1]!=WALL){
+						pacman.direction = "RIGHT";
+						pacman.move();
+					}
+				}	
 			}
 			else if (e.keyCode == '37') {
 				// left arrow
@@ -89,22 +102,27 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				pacman.direction = "LEFT"	
-				pacman.move();
+				if(game.status=="PLAY"){
+					if(MATRIX[pacman.positionY][pacman.positionX-1]!=WALL){
+						pacman.direction = "LEFT";
+						pacman.move();
+					}
+					
+				}	
+				
 			}
 			
 		}
 		
 		//Loop-------------------------
-		setInterval(function(){
-			if(!pacman.blocked)
-				pacman.move();
-		},200);
-		
 		var loop = function(){
 			if(!pacman.blocked)
 				pacman.move();
 		}
+		
+		setInterval(loop,250);
+		
+		
 	
 	
 		

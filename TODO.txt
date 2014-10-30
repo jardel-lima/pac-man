@@ -1,10 +1,12 @@
--Inrterface
+-Inrterface #Pablo
+ - show menu
  - show score
  - show lives
  - show time
  - show map number (eg: 1/5)
  - show ranking(3 first)
  - show game in a proper size
+ - show how to play
  
 -Pacman
  -Moviment #Jardel
@@ -28,3 +30,6 @@
  -Restart game
  -What to do when the map is completed(new Map)
  -What to do when all maps are completed
+
+-Extras
+ -Allow the user to create a map
