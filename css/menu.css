@@ -1,0 +1,73 @@
+body{
+    background: #6699ff;
+}
+.menuLogo{
+    width: 800px;
+    height: 180px;
+    font-family: Comic Sans Ms;
+    border-top: darkgoldenrod 10px ridge ;
+    border-bottom: darkgoldenrod 10px ridge ;
+    border-left: darkgoldenrod 10px ridge ;
+    border-right: darkgoldenrod 10px ridge ;
+    
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    background: black;  
+    border-radius:20px;
+    /*background-image: */
+    
+}
+.menuLogo h1{
+    color: darkgoldenrod;
+    margin: auto;
+    font-size: 6.0em;
+    text-shadow: 3px 3px 3px gold;
+    
+}
+.menuBody{
+    width: 800px;
+    font-family: Comic Sans Ms;
+    color: darkgoldenrod;
+    border-top: darkgoldenrod 10px ridge ;
+    border-bottom: darkgoldenrod 10px ridge ;
+    border-left: darkgoldenrod 10px ridge ;
+    border-right: darkgoldenrod 10px ridge ;   
+    border-radius:20px;
+    margin: 10px auto auto auto;
+    text-align: center;
+    vertical-align: middle;
+    background: black;  
+    /*background-image: */
+    
+}
+.menuOption{
+    margin: 10px auto 10px auto;    
+    background: darkgoldenrod;
+    width: 400px;
+    height: 80px;   
+    border-radius:40px;
+     border-top: darkgoldenrod 10px outset ;
+    border-bottom: darkgoldenrod 10px outset ;
+    border-left: darkgoldenrod 10px outset ;
+    border-right: darkgoldenrod 10px outset ; 
+    
+    
+}
+.menuOption h3{
+    text-shadow: 1px 1px 1px white;
+    
+    font-size: 1.7em;
+    font-weight: bold;
+    color:black;
+}
+.menuOption:hover{
+    background: blue ;
+    
+}
+.menuFoot{
+    text-align: center;
+    margin: 30px auto 10px auto; 
+    
+}
+
