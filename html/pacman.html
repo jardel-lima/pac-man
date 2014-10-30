@@ -54,6 +54,8 @@
 					"0                  0"+
 					"00000000000000000000";
 	game.initiate(map);
+         document.getElementById('map').innerHTML=game.phase; 
+        
 	printMatrix();
 	
 	//keyboard events----------------------------------------------------
@@ -120,11 +122,16 @@
 			}
 			
 		}
-		
 		//Loop-------------------------
 		var loop = function(){
 			if(!pacman.blocked)
 				pacman.move();
+                            
+                     document.getElementById('score').innerHTML=game.score; 
+                     document.getElementById('lives').innerHTML=pacman.lives; 
+                     document.getElementById('time').innerHTML=game.time; 
+    
+                           
 		}
 		
 		setInterval(loop,250);
