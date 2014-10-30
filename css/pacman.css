@@ -1,17 +1,37 @@
 /*
 
 */
-
+body{
+    background: #ccccff;
+}
 table{
     border-style: none;
     margin: auto auto auto auto;
-    width: 700px;
-    height: 1000px;
+    width: 500px;
+    height: 800px;
     border-spacing: 0;
 }
 table tr,td{
     border-style: none;
     padding: 0px;
-    background-size: cover;
+    background-size: 100%;
+    background-repeat: no-repeat;
     background-color: black;
+}
+.divInfo{
+    
+    color: darkred;
+    text-align: center;
+    margin: auto auto 20px auto;
+    font-family: Comic Sans Ms;
+    font-size: 1.5em;
+    width: 600px;
+    
+    
+}
+.divInfo div{
+    border-width: 2px;
+    display: inline-block;
+    width: 20%;
+    
 }
