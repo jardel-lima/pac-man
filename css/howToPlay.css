@@ -1,0 +1,94 @@
+
+body{
+    background: #6699ff;
+}
+
+.pnlTitle{
+    width: 800px;
+    height: 180px;
+    font-family: Comic Sans Ms;
+    border-top: darkgoldenrod 10px ridge ;
+    border-bottom: darkgoldenrod 10px ridge ;
+    border-left: darkgoldenrod 10px ridge ;
+    border-right: darkgoldenrod 10px ridge ;
+    color: darkgoldenrod;
+    text-shadow: 3px 3px 3px gold;
+    font-size: 6.0em;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    background: black;  
+    border-radius:20px;
+    /*background-image: */
+    
+}
+.pnlBody{
+    width: 800px;
+    height: 340px;
+    font-family: Comic Sans Ms;
+    color: darkgoldenrod;
+    border-top: darkgoldenrod 10px ridge ;
+    border-bottom: darkgoldenrod 10px ridge ;
+    border-left: darkgoldenrod 10px ridge ;
+    border-right: darkgoldenrod 10px ridge ;   
+    border-radius:20px;
+    margin: 10px auto auto auto;
+    vertical-align: middle;
+    background: black;  
+    font-size: 1.6em;
+    
+}
+.pnlLine{
+    width: 800px;
+    height: 100px;
+    
+}
+#textW{
+     position: relative;
+     top: 10px;
+     right:-360px;
+     
+     
+     
+}
+#imgW{
+    position: relative;
+     top: -50px;
+     right: -450px;
+}
+#textA{
+     position: relative;
+     top: 30px;
+     right: -100px;
+     
+     
+}
+#imgA{
+    position: relative;
+     top: -20px;
+     right: -250px;
+}
+#textD{
+     position: relative;
+     top: -170px;
+     right: -560px;
+     
+     
+}
+#imgD{
+    position: relative;
+     top: -105px;
+     right: -460px;
+}
+#textS{
+     position: relative;
+     top: -40px;
+     right: -460px;
+     
+     
+}
+#imgS{
+    position: relative;
+     top: 20px;
+     right:-360px;
+}
