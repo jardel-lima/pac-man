@@ -1,4 +1,4 @@
-	
+	//Function that Create the matrix and the table
 	function initiateMatrix() {
 			var table="<table border='"+1+"' width='"+80+"%' align='center' id=\"tableGame\">";
 			for(var i = 0; i < ROWS; i++){
@@ -18,7 +18,7 @@
 			
 		}
 		
-		//Print Matrix---------------------------------------------
+		//Print Matrix on browser's console---------------------------------------------
 		function printMatrix(){
 			var rows = MATRIX.length;
 			console.log("\n Matrix  \n");
@@ -28,7 +28,7 @@
 			//updateTable();
 		}
 		
-		//Update table in the html file to be equal the matrix
+		//Polulate table in the html file to be equal the matrix
         function populateTable(){
             for( var i = 0; i < ROWS; i++){
                 for( var j = 0; j < COLUMNS; j++){
@@ -40,6 +40,7 @@
             
         }
         
+        //Read a map form a string and return the quantity of food on that map
         function readMap(map){
 			var quantityOfFood = 0
 			for(var i = 0; i <  ROWS; i++){
@@ -56,13 +57,13 @@
 			    }
 			}
 			
-			pacman = new Pacman();
+			pacman = new Pacman();//create a pacman
 			MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
 			quantityOfFood = quantityOfFood - 1/*pacman*/
 			return quantityOfFood;
 		}
 		
-		//The Ghosts will be always in the same place
+		//Create 4 ghosts that will start always in the same position
 		function generateGhosts(){
 			MATRIX[14][8]= GHOST;  ghost1 = new Ghost(8,14);
 			MATRIX[14][9]= GHOST;  ghost2 = new Ghost(9,14);
@@ -72,6 +73,7 @@
 			ghost4.direction="DOWN";
 		}
 		
+		//Generate special food in random positions
 		function generateSpecialFood(){
 			var x_aux;
 			var y_aux;
@@ -87,6 +89,7 @@
 			}while(specialFood>0);
 		}
 		
+		//Populate the matrix
 		function populateMATRIX(map){
 			readMap(map);
 			generateGhosts();
@@ -95,6 +98,7 @@
 			
 		}
 		
+		//Validade moviment, check if the x and y values are valids. It returns tha element in that position
 		function validateMoviment( x , y ){
 			var xLimit = COLUMNS;
 			var yLimit = ROWS;
@@ -105,13 +109,5 @@
 				
 		}
 		
-		function applyPacmanMoviment(positionX, positionY, newPositionX, newPositionY){
-			MATRIX[positionY][positionX] = EMPTY;
-			document.getElementById("tableGame").rows[positionY].cells[positionX].style.backgroundImage = IMG_EMPTY;
-			pacman.positionY = newPositionY;
-			pacman.positionX = newPositionX;
-			MATRIX[pacman.positionY][pacman.positionX] = PACMAN;
-			document.getElementById("tableGame").rows[pacman.positionY].cells[pacman.positionX].style.backgroundImage = IMG_PACMAN;
-			printMatrix();
-		}
+		
 		

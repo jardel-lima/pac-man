@@ -73,8 +73,8 @@
 				if(game.status=="PLAY"){
 					if(MATRIX[pacman.positionY-1][pacman.positionX]!=WALL){
 						pacman.direction = "UP";
-						pacman.move();
 					}
+					pacman.move();
 				}	
 				
 				
@@ -88,8 +88,8 @@
 				if(game.status=="PLAY"){
 					if(MATRIX[pacman.positionY+1][pacman.positionX]!=WALL){
 						pacman.direction = "DOWN";
-						pacman.move();
 					}
+					pacman.move();
 				}	
 			}
 			else if (e.keyCode == '39') {
@@ -101,8 +101,8 @@
 				if(game.status=="PLAY"){
 					if(MATRIX[pacman.positionY][pacman.positionX+1]!=WALL){
 						pacman.direction = "RIGHT";
-						pacman.move();
 					}
+					pacman.move();
 				}	
 			}
 			else if (e.keyCode == '37') {
@@ -114,8 +114,8 @@
 				if(game.status=="PLAY"){
 					if(MATRIX[pacman.positionY][pacman.positionX-1]!=WALL){
 						pacman.direction = "LEFT";
-						pacman.move();
 					}
+					pacman.move();
 					
 				}	
 				
@@ -124,15 +124,16 @@
 		}
 		//Loop-------------------------
 		var loop = function(){
-			if(!pacman.blocked)
+			if(pacman.blocked==false){
 				pacman.move();
+				document.getElementById('score').innerHTML=game.score;
+			}	
 				ghost1.move();
 				ghost3.move();
-				//setTimeout(ghost3.move() , 1000); 
 				ghost2.move();
 				ghost4.move();
 				
-                     document.getElementById('score').innerHTML=game.score; 
+                     
                      document.getElementById('lives').innerHTML=pacman.lives; 
                      document.getElementById('time').innerHTML=game.time; 
     
@@ -140,6 +141,13 @@
 		}
 		
 		setInterval(loop,300);
+		
+		var time = function(){
+			if(game.status=="PLAY")
+					game.time++;
+		}
+		
+		setInterval(time,1000);
 		
 		
 	

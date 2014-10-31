@@ -9,16 +9,16 @@
  - show how to play
  
 -Pacman
- -Moviment #Jardel
+ -Moviment #Jardel -OK
  -What to do when eat:
- 	-normal food
+ 	-normal food -OK
  	-special food
  - What to do when find a ghost
  	-pacman with special power
  	-pacman without special power
  	
 -Ghost
- -moviment #Jardel
+ -moviment 
  -what to do when find pacman
  	-weak(pacman with super power)
  	-no weak 	
