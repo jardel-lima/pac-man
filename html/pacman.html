@@ -126,7 +126,12 @@
 		var loop = function(){
 			if(!pacman.blocked)
 				pacman.move();
-                            
+				ghost1.move();
+				ghost3.move();
+				//setTimeout(ghost3.move() , 1000); 
+				ghost2.move();
+				ghost4.move();
+				
                      document.getElementById('score').innerHTML=game.score; 
                      document.getElementById('lives').innerHTML=pacman.lives; 
                      document.getElementById('time').innerHTML=game.time; 
@@ -134,7 +139,7 @@
                            
 		}
 		
-		setInterval(loop,250);
+		setInterval(loop,300);
 		
 		
 	

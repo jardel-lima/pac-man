@@ -68,7 +68,8 @@
 			MATRIX[14][9]= GHOST;  ghost2 = new Ghost(9,14);
 			MATRIX[14][10]= GHOST; ghost3 = new Ghost(10,14);
 			MATRIX[14][11]= GHOST; ghost4 = new Ghost(11,14);
-			ghost1.move()
+			ghost2.direction="DOWN";
+			ghost4.direction="DOWN";
 		}
 		
 		function generateSpecialFood(){
