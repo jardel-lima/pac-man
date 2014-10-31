@@ -10,9 +10,13 @@
 		var EMPTY = 'e';
 		var NUMBER_OF_SPECIAL_FOOD = 5;
 		var IMG_PACMAN_RIGHT = 'url(../imgs/p_right.png)';
+                var IMG_PACMAN_RIGHT2 = 'url(../imgs/p_right2.png)';
 		var IMG_PACMAN_LEFT = 'url(../imgs/p_left.png)';
+                var IMG_PACMAN_LEFT2 = 'url(../imgs/p_left2.png)';
 		var IMG_PACMAN_UP = 'url(../imgs/p_up.png)';
+                var IMG_PACMAN_UP2 = 'url(../imgs/p_up2.png)';
 		var IMG_PACMAN_DOWN = 'url(../imgs/p_down.png)';
+                var IMG_PACMAN_DOWN2 = 'url(../imgs/p_down2.png)';
 		var IMG_PACMAN = IMG_PACMAN_RIGHT;
         var IMG_EMPTY = 'url(../imgs/empty.png)';
         var IMG_FOOD = 'url(../imgs/food.png)';

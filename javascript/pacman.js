@@ -6,6 +6,7 @@ function Pacman(){
 			this.blocked = true;
 			this.superPower = false;
 			this.lives = 4;
+                        this.openMouth = true;
 			
 			//Function that based on the pacman direction validate and change the possition of the pacman
 			this.move = function(){
@@ -15,19 +16,47 @@ function Pacman(){
 					switch(this.direction){
 					 case "UP":
 					 	yAux --;/*Changin pacman possition and image*/
-					 	IMG_PACMAN = IMG_PACMAN_UP;
+                                                if(this.openMouth){
+                                                    IMG_PACMAN = IMG_PACMAN_UP;
+                                                    this.openMouth = false;
+                                                }
+                                                else{
+                                                    IMG_PACMAN = IMG_PACMAN_UP2;
+                                                    this.openMouth = true;
+                                                }
 					 	break;
 					 case "DOWN":
 					 	yAux ++;
-					 	IMG_PACMAN = IMG_PACMAN_DOWN;
+					 	if(this.openMouth){
+                                                    IMG_PACMAN = IMG_PACMAN_DOWN;
+                                                    this.openMouth = false;
+                                                }
+                                                else{
+                                                    IMG_PACMAN = IMG_PACMAN_DOWN2;
+                                                    this.openMouth = true;
+                                                }
 					 	break;
 					 case "RIGHT":
 					 	xAux ++;
-					 	IMG_PACMAN = IMG_PACMAN_RIGHT;
+					 	if(this.openMouth){
+                                                    IMG_PACMAN = IMG_PACMAN_RIGHT;
+                                                    this.openMouth = false;
+                                                }
+                                                else{
+                                                    IMG_PACMAN = IMG_PACMAN_RIGHT2;
+                                                    this.openMouth = true;
+                                                }
 					 	break;
 					 case "LEFT":
 					 	xAux --;
-					 	IMG_PACMAN = IMG_PACMAN_LEFT;
+					 	if(this.openMouth){
+                                                    IMG_PACMAN = IMG_PACMAN_LEFT;
+                                                    this.openMouth = false;
+                                                }
+                                                else{
+                                                    IMG_PACMAN = IMG_PACMAN_LEFT2;
+                                                    this.openMouth = true;
+                                                }
 					 	break;			
 					}
 					
