@@ -1,12 +1,12 @@
 -Inrterface #Pablo
- - show menu
- - show score
- - show lives
- - show time
- - show map number (eg: 1/5)
+ - show menu -OK
+ - show score - OK
+ - show lives -OK
+ - show time -OK
+ - show map number (eg: 1/5) - OK
  - show ranking(3 first)
- - show game in a proper size
- - show how to play
+ - show game in a proper size -OK
+ - show how to play - 50%
  
 -Pacman
  -Moviment #Jardel -OK
