@@ -124,18 +124,20 @@
 		}
 		//Loop-------------------------
 		var loop = function(){
+			
+			ghost1.move();
+			ghost3.move();
+			ghost2.move();
+			ghost4.move();
+				
 			if(pacman.blocked==false){
 				pacman.move();
 				document.getElementById('score').innerHTML=game.score;
 			}	
-				ghost1.move();
-				ghost3.move();
-				ghost2.move();
-				ghost4.move();
 				
                      
-                     document.getElementById('lives').innerHTML=pacman.lives; 
-                     document.getElementById('time').innerHTML=game.time; 
+         document.getElementById('lives').innerHTML=pacman.lives; 
+         document.getElementById('time').innerHTML=game.time; 
     
                            
 		}
