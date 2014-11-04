@@ -19,7 +19,14 @@ table tr,td{
 }
 .divInfo{
     
-    color: darkred;
+    color: black;
+    text-shadow: 1px 1px 1px white;     
+    background: darkgoldenrod;
+    border-radius:20px;
+     border-top: darkgoldenrod 10px outset ;
+    border-bottom: darkgoldenrod 10px outset ;
+    border-left: darkgoldenrod 10px outset ;
+    border-right: darkgoldenrod 10px outset ;
     text-align: center;
     margin: auto auto 20px auto;
     font-family: Comic Sans Ms;
@@ -31,6 +38,13 @@ table tr,td{
 .divInfo div{
     border-width: 2px;
     display: inline-block;
-    width: 20%;
+    width: 24%;
+    vertical-align: top;
     
+    
+}
+div .edtWhite{
+		background: white;
+		border-radius:10px;
+		width: 50%;
 }
