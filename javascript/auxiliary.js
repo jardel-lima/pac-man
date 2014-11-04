@@ -1,6 +1,6 @@
 	//Function that Create the matrix and the table
 	function initiateMatrix() {
-			var table="<table border='"+1+"' width='"+80+"%' align='center' id=\"tableGame\">";
+			var table="<table border='"+1+"' width='"+tableWidth+"px'  height='"+tableHeight+"px' align='center' id=\"tableGame\">";
 			for(var i = 0; i < ROWS; i++){
 				var matrix = [];
 				table+="<tr height='"+5+"'>"

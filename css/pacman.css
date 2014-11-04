@@ -7,8 +7,7 @@ body{
 table{
     border-style: none;
     margin: auto auto auto auto;
-    width: 500px;
-    height: 800px;
+   
     border-spacing: 0;
 }
 table tr,td{

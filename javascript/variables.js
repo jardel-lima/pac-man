@@ -30,3 +30,5 @@
         var ghost2;
         var ghost3;
         var ghost4;
+        var tableHeight= window.innerHeight*0.9;
+        var tableWidth = tableHeight*0.625;
