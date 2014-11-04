@@ -8,6 +8,7 @@
 		var GHOST = 'G';
 		var PACMAN = 'P';
 		var EMPTY = 'e';
+		var EXIT = 'E';
 		var NUMBER_OF_SPECIAL_FOOD = 5;
 		var IMG_PACMAN_RIGHT = 'url(../imgs/p_right.png)';
                 var IMG_PACMAN_RIGHT2 = 'url(../imgs/p_right2.png)';

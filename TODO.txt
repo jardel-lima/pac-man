@@ -18,7 +18,7 @@
  	-pacman without special power
  	
 -Ghost
- -moviment 
+ -moviment #Jardel 
  -what to do when find pacman
  	-weak(pacman with super power)
  	-no weak 	

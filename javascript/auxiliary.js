@@ -71,6 +71,10 @@
 			MATRIX[14][11]= GHOST; ghost4 = new Ghost(11,14);
 			ghost2.direction="DOWN";
 			ghost4.direction="DOWN";
+			MATRIX[16][8]= EXIT;
+			MATRIX[12][9]= EXIT;
+			MATRIX[16][10]= EXIT;
+			MATRIX[12][11]= EXIT;
 		}
 		
 		//Generate special food in random positions

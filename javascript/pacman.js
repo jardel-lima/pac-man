@@ -84,6 +84,7 @@ function Pacman(){
 							}
 							else{
 								//TODO
+								alert("You Died!!!");
 							}
 						}
 						else if(validMoviment==EMPTY){
