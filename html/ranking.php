@@ -2,8 +2,8 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$database = "nameDataBase";
-$tableName= "nameTable";
+$database = "pacmandb";
+$tableName= "player";
  		
 $myCon = mysqli_connect($host,$user,$password,$database);
   
@@ -14,20 +14,29 @@ $myCon = mysqli_connect($host,$user,$password,$database);
   }	
    else
      {
-		$sql = "Select *  from $tableName ORDER BY pontuation";
+		$sql = "Select *  from $tableName ORDER BY player_score desc";
 		$res = mysqli_query($myCon,$sql);
 		
 		if($res){
 			if(mysqli_num_rows($res)==0){
 				print "No Ranking Yet!";
 			}else{
-				$tableAnser="";
-				for($row=1;$row<=mysqli_num_rows($res);$row++){
-					$record = mysqli_fetch_assoc($res);
-					$tableAnser+=$record+"<br>"; // maybe it is not working...		
 				
+				$tableFinal="<table><tr><th>Name</th><th>Score</th><th>Time</th></tr>";
+				
+				for($row=1;$row<=mysqli_num_rows($res);$row++){
+					$tableFinal=$tableFinal."<tr>";
+					
+					$record = mysqli_fetch_assoc($res);
+					
+					$tableFinal=$tableFinal."<td>".$record["player_name"]."</td>";
+					$tableFinal=$tableFinal."<td>".$record["player_score"]."</td>";
+					$tableFinal=$tableFinal."<td>".$record["player_time"]."</td>";
+							
+					$tableFinal=$tableFinal."</tr>";
 				}
-				echo $tableAnser;
+				$tableFinal=$tableFinal."</table>";
+				echo $tableFinal;
 			}
 			
 		}else{

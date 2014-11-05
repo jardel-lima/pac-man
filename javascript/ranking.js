@@ -44,7 +44,7 @@
  
  function loadRanking() {
          
-	if (xmlHttp.readyState == 4 || xmlHttp2.readyState == 0)   {  
+	if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0)   {  
  			
  			// execute the hi.php page from the server 
  	
@@ -64,7 +64,6 @@
                 
 function updateHtml(data){
 	//TODO check data and  print correctly
-		document.write(data); //just a test
+		document.getElementById("divRanking").innerHTML=data; //just a test
 	
-	}
-}                
+	}              

@@ -1,0 +1,39 @@
+body{
+    background: #6699ff;
+}
+.divLogo{
+    width: 800px;
+    height: 140px;
+    font-family: Comic Sans Ms;
+    border-top: darkgoldenrod 10px ridge ;
+    border-bottom: darkgoldenrod 10px ridge ;
+    border-left: darkgoldenrod 10px ridge ;
+    border-right: darkgoldenrod 10px ridge ;
+    
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    background: black;  
+    border-radius:20px;
+    color: darkgoldenrod;
+    margin: auto;
+    font-size: 5.0em;
+    text-shadow: 3px 3px 3px gold;
+    
+}
+table{
+    width: 600px;
+    font-family: Comic Sans Ms;
+    color: darkgoldenrod;
+    border-top: darkgoldenrod 10px ridge ;
+    border-bottom: darkgoldenrod 10px ridge ;
+    border-left: darkgoldenrod 10px ridge ;
+    border-right: darkgoldenrod 10px ridge ;   
+    border-radius:20px;
+    margin: 10px auto auto auto;
+    text-align: center;
+    vertical-align: middle;
+    background: black;  
+    /*background-image: */
+    
+}
