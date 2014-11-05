@@ -37,3 +37,35 @@ table{
     /*background-image: */
     
 }
+table th{
+	font-size: 1.5em;
+}
+a {
+	text-decoration: none;
+}
+.divButton{
+    margin: 10px auto 10px auto;    
+    background: darkgoldenrod;
+    width: 100px;
+    height: 20px;   
+    border-radius:40px;
+     border-top: darkgoldenrod 10px outset ;
+    border-bottom: darkgoldenrod 10px outset ;
+    border-left: darkgoldenrod 10px outset ;
+    border-right: darkgoldenrod 10px outset ; 
+    font-size: 1.2em;
+    font-weight: bold;
+    color:black;
+    text-shadow: 1px 1px 1px white;
+    text-align: center;
+    
+}
+
+.divButton:hover{
+    background: blue ;
+     border-top: blue 10px outset ;
+    border-bottom: blue 10px outset ;
+    border-left: blue 10px outset ;
+    border-right: blue 10px outset ;
+    cursor: pointer;
+}
