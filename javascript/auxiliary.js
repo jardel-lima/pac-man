@@ -32,7 +32,26 @@
         function populateTable(){
             for( var i = 0; i < ROWS; i++){
                 for( var j = 0; j < COLUMNS; j++){
-                    var newImg = MATRIX[i][j]==WALL?IMG_WALL:MATRIX[i][j]==FOOD?IMG_FOOD:MATRIX[i][j]==EMPTY?IMG_EMPTY:MATRIX[i][j]==PACMAN?IMG_PACMAN:MATRIX[i][j]==GHOST?IMG_GHOST:IMG_SPECIAL_FOOD;
+                	var newImg;
+                	if(MATRIX[i][j]==WALL){
+                		newImg = IMG_WALL;
+                	}
+                	else if(MATRIX[i][j]==FOOD){
+                		newImg = IMG_FOOD;
+                	}
+                	else if(MATRIX[i][j]==PACMAN){
+                		newImg = IMG_PACMAN;
+                	}
+                	else if(MATRIX[i][j]==GHOST){
+                		newImg = IMG_GHOST;
+                	}
+                	else if(MATRIX[i][j]==SPECIAL_FOOD){
+                		newImg = IMG_SPECIAL_FOOD;
+                	}
+                	else{
+                		newImg = IMG_EMPTY;
+                	}
+                    /*var newImg = MATRIX[i][j]==WALL?IMG_WALL:MATRIX[i][j]==FOOD?IMG_FOOD:MATRIX[i][j]==EMPTY?IMG_EMPTY:MATRIX[i][j]==PACMAN?IMG_PACMAN:MATRIX[i][j]==GHOST?IMG_GHOST:IMG_SPECIAL_FOOD;*/
 
                     document.getElementById("tableGame").rows[i].cells[j].style.backgroundImage = newImg; 
                 }
@@ -59,7 +78,7 @@
 			
 			pacman = new Pacman();//create a pacman
 			MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
-			quantityOfFood = quantityOfFood - 1/*pacman*/
+			quantityOfFood = quantityOfFood - 1;/*pacman*/
 			return quantityOfFood;
 		}
 		
@@ -71,10 +90,7 @@
 			MATRIX[14][11]= GHOST; ghost4 = new Ghost(11,14);
 			ghost2.direction="DOWN";
 			ghost4.direction="DOWN";
-			MATRIX[16][8]= EXIT;
-			MATRIX[12][9]= EXIT;
-			MATRIX[16][10]= EXIT;
-			MATRIX[12][11]= EXIT;
+			
 		}
 		
 		//Generate special food in random positions

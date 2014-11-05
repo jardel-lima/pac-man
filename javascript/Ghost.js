@@ -11,6 +11,7 @@ function Ghost( initialX, initialY ){
 			this.direction = "UP";//Indicates the current ghost direction. Possible values: "UP"|"DOWN"|"LEFT"|"RIGHT"
 			this.oppositeDirection = "DOWN";//Saves the opposite ghost's direction. To avoid the ghost going back in his path, this position will be considered just in last case.
 			this.availabeDirections =[1,1,1,1]//represents the available directions that the ghost can have. Value 1 represents available and value 0 unavailable. The order of the directions are ["UP","DOWN","RIGHT","LEFT"]
+			this.alive = true;//Idicates that the ghost is alive
 			
 			//Function that moves the ghost based on his satatus: inPrison or no inPrison
 			this.move = function(){
@@ -139,13 +140,29 @@ function Ghost( initialX, initialY ){
 	}
 	//Change the ghost position
 	function applyGhostMoviment(ghost, newPositionX, newPositionY){
+				
+				if(ghost.savedObject==EMPTY){
+					document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = IMG_EMPTY;
+				}else{
+					document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = IMG_SPECIAL_FOOD;
+				}
+				
+				if(MATRIX[newPositionY][newPositionX] == SPECIAL_FOOD){
+					ghost.savedObject = SPECIAL_FOOD
+				}else{
+					ghost.savedObject = EMPTY;
+				}
+				
 				MATRIX[ghost.positionY][ghost.positionX] = ghost.savedObject;
-				document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = IMG_EMPTY;
+				
 				ghost.savedObjectObject = MATRIX[newPositionY][newPositionX];
 				ghost.positionY = newPositionY;
 				ghost.positionX = newPositionX;
+
 				MATRIX[ghost.positionY][ghost.positionX]=GHOST;
+				
 				document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = IMG_GHOST;
+				
 			}
 			
 			function setOppositeDirection(ghost){
@@ -171,18 +188,46 @@ function Ghost( initialX, initialY ){
 				switch(direction){
 					case "UP":
 						ghost.direction="UP";
+						if(MATRIX[ghost.positionY-1][ghost.positionX]==FOOD){
+						 	game.quantityOfFood--;
+						}
+						else if(MATRIX[ghost.positionY-1][ghost.positionX]==PACMAN){
+							pacman.lives--;
+							alert("You Died!!");
+						}
 						applyGhostMoviment(ghost, ghost.positionX, ghost.positionY-1);
 						break;
 					case "DOWN":
 						ghost.direction="DOWN";
+						if(MATRIX[ghost.positionY+1][ghost.positionX]==FOOD){
+						 	game.quantityOfFood--;
+						}
+						else if(MATRIX[ghost.positionY+1][ghost.positionX]==PACMAN){
+							pacman.lives--;
+							alert("You Died!!");
+						}
 						applyGhostMoviment(ghost, ghost.positionX, ghost.positionY+1);
 						break;
 					case "RIGHT":
 						ghost.direction="RIGHT";
+						if(MATRIX[ghost.positionY][ghost.positionX+1]==FOOD){
+						 	game.quantityOfFood--;
+						}
+						else if(MATRIX[ghost.positionY][ghost.positionX+1]==PACMAN){
+							pacman.lives--;
+							alert("You Died!!");
+						}
 						applyGhostMoviment(ghost, ghost.positionX+1, ghost.positionY);
 						break;
 					case "LEFT":
 						ghost.direction="LEFT";
+						if(MATRIX[ghost.positionY][ghost.positionX-1]==FOOD){
+						 	game.quantityOfFood--;
+						}
+						else if(MATRIX[ghost.positionY][ghost.positionX-1]==PACMAN){
+							pacman.lives--;
+							alert("You Died!!");
+						}
 						applyGhostMoviment(ghost, ghost.positionX-1, ghost.positionY);
 						break;		
 				}

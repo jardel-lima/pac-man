@@ -70,7 +70,7 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				if(game.status=="PLAY"){
+				if(game.status=="PLAY"  && pacman.direction!="UP"){
 					if(MATRIX[pacman.positionY-1][pacman.positionX]!=WALL){
 						pacman.direction = "UP";
 					}
@@ -85,7 +85,7 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				if(game.status=="PLAY"){
+				if(game.status=="PLAY" && pacman.direction!="DOWN"){
 					if(MATRIX[pacman.positionY+1][pacman.positionX]!=WALL){
 						pacman.direction = "DOWN";
 					}
@@ -98,7 +98,7 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				if(game.status=="PLAY"){
+				if(game.status=="PLAY"  && pacman.direction!="RIGHT"){
 					if(MATRIX[pacman.positionY][pacman.positionX+1]!=WALL){
 						pacman.direction = "RIGHT";
 					}
@@ -108,10 +108,10 @@
 			else if (e.keyCode == '37') {
 				// left arrow
 				console.log("Left");
-				if(game.status=="STOP")
+				if(game.status=="STOP" )
 					game.status = "PLAY";
 				
-				if(game.status=="PLAY"){
+				if(game.status=="PLAY"  && pacman.direction!="LEFT"){
 					if(MATRIX[pacman.positionY][pacman.positionX-1]!=WALL){
 						pacman.direction = "LEFT";
 					}
@@ -125,20 +125,30 @@
 		//Loop-------------------------
 		var loop = function(){
 			
-			ghost1.move();
-			ghost3.move();
-			ghost2.move();
-			ghost4.move();
+			game.ghostController(ghost1, ghost2, ghost3, ghost4);
+			
+			if(game.status=="PLAY"){
 				
-			if(pacman.blocked==false){
-				pacman.move();
-				document.getElementById('score').innerHTML=game.score;
-			}	
+				if(game.quantityOfFood<=0){
+				 	game.status="PAUSE";
+				 	alert("The game is over");
+				 }
+				 
+				 if(pacman.lives<=0){
+				 	game.status="PAUSE";
+				 	alert("You do not have any live!!");
+				 }
+				 
+				if(pacman.blocked==false){
+					pacman.move();
+					document.getElementById('score').innerHTML=game.score;
+				}	
 				
-                     
-         document.getElementById('lives').innerHTML=pacman.lives; 
-         document.getElementById('time').innerHTML=game.time; 
-    
+				 document.getElementById('lives').innerHTML=pacman.lives; 
+				 document.getElementById('time').innerHTML=game.time; 
+				 
+    	 	}
+    	 	console.log("Food "+game.quantityOfFood);
                            
 		}
 		

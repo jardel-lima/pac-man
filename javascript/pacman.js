@@ -71,11 +71,13 @@ function Pacman(){
 						if(validMoviment==FOOD){
 							//This function will apply the new pacman's position
 							applyPacmanMoviment(this, xAux, yAux);
+							game.quantityOfFood--;
 							game.score+=10;
 						}
 						else if(validMoviment==SPECIAL_FOOD){
 							//TODO
 							applyPacmanMoviment(this, xAux, yAux);
+							game.quantityOfFood--;
 							game.score+=20;
 						}
 						else if(validMoviment==GHOST){
@@ -84,6 +86,7 @@ function Pacman(){
 							}
 							else{
 								//TODO
+								pacman.lives--;
 								alert("You Died!!!");
 							}
 						}

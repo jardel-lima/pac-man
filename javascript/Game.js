@@ -29,5 +29,30 @@ function Game(){
 	this.gameOver = function(){
 			
 			}
+			
+	this.ghostController = function(ghost1, ghost2, ghost3, ghost4 ){
+		if(this.status!="PAUSE"){
+			
+			if(ghost1.alive==true){
+			 	ghost1.move();
+			}
+			if(ghost2.alive==true){
+			 	ghost2.move();
+			}
+			if(ghost3.alive==true){
+			 	ghost3.move();
+			}
+			if(ghost4.alive==true){
+			 	ghost4.move();
+			}
+			
+			if(this.time==2){
+			 	MATRIX[16][8]= EXIT;
+				MATRIX[12][9]= EXIT;
+				MATRIX[16][10]= EXIT;
+				MATRIX[12][11]= EXIT;
+			}
+		}
+	}
 	
 }
