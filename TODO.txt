@@ -1,10 +1,12 @@
+How to use the database: extract pacmandb.zip to C:\wamp\bin\mysql\mysql5.6.12\data
+
 -Inrterface #Pablo
  - show menu -OK
  - show score - OK
  - show lives -OK
  - show time -OK
  - show map number (eg: 1/5) - OK
- - show ranking(3 first)
+ - show ranking(3 first) - OK
  - show game in a proper size -OK
  - show how to play - 50%
  
