@@ -183,6 +183,11 @@ function Ghost( initialX, initialY ){
 			
 			/*Move the ghost according to the direction*/
 			function moveAccordingDirection(direction, ghost){
+				if(ghost.weak){
+					IMG_GHOST = IMG_GHOST_WEEK;
+				}else{
+					IMG_GHOST = IMG_GHOST_NORMAL;
+				}
 				switch(direction){
 					case "UP":
 						ghost.direction="UP";
@@ -192,8 +197,12 @@ function Ghost( initialX, initialY ){
 						}
 						/*If the pacman is in the future ghost position his quantity of lives will be decreased*/
 						else if(MATRIX[ghost.positionY-1][ghost.positionX]==PACMAN){
-							pacman.lives--;
-							alert("You Died!!");
+							if(!pacman.immune && !this.weak){
+								pacman.lives--;
+								alert("You Died!!");
+								pacman.immune = true;
+								pacman.deathTime = game.time;
+							}
 						}
 						applyGhostMoviment(ghost, ghost.positionX, ghost.positionY-1);
 						break;
@@ -203,8 +212,12 @@ function Ghost( initialX, initialY ){
 						 	game.quantityOfFood--;
 						}
 						else if(MATRIX[ghost.positionY+1][ghost.positionX]==PACMAN){
-							pacman.lives--;
-							alert("You Died!!");
+							if(!pacman.immune && !this.weak){
+								pacman.lives--;
+								alert("You Died!!");
+								pacman.immune = true;
+								pacman.deathTime = game.time;
+							}
 						}
 						applyGhostMoviment(ghost, ghost.positionX, ghost.positionY+1);
 						break;
@@ -214,8 +227,12 @@ function Ghost( initialX, initialY ){
 						 	game.quantityOfFood--;
 						}
 						else if(MATRIX[ghost.positionY][ghost.positionX+1]==PACMAN){
-							pacman.lives--;
-							alert("You Died!!");
+							if(!pacman.immune && !this.weak){
+								pacman.lives--;
+								alert("You Died!!");
+								pacman.immune = true;
+								pacman.deathTime = game.time;
+							}
 						}
 						applyGhostMoviment(ghost, ghost.positionX+1, ghost.positionY);
 						break;
@@ -225,8 +242,12 @@ function Ghost( initialX, initialY ){
 						 	game.quantityOfFood--;
 						}
 						else if(MATRIX[ghost.positionY][ghost.positionX-1]==PACMAN){
-							pacman.lives--;
-							alert("You Died!!");
+							if(!pacman.immune && !this.weak){
+								pacman.lives--;
+								alert("You Died!!");
+								pacman.immune = true;
+								pacman.deathTime = game.time;
+							}
 						}
 						applyGhostMoviment(ghost, ghost.positionX-1, ghost.positionY);
 						break;		

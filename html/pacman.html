@@ -66,7 +66,7 @@
 
 			if (e.keyCode == '38') {
 				// up arrow
-				console.log("Up");
+				//console.log("Up");
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
@@ -81,7 +81,7 @@
 			}
 			else if (e.keyCode == '40') {
 				// down arrow
-				console.log("Down");
+				//console.log("Down");
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
@@ -94,7 +94,7 @@
 			}
 			else if (e.keyCode == '39') {
 				// right arrow
-				console.log("Right");
+				//console.log("Right");
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
@@ -107,7 +107,7 @@
 			}
 			else if (e.keyCode == '37') {
 				// left arrow
-				console.log("Left");
+				//console.log("Left");
 				if(game.status=="STOP" )
 					game.status = "PLAY";
 				
@@ -125,30 +125,12 @@
 		//Loop-------------------------
 		var loop = function(){
 			
-			game.ghostController(ghost1, ghost2, ghost3, ghost4);
-			
-			if(game.status=="PLAY"){
+				 game.gameController(pacman, ghost1, ghost2, ghost3, ghost4);
 				
-				if(game.quantityOfFood<=0){
-				 	game.status="PAUSE";
-				 	alert("The game is over");
-				 }
-				 
-				 if(pacman.lives<=0){
-				 	game.status="PAUSE";
-				 	alert("You do not have any live!!");
-				 }
-				 
-				if(pacman.blocked==false){
-					pacman.move();
-					document.getElementById('score').innerHTML=game.score;
-				}	
-				
+				 document.getElementById('score').innerHTML=game.score;
 				 document.getElementById('lives').innerHTML=pacman.lives; 
 				 document.getElementById('time').innerHTML=game.time; 
 				 
-    	 	}
-    	 	//console.log("Food "+game.quantityOfFood);
                            
 		}
 		

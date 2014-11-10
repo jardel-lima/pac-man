@@ -8,6 +8,9 @@ function Pacman(){
 			this.superPower = false;//Indcates that pacman "ate" a especial food, that gives him super power to eat ghosts
 			this.lives = 4;//Number of remainings pacman' lives
             this.openMouth = true;//Indicates if pacman shoul appear with his mouth opened or closed
+            this.immune = false;
+            this.deathTime = null;
+            this.superPowerTime = null;
 			
 			//Function that based on the pacman direction validate and change the possition of the pacman
 			this.move = function(){
@@ -25,7 +28,14 @@ function Pacman(){
                             this.openMouth = false;
                         }
                         else{
-                            IMG_PACMAN = IMG_PACMAN_UP2;
+                        	
+                        	if(this.immune){
+                        		 IMG_PACMAN = IMG_PACMAN_UP2_IMMUNE;
+                        	}
+                        	else{
+                        		 IMG_PACMAN = IMG_PACMAN_UP2;
+                        	}
+                           
                             this.openMouth = true;
                         }
 					 	break;
@@ -36,7 +46,13 @@ function Pacman(){
                             this.openMouth = false;
                         }
                         else{
-                            IMG_PACMAN = IMG_PACMAN_DOWN2;
+                        	if(this.immune){
+                        		  IMG_PACMAN = IMG_PACMAN_DOWN2_IMMUNE;
+                        	}
+                        	else{
+                        		  IMG_PACMAN = IMG_PACMAN_DOWN2;
+                        	}
+                           
                             this.openMouth = true;
                         }
 					 	break;
@@ -47,7 +63,13 @@ function Pacman(){
                             this.openMouth = false;
                         }
                         else{
-                            IMG_PACMAN = IMG_PACMAN_RIGHT2;
+                        	if(this.immune){
+                        		  IMG_PACMAN = IMG_PACMAN_RIGHT2_IMMUNE;
+                        	}
+                        	else{
+                        		 IMG_PACMAN = IMG_PACMAN_RIGHT2;
+                        	}
+                            
                             this.openMouth = true;
                         }
 					 	break;
@@ -58,7 +80,13 @@ function Pacman(){
 	                        this.openMouth = false;
 	                    }
 	                    else{
-	                        IMG_PACMAN = IMG_PACMAN_LEFT2;
+                        	if(this.immune){
+                        		  IMG_PACMAN = IMG_PACMAN_LEFT2_IMMUNE;
+                        	}
+                        	else{
+                        		  IMG_PACMAN = IMG_PACMAN_LEFT2;
+                        	}
+	                        
 	                        this.openMouth = true;
 	                    }
 					 	break;			
@@ -76,21 +104,25 @@ function Pacman(){
 						}
 						else if(validMoviment==SPECIAL_FOOD){
 							//TODO
+							this.superPower = true;
+							this.superPowerTime = game.time;
 							applyPacmanMoviment(this, xAux, yAux);
 							game.quantityOfFood--;
 							game.score+=20;
 						}
 						else if(validMoviment==GHOST){
-							if(this.superPower){
+							if(this.superPower||this.immune){
 								applyPacmanMoviment(this, xAux, yAux);
 							}
 							else{
 								//TODO
 								pacman.lives--;
+								this.immune = true;
+								this.deathTime = game.time;
 								alert("You Died!!!");
 							}
 						}
-						else if(validMoviment==EMPTY){
+						else if(validMoviment==EMPTY||validMoviment==EXIT){
 							applyPacmanMoviment(this, xAux, yAux);
 						}
 						else if(validMoviment==WALL){

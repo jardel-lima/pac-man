@@ -32,6 +32,12 @@ function Game(){
 			
 	this.ghostController = function(ghost1, ghost2, ghost3, ghost4 ){
 		if(this.status!="PAUSE"){
+			if(pacman.superPower && !ghost1.weak){
+				ghost1.weak = true;
+				ghost2.weak = true;
+				ghost3.weak = true;
+				ghost4.weak = true;
+			}
 			
 			if(ghost1.alive==true){
 			 	ghost1.move();
@@ -53,6 +59,52 @@ function Game(){
 				MATRIX[12][11]= EXIT;
 			}
 		}
+	}
+	
+	this.pacmanController = function(pacman){
+			if(pacman.blocked==false){
+				pacman.move();
+			}	
+			
+			if(pacman.immune){
+				if(pacman.deathTime!=null){
+					if((this.time - pacman.deathTime)>3){
+						pacman.immune = false;
+						pacman.deathTime = null;
+					}
+				}
+    	 	}
+	}
+	
+	this.gameController = function(pacman, ghost1, ghost2, ghost3, ghost4){
+		this.ghostController(ghost1, ghost2, ghost3, ghost4);
+		if(this.status=="PLAY"){
+				this.pacmanController(pacman);
+				
+				if(this.quantityOfFood<=0){
+				 	game.status="PAUSE";
+				 	alert("The game is over");
+				 }
+				 
+				 if(pacman.lives<=0){
+				 	game.status="PAUSE";
+				 	alert("You do not have any live!!");
+				 }
+				 
+				 if(pacman.superPower){
+				 	
+				 	if((this.time-pacman.superPowerTime)>5){
+				 		pacman.superPower = false;
+			 			ghost1.weak = false;
+						ghost2.weak = false;
+						ghost3.weak = false;
+						ghost4.weak = false;
+				 	}
+				 }
+				 
+				
+				
+    	 }
 	}
 	
 }
