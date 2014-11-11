@@ -10,7 +10,7 @@ function Ghost( initialX, initialY ){
 			this.inPrison = true;/*Indicates that the ghost still in prison*/
 			this.direction = "UP";/*Indicates the current ghost direction. Possible values: "UP"|"DOWN"|"LEFT"|"RIGHT"*/
 			this.oppositeDirection = "DOWN";/*Saves the opposite ghost's direction. To avoid the ghost going back in his path, this position will be considered just in last case.*/
-			this.availabeDirections =[1,1,1,1]/*represents the available directions that the ghost can have. Value 1 represents available and value 0 unavailable. The order of the directions are ["UP","DOWN","RIGHT","LEFT"]*/
+			this.availableDirections =[1,1,1,1]/*represents the available directions that the ghost can have. Value 1 represents available and value 0 unavailable. The order of the directions are ["UP","DOWN","RIGHT","LEFT"]*/
 			this.alive = true;/*Idicates that the ghost is alive*/
 			
 			/*Function that moves the ghost based on his satatus: inPrison or no inPrison*/
@@ -42,7 +42,7 @@ function Ghost( initialX, initialY ){
 								if(valid==EXIT){
 									this.inPrison = false;
 								}
-								applyGhostMoviment(this, this.positionX, this.positionY+1);
+								applyGhostMoviment( this, this.positionX, this.positionY+1);
 							}
 					}
 	
@@ -54,58 +54,58 @@ function Ghost( initialX, initialY ){
 					var food=null;/*If one of the possibles directions has a food this variable will recieve the number that corresponds that direction */
 					/*Check if the direction 'UP' is available*/
 					valid = validateMoviment( this.positionX , this.positionY-1 );
-					/*if this direction has a wall or is a invalid direction this direction will recive 0 on the availabeDirections arry*/
+					/*if this direction has a wall or is a invalid direction this direction will recive 0 on the availableDirections arry*/
 					if(food==null&&(valid==false || valid==WALL)){
-						this.availabeDirections[0] = 0;
+						this.availableDirections[0] = 0;
 					}
 					/*If there is food on this direction the ghost will move to this direction*/
 					else if(food==null&&valid==FOOD){
 						food = 0;
 					}
-					/*Else this direction will be marked as valid on the availabeDirections arry*/
+					/*Else this direction will be marked as valid on the availableDirections arry*/
 					else{	
-						this.availabeDirections[0] = 1;
+						this.availableDirections[0] = 1;
 					}
 					/*Check if the direction 'DOWN' is available*/
 					valid = validateMoviment( this.positionX , this.positionY+1 );
 					if(food==null&&(valid==false || valid==WALL)){
-						this.availabeDirections[1] = 0;
+						this.availableDirections[1] = 0;
 					}
 					else if(food==null&&valid==FOOD){
 						food = 1;
 					}
 					else{
-						this.availabeDirections[1] = 1;
+						this.availableDirections[1] = 1;
 					}
 					/*Check if the direction 'RIGHT' is available*/
 					valid = validateMoviment( this.positionX+1 , this.positionY );
 					if(food==null&&(valid==false || valid==WALL)){
-						this.availabeDirections[2] = 0;
+						this.availableDirections[2] = 0;
 					}
 					else if(food==null && valid==FOOD){
 						food = 2;
 					}
 					else{
-						this.availabeDirections[2] = 1;
+						this.availableDirections[2] = 1;
 					}
 					/*Check if the direction 'LEFT' is available*/
 					valid = validateMoviment( this.positionX-1 , this.positionY );
 					if(food==null&&(valid==false || valid==WALL)){
-						this.availabeDirections[3] = 0;
+						this.availableDirections[3] = 0;
 					}
 					else if(food==null && valid==FOOD){
 						food = 3;
 					}
 					else{
-						this.availabeDirections[3] = 1;
+						this.availableDirections[3] = 1;
 					}
 					/* If any food was found on any direction the ghost will move to this direction*/
 					if(food!= null){
 						moveAccordingDirection(directions[food], this);
 					}
-					/*Using the availabeDirections arry a random fonction will choose one of the valid directions*/
+					/*Using the availableDirections arry a random function will choose one of the valid directions*/
 					else{
-					/*Set the opposite direction, it invalids the opposit direction(avoid the ghost go back on his path)*/
+					/*Set the opposite direction, it makes the opposit direction invalid(avoid the ghost go back on his path)*/
 						setOppositeDirection(this)
 						/*Check the number of valid directions*/
 						var numberOfValid  =  numberOfValidDirections(this);
@@ -128,13 +128,13 @@ function Ghost( initialX, initialY ){
 									direction = 3;
 							
 								/*If that direction is a valid direction the ghost will move towards to this direction*/
-								if(this.availabeDirections[direction]==1){
+								if(this.availableDirections[direction]==1){
 									moveAccordingDirection(directions[direction], this);
 									break;	
 								}/*Else if this direction has not been called by the random funcion the position that represents that direction will revieve value 2, and the number of tryings will be decreased*/
 								else{
-									if(this.availabeDirections[direction]!=2){
-										this.availabeDirections[direction]=2;
+									if(this.availableDirections[direction]!=2){
+										this.availableDirections[direction]=2;
 										trying--;
 									}
 								}	
@@ -143,10 +143,8 @@ function Ghost( initialX, initialY ){
 						}
 						/*If the function numberOfValidDirections has retruned null it means that none directions is valid, so the ghost will go back on his path */
 						if(numberOfValid==null){
-							//If go backwords is the only direction availabe do it.
-							//if(goBack===true){
-								moveAccordingDirection(this.oppositeDirection, this);
-							//}
+							//If go backwords is the only direction available do it.
+							moveAccordingDirection(this.oppositeDirection, this);
 						}
 						/*Else there is just one possible direction and it was retruned by the function numberOfValidDirections*/
 						else{
@@ -165,24 +163,25 @@ function Ghost( initialX, initialY ){
 			function setOppositeDirection(ghost){
 				if(ghost.direction=="UP"){
 					ghost.oppositeDirection = "DOWN"
-					ghost.availabeDirections[1] = 0;
+					ghost.availableDirections[1] = 0;
 				}
 				else if(ghost.direction=="DOWN"){
 					ghost.oppositeDirection = "UP"
-					ghost.availabeDirections[0] = 0;
+					ghost.availableDirections[0] = 0;
 				}
 				else if(ghost.direction=="RIGHT"){
 					ghost.oppositeDirection = "LEFT";
-					ghost.availabeDirections[3] = 0;
+					ghost.availableDirections[3] = 0;
 				}
 				else if(ghost.direction=="LEFT"){
 					ghost.oppositeDirection = "RIGHT";
-					ghost.availabeDirections[2] = 0;
+					ghost.availableDirections[2] = 0;
 				}
 			}
 			
 			/*Move the ghost according to the direction*/
 			function moveAccordingDirection(direction, ghost){
+				/*If the ghost is weak it will change color*/
 				if(ghost.weak){
 					IMG_GHOST = IMG_GHOST_WEEK;
 				}else{
@@ -197,6 +196,7 @@ function Ghost( initialX, initialY ){
 						}
 						/*If the pacman is in the future ghost position his quantity of lives will be decreased*/
 						else if(MATRIX[ghost.positionY-1][ghost.positionX]==PACMAN){
+							/*Just if pacman in not immune and the ghost is not weak*/
 							if(!pacman.immune && !this.weak){
 								pacman.lives--;
 								alert("You Died!!");
@@ -271,7 +271,7 @@ function Ghost( initialX, initialY ){
 				/*Update Matrix*/
 				MATRIX[ghost.positionY][ghost.positionX] = ghost.savedObject;
 				
-				/*Save the element that is present on the future ghost's position*/
+				/*Save the element that is present on the future ghost position*/
 				if(MATRIX[newPositionY][newPositionX] == SPECIAL_FOOD){
 					ghost.savedObject = SPECIAL_FOOD
 				}else if(MATRIX[newPositionY][newPositionX] == PACMAN){
@@ -295,17 +295,19 @@ function Ghost( initialX, initialY ){
 				var number = 0;
 				var aux;
 				for(var i = 0; i < 4; i++){
-					if(ghost.availabeDirections[i]==1){
-						number++;
-						aux = i;
+					if(ghost.availableDirections[i]==1){
+						number++;/*Counts the number of valid directions*/
+						aux = i;/*Save it to be returned*/
 					}
 				}
-				
+				/*If none direction is available return null*/
 				if(number==0){
 					return null;
+				/*If just one direction is available returns the number that represents this direction*/	
 				}else if(number==1){
 					return aux;
 				}
+				/*If two or more directions are available return 4*/
 				else
 					return 4;
 			}

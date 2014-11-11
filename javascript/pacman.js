@@ -8,9 +8,9 @@ function Pacman(){
 			this.superPower = false;//Indcates that pacman "ate" a especial food, that gives him super power to eat ghosts
 			this.lives = 4;//Number of remainings pacman' lives
             this.openMouth = true;//Indicates if pacman shoul appear with his mouth opened or closed
-            this.immune = false;
-            this.deathTime = null;
-            this.superPowerTime = null;
+            this.immune = false;/*Indicates if pacman is immune to the ghosts. It will happen when pacman dies, it will be immune for 3 seconds  */
+            this.deathTime = null;/*Helps to control the immune time*/
+            this.superPowerTime = null;/*Helps to contro the super power time*/
 			
 			//Function that based on the pacman direction validate and change the possition of the pacman
 			this.move = function(){
@@ -22,13 +22,13 @@ function Pacman(){
 					switch(this.direction){
 					 case "UP":
 					 	yAux --;/*Changin pacman possition and image*/
-					 	//Check if the pacman's mouth is opened or closed, it will change the pacman' image
+					 	//Check if the pacman's mouth is opened or closed, it will change the pacman's image
                         if(this.openMouth){
                             IMG_PACMAN = IMG_PACMAN_UP;
                             this.openMouth = false;
                         }
                         else{
-                        	
+                        	/*If pacman is immune it will change color*/
                         	if(this.immune){
                         		 IMG_PACMAN = IMG_PACMAN_UP2_IMMUNE;
                         	}
@@ -103,28 +103,32 @@ function Pacman(){
 							game.score+=10;
 						}
 						else if(validMoviment==SPECIAL_FOOD){
-							//TODO
+							/*If pacman finds a specil food his super power will be activated*/
+							applyPacmanMoviment(this, xAux, yAux);
 							this.superPower = true;
 							this.superPowerTime = game.time;
-							applyPacmanMoviment(this, xAux, yAux);
 							game.quantityOfFood--;
 							game.score+=20;
 						}
 						else if(validMoviment==GHOST){
+							/*If pacman finds a ghost and his super power has beem activated or he is immune it will move normally as there is no ghost*/
 							if(this.superPower||this.immune){
 								applyPacmanMoviment(this, xAux, yAux);
-							}
+							} 
+							/*If pacman has not super power or he is not immune he will die*/
 							else{
-								//TODO
+								//TODO 
 								pacman.lives--;
 								this.immune = true;
 								this.deathTime = game.time;
 								alert("You Died!!!");
 							}
 						}
+						/*If he finds a empty space or an exit it will move normally*/
 						else if(validMoviment==EMPTY||validMoviment==EXIT){
 							applyPacmanMoviment(this, xAux, yAux);
 						}
+						/*If he finds a wall he will be blocked*/
 						else if(validMoviment==WALL){
 							this.blocked = true;
 						}
