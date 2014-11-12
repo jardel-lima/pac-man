@@ -11,19 +11,19 @@ How to use the database: extract pacmandb.zip to C:\wamp\bin\mysql\mysql5.6.12\d
  - show how to play - 50%
  
 -Pacman
- -Moviment #Jardel -OK
+ -Moviment -OK
  -What to do when eat:
  	-normal food -OK
- 	-special food
+ 	-special food -OK
  - What to do when find a ghost
- 	-pacman with special power
- 	-pacman without special power
+ 	-pacman with special power - 75%
+ 	-pacman without special power - OK
  	
 -Ghost
- -moviment #Jardel 
+ -moviment - OK
  -what to do when find pacman
- 	-weak(pacman with super power)
- 	-no weak 	
+ 	-weak(pacman with super power)- 50%
+ 	-no weak - OK 	
  	
 -Game
  -Load maps from the server (Ajax)
