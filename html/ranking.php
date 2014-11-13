@@ -3,7 +3,7 @@ $host = "localhost";
 $user = "root";
 $password = "";
 $database = "pacmandb";
-$tableName= "player";
+$tableName= "players";
  		
 $myCon = mysqli_connect($host,$user,$password,$database);
   
