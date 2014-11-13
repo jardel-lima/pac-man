@@ -14,7 +14,8 @@
 			
 			 table+="</table>";
              document.getElementById("divGame").innerHTML= table;
-            
+             document.getElementById("divInfo").setAttribute("style","width:"+divWidth+"px");
+              document.getElementById("divFoot").setAttribute("style","width:"+divWidth*0.6+"px");
 			
 		}
 		

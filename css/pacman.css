@@ -48,3 +48,39 @@ div .edtWhite{
 		border-radius:10px;
 		width: 50%;
 }
+.divFoot{
+    margin: 20px auto auto auto;
+    
+}
+.divFoot div{
+    width: 20%;
+    margin: auto;
+    color: black;
+    display: inline;
+    text-shadow: 1px 1px 1px white;     
+    background: darkgoldenrod;
+    border-radius:20px;
+     border-top: darkgoldenrod 10px outset ;
+    border-bottom: darkgoldenrod 10px outset ;
+    border-left: darkgoldenrod 10px outset ;
+    border-right: darkgoldenrod 10px outset ;
+    text-align: center;
+    font-family: Comic Sans Ms;
+    font-size: 1.0em;
+    
+    
+}
+a{
+    text-decoration: none;
+}
+.divFoot div:hover{
+    background: blue ;
+     border-top: blue 10px outset ;
+    border-bottom: blue 10px outset ;
+    border-left: blue 10px outset ;
+    border-right: blue 10px outset ;
+    cursor: pointer;
+}
+#nextPhase{
+    display:none;
+}

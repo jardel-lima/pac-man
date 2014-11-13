@@ -12,7 +12,7 @@
     <script type="text/javascript" src="../javascript/Game.js"></script>
 </head>
 <body>
-    <div class="divInfo">
+    <div class="divInfo" id="divInfo">
         <div>Map: <div class="edtWhite"><span id="map"> </span></div></div>
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
         <div>Lives:<div class="edtWhite"><span id="lives"> </span></div></div>
@@ -20,6 +20,11 @@
         
     </div>
     <div id="divGame"></div>
+    <div class="divFoot" id="divFoot">
+        <a href="mainMenu.html"><div class="divButton">Return Menu</div></a>
+        <div class="divButton" onclick="game.restart();">Restart Game</div>
+        <div class="divButton" id="nextPhase" onclick="game.changePhase(game.phase);">Next Phase</div>
+    </div>
 	<script>
 	
 	var game = new Game();

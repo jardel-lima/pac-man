@@ -22,8 +22,8 @@ function Game(){
 			
 			}
 	
-	this.resart = function(){
-			
+	this.restart = function(){
+			location.reload();
 			}
 			
 	this.gameOver = function(){
@@ -93,6 +93,7 @@ function Game(){
 				if(this.quantityOfFood<=0){
 				 	game.status="PAUSE";
 				 	alert("The game is over");
+                                        document.getElementById("nextPhase").setAttribute("style","Display:inline");
 				 }
 				 
 				 /*If pacman has no more lives the game is over*/
