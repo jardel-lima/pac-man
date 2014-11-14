@@ -12,14 +12,22 @@ function Game(){
 			if(this.status == "STOP"){
 				initiateMatrix();
 				this.quantityOfFood = readMap(map);
-				populateMATRIX(map)
+				populateMATRIX(map);
+                                document.getElementById('map').innerHTML=game.phase; 
+                                
 			}
 			
 				
 		}	
 			
-	this.changePhase = function(phaseNumber){
-			
+	this.changePhase = function(){
+                map = document.getElementById("divDataMap").innerHTML;
+                this.quantityOfFood- readMap(map);
+                populateMATRIX(map);
+                document.getElementById('map').innerHTML=this.phase; 
+                printMatrix();
+                        
+                        
 			}
 	
 	this.restart = function(){
@@ -120,3 +128,5 @@ function Game(){
 	}
 	
 }
+
+

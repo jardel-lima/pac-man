@@ -1,4 +1,5 @@
  var xmlHttp = createXmlHttpRequestObject();
+ var dataFile;
 
 
  function createXmlHttpRequestObject()  {
@@ -32,8 +33,9 @@
                         if (xmlHttp.readyState == 4)    {
                                 // status of 200 indicates the transaction completed successfully
                                 if (xmlHttp.status == 200)  {
-                                	dataRanking= xmlHttp.responseText;
-                                	updateHtml(dataRanking);
+                                    
+                                	dataFile= xmlHttp.responseText;
+                                        document.getElementById("divDataMap").innerHTML=dataFile;
                                 }
                                 // a HTTP status different than 200 signals an error
                                 else  {
@@ -42,13 +44,13 @@
                         }
                 }                
  
- function loadRanking() {
+ function loadFile(file) {
          
 	if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0)   {  
  			
  			// execute the hi.php page from the server 
  	
- 			xmlHttp.open("POST", "ranking.php", true);   
+ 			xmlHttp.open("GET", "readFile.php?fileName=../maps/"+file, true);   
  				
  			// define the method to handle server responses 
  			xmlHttp.onreadystatechange = handleServerResponse;  
@@ -57,13 +59,8 @@
  			xmlHttp.send(null);   
  	} else {
  			// if the connection is busy, try again after one second   
- 			setTimeout('loadRanking()', 1000); 
+ 			setTimeout('loadFile('+file+')', 1000); 
  		} 
  		//setInterval('checkData()', 1000);
-                }
-                
-function updateHtml(data){
-	//TODO check data and  print correctly
-		document.getElementById("divRanking").innerHTML=data; //just a test
-	
-	}              
+                } 
+                         

@@ -82,5 +82,5 @@ a{
     cursor: pointer;
 }
 #nextPhase{
-    display:none;
+    display:inline;
 }
