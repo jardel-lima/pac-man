@@ -87,8 +87,7 @@ function Game(){
 		this.ghostController(ghost1, ghost2, ghost3, ghost4);
 		/*If the game's status is "PLAY" */
 		if(this.status=="PLAY"){
-				/*Call pacman's controller*/
-				this.pacmanController(pacman);
+				
 				/*Checks the quantity of remaing food, it it is equla to 0 the game is over*/
 				if(this.quantityOfFood<=0){
 				 	game.status="PAUSE";
@@ -101,16 +100,40 @@ function Game(){
 				 	alert("You do not have any live!!");
 				 }
 				 
+				 /*Call pacman's controller*/
+				 this.pacmanController(pacman);
 				 /*If pacman has his super power activated and it has beem activated for 5 seconds his super power will be disabled and the ghosts will be not weak anymore*/
 				 if(pacman.superPower){
 				 	
-				 	if((this.time-pacman.superPowerTime)>5){
+				 	if((this.time-pacman.superPowerTime)>10){
 				 		pacman.superPower = false;
 			 			ghost1.weak = false;
 						ghost2.weak = false;
 						ghost3.weak = false;
 						ghost4.weak = false;
 				 	}
+				 }
+				 
+				 if(pacman.ghostKilled!=null){
+				 	switch(pacman.ghostKilled){
+				 		case GHOST+1:
+				 			ghost1.die();
+				 			pacman.ghostKilled = null;
+				 		break;
+				 		case GHOST+2:
+				 			ghost2.die();
+				 			pacman.ghostKilled = null;
+				 		break;
+				 		case GHOST+3:
+				 			ghost3.die();
+				 			pacman.ghostKilled = null;
+				 		break;
+				 		case GHOST+4:
+				 			ghost4.die();
+				 			pacman.ghostKilled = null;
+				 		break;
+				 	}
+		
 				 }
 				 
 				

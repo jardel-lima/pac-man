@@ -11,6 +11,7 @@ function Pacman(){
             this.immune = false;/*Indicates if pacman is immune to the ghosts. It will happen when pacman dies, it will be immune for 3 seconds  */
             this.deathTime = null;/*Helps to control the immune time*/
             this.superPowerTime = null;/*Helps to contro the super power time*/
+            this.ghostKilled = null;/*Indicates which ghost was killed by the pacman*/
 			
 			//Function that based on the pacman direction validate and change the possition of the pacman
 			this.move = function(){
@@ -110,9 +111,12 @@ function Pacman(){
 							game.quantityOfFood--;
 							game.score+=20;
 						}
-						else if(validMoviment==GHOST){
+						else if(validMoviment.search(GHOST)!=-1){
 							/*If pacman finds a ghost and his super power has beem activated or he is immune it will move normally as there is no ghost*/
 							if(this.superPower||this.immune){
+								if(this.superPower){
+									this.ghostKilled = validMoviment;
+								}
 								applyPacmanMoviment(this, xAux, yAux);
 							} 
 							/*If pacman has not super power or he is not immune he will die*/

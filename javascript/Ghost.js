@@ -1,5 +1,5 @@
 /*Class that represents a Ghost, it recieves the ghost's initial positions*/
-function Ghost( initialX, initialY ){
+function Ghost( initialX, initialY, number ){
 			
 			this.initialX = initialX;/*Initial ghost's X position*/
 			this.initialY = initialY;/*Initial ghost's Y position*/
@@ -12,6 +12,7 @@ function Ghost( initialX, initialY ){
 			this.oppositeDirection = "DOWN";/*Saves the opposite ghost's direction. To avoid the ghost going back in his path, this position will be considered just in last case.*/
 			this.availableDirections =[1,1,1,1]/*represents the available directions that the ghost can have. Value 1 represents available and value 0 unavailable. The order of the directions are ["UP","DOWN","RIGHT","LEFT"]*/
 			this.alive = true;/*Idicates that the ghost is alive*/
+			this.number = number;
 			
 			/*Function that moves the ghost based on his satatus: inPrison or no inPrison*/
 			this.move = function(){
@@ -156,6 +157,12 @@ function Ghost( initialX, initialY ){
 				}
 			}
 			
+			this.die = function(){
+				this.positionX = this.initialX;
+				this.positionY = this.initialY;
+				
+			}
+			
 	}
 	
 			
@@ -285,7 +292,7 @@ function Ghost( initialX, initialY ){
 				ghost.positionX = newPositionX;
 				
 				/*Matrix and Table are updated*/
-				MATRIX[ghost.positionY][ghost.positionX]=GHOST;
+				MATRIX[ghost.positionY][ghost.positionX]=GHOST+ghost.number;
 				document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = IMG_GHOST;
 				
 			}
