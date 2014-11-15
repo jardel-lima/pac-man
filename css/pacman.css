@@ -82,5 +82,8 @@ a{
     cursor: pointer;
 }
 #nextPhase{
-    display:inline;
+    display:none;
+}
+#divDataMap{
+    display: none;
 }

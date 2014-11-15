@@ -12,7 +12,7 @@
     <script type="text/javascript" src="../javascript/Game.js"></script>
      <script type="text/javascript" src="../javascript/fileReader.js"></script>
 </head>
-<body>
+<body onload="loadNextPhase();"> 
     <div class="divInfo" id="divInfo">
         <div>Map: <div class="edtWhite"><span id="map"> </span></div></div>
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
@@ -24,7 +24,7 @@
     <div class="divFoot" id="divFoot">
         <a href="mainMenu.html"><div class="divButton">Return Menu</div></a>
         <div class="divButton" onclick="game.restart();">Restart Game</div>
-        <div class="divButton" id="nextPhase" onclick="loadNextPhase();">Next Phase</div>
+        <div class="divButton" id="nextPhase" onclick="loadNextPhase();" >Next Phase</div>
     </div>
 	<script>
 	
@@ -130,12 +130,12 @@
 			
 		}
                 function loadNextPhase(){
-                    game.phase++;
+                    game.phase++;                    
                     mapFile="map"+game.phase+".txt";
                     loadFile(mapFile);
                     game.changePhase();
+                    
                 }
-                
 		//Loop-------------------------
 		var loop = function(){
 			
@@ -162,6 +162,6 @@
 	
 		
 	</script>
-        <div id="divDataMap" style="display: none;"></div>
+        <div id="divDataMap"></div>
 </body>
 </html>

@@ -14,10 +14,12 @@
 			
 		}else{ //file not empty
 			$fh = fopen($fileName,"r"); // open file to read
+                        $map="";
 			while(!feof($fh)){ //it will read the file line by line until its end.
 				$line = fgets($fh); // read the line
-				print($line);
+				$map=$map.trim($line); //take off the end of line /r/n
 				}
+                         print($map);       
 			fclose($fh);
 			}
 	

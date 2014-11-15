@@ -34,8 +34,8 @@
                                 // status of 200 indicates the transaction completed successfully
                                 if (xmlHttp.status == 200)  {
                                     
-                                	dataFile= xmlHttp.responseText;
-                                        document.getElementById("divDataMap").innerHTML=dataFile;
+                                	dataFile= xmlHttp.responseText; // the server response 
+                                        document.getElementById("divDataMap").innerHTML=dataFile; // put the new map in a div to get it in game.js
                                 }
                                 // a HTTP status different than 200 signals an error
                                 else  {
