@@ -12,18 +12,26 @@ function Game(){
 			if(this.status == "STOP"){
 				initiateMatrix();
 				this.quantityOfFood = readMap(map);
-				populateMATRIX(map)
+				populateMATRIX(map);
+                                document.getElementById('map').innerHTML=game.phase; 
+                                
 			}
 			
 				
 		}	
 			
-	this.changePhase = function(phaseNumber){
-			
+	this.changePhase = function(){
+                map = document.getElementById("divDataMap").innerHTML;
+                this.quantityOfFood- readMap(map);
+                populateMATRIX(map);
+                document.getElementById('map').innerHTML=this.phase; 
+                printMatrix();
+                        
+                        
 			}
 	
-	this.resart = function(){
-			
+	this.restart = function(){
+			location.reload();
 			}
 			
 	this.gameOver = function(){
@@ -92,6 +100,7 @@ function Game(){
 				if(this.quantityOfFood<=0){
 				 	game.status="PAUSE";
 				 	alert("The game is over");
+                                        document.getElementById("nextPhase").setAttribute("style","Display:inline");
 				 }
 				 
 				 /*If pacman has no more lives the game is over*/
@@ -142,3 +151,5 @@ function Game(){
 	}
 	
 }
+
+

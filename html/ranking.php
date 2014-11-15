@@ -1,11 +1,11 @@
 <?php
 $host = "localhost";
-$user = "root";
-$password = "";
-$database = "pacmandb";
+$user = "f2014_user9";
+$password =  "f2014_user9";
+$database = "f2014_user9";
 $tableName= "player";
  		
-$myCon = mysqli_connect($host,$user,$password,$database);
+$myCon = mysqli_connect($host,$user,$password,$database); // try to connect to the mysql server
   
   if(mysqli_connect_errno())
   {
@@ -14,7 +14,7 @@ $myCon = mysqli_connect($host,$user,$password,$database);
   }	
    else
      {
-		$sql = "Select *  from $tableName ORDER BY player_score desc";
+		$sql = "Select *  from $tableName ORDER BY player_score-(player_time/10) desc";
 		$res = mysqli_query($myCon,$sql);
 		
 		if($res){

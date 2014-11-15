@@ -10,9 +10,10 @@
     <script type="text/javascript" src="../javascript/Pacman.js"></script>
     <script type="text/javascript" src="../javascript/Ghost.js"></script>
     <script type="text/javascript" src="../javascript/Game.js"></script>
+     <script type="text/javascript" src="../javascript/fileReader.js"></script>
 </head>
 <body>
-    <div class="divInfo">
+    <div class="divInfo" id="divInfo">
         <div>Map: <div class="edtWhite"><span id="map"> </span></div></div>
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
         <div>Lives:<div class="edtWhite"><span id="lives"> </span></div></div>
@@ -20,9 +21,15 @@
         
     </div>
     <div id="divGame"></div>
+    <div class="divFoot" id="divFoot">
+        <a href="mainMenu.html"><div class="divButton">Return Menu</div></a>
+        <div class="divButton" onclick="game.restart();">Restart Game</div>
+        <div class="divButton" id="nextPhase" onclick="loadNextPhase();">Next Phase</div>
+    </div>
 	<script>
 	
 	var game = new Game();
+        //var map = readFile("maps/map1.txt");
 	var map = 	"00000000000000000000"+
 				  	"0                  0"+
 					"0 0000000  0000000 0"+
@@ -54,7 +61,7 @@
 					"0                  0"+
 					"00000000000000000000";
 	game.initiate(map);
-         document.getElementById('map').innerHTML=game.phase; 
+         
         
 	printMatrix();
 	
@@ -122,6 +129,13 @@
 			}
 			
 		}
+                function loadNextPhase(){
+                    game.phase++;
+                    mapFile="map"+game.phase+".txt";
+                    loadFile(mapFile);
+                    game.changePhase();
+                }
+                
 		//Loop-------------------------
 		var loop = function(){
 			
@@ -148,5 +162,6 @@
 	
 		
 	</script>
+        <div id="divDataMap" style="display: none;"></div>
 </body>
 </html>
