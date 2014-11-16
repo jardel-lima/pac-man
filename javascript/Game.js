@@ -24,7 +24,7 @@ function Game(){
                 map = document.getElementById("divDataMap").innerHTML;
                 this.quantityOfFood- readMap(map);
                 populateMATRIX(map);
-                document.getElementById('map').innerHTML=this.phase; 
+                document.getElementById('map').innerHTML=this.phase-1;                
                 printMatrix();
                         
                         
