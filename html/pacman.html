@@ -12,7 +12,7 @@
     <script type="text/javascript" src="../javascript/Game.js"></script>
      <script type="text/javascript" src="../javascript/fileReader.js"></script>
 </head>
-<body onload="loadNextPhase();"> 
+<body onload="loadNextPhase(false);"> 
     <div class="divInfo" id="divInfo">
         <div>Map: <div class="edtWhite"><span id="map"> </span></div></div>
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
@@ -24,7 +24,7 @@
     <div class="divFoot" id="divFoot">
         <a href="mainMenu.html"><div class="divButton">Return Menu</div></a>
         <div class="divButton" onclick="game.restart();">Restart Game</div>
-        <div class="divButton" id="nextPhase" onclick="loadNextPhase();" >Next Phase</div>
+        <div class="divButton" id="nextPhase" onclick="loadNextPhase(true);" >Next Phase</div>
     </div>
 	<script>
 	
@@ -129,10 +129,11 @@
 			}
 			
 		}
-                function loadNextPhase(){
+                function loadNextPhase(execute){
                     game.phase++;                    
                     mapFile="map"+game.phase+".txt";
                     loadFile(mapFile);
+                    if(execute)
                     game.changePhase();
                     
                 }
@@ -142,8 +143,8 @@
 				 game.gameController(pacman, ghost1, ghost2, ghost3, ghost4);
 				
 				 document.getElementById('score').innerHTML=game.score;
-				 document.getElementById('lives').innerHTML=pacman.lives; 
-				 document.getElementById('time').innerHTML=game.time; 
+				 document.getElementById('lives').innerHTML=game.quantityOfFood;//pacman.lives; 
+				 document.getElementById('time').innerHTML=game.prisonTime; //game.time; 
 				 
                            
 		}
@@ -151,8 +152,10 @@
 		setInterval(loop,300);
 		
 		var time = function(){
-			if(game.status=="PLAY")
+			if(game.status=="PLAY"){
 					game.time++;
+                                        game.prisonTime++;
+                                    }
 		}
 		
 		setInterval(time,1000);

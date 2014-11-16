@@ -6,7 +6,7 @@ function Game(){
 	this.time = 0;//Time of the game
 	this.phase = 1;//Represent tha phase/map of the game
 	this.status = "STOP";//It represents the status of the game. That can be 'PLAY'(When the user is playing)|'PAUSE'(When a new map is gonna start)|'STOP'(When the game has not started)|'OVER'(When the game is over)
-	
+	this.prisonTime = 0;
 	//Function that initiate a game, creating the matrix, table, read the map and populate the matrix and table
 	this.initiate = function(map){
 			if(this.status == "STOP"){
@@ -21,11 +21,14 @@ function Game(){
 		}	
 			
 	this.changePhase = function(){
-                map = document.getElementById("divDataMap").innerHTML;
-                this.quantityOfFood- readMap(map);
+                this.status = "STOP"; // stop game to load new map
+                map = document.getElementById("divDataMap").innerHTML; // get new map
+                IMG_PACMAN = IMG_PACMAN_RIGHT; // update pacman's image to initial position's image
+                this.quantityOfFood= readMap(map); 
                 populateMATRIX(map);
-                document.getElementById('map').innerHTML=this.phase-1;                
+                document.getElementById('map').innerHTML=this.phase-1;    //update phase html element            
                 printMatrix();
+                this.prisonTime = 0;
                         
                         
 			}
@@ -62,7 +65,7 @@ function Game(){
 			 	ghost4.move();
 			}
 			/*If the game time is equal 2 exits will be created in the prison, allowing the ghost to go out*/
-			if(this.time==2){
+			if(this.prisonTime==2){
 			 	MATRIX[16][8]= EXIT;
 				MATRIX[12][9]= EXIT;
 				MATRIX[16][10]= EXIT;
