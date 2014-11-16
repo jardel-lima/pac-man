@@ -12,7 +12,7 @@ function Ghost( initialX, initialY, number ){
 			this.oppositeDirection = "DOWN";/*Saves the opposite ghost's direction. To avoid the ghost going back in his path, this position will be considered just in last case.*/
 			this.availableDirections =[1,1,1,1]/*represents the available directions that the ghost can have. Value 1 represents available and value 0 unavailable. The order of the directions are ["UP","DOWN","RIGHT","LEFT"]*/
 			this.alive = true;/*Idicates that the ghost is alive*/
-			this.number = number;
+			this.number = number;/*Represents the ghost number. It intentify the ghost*/
 			
 			/*Function that moves the ghost based on his satatus: inPrison or no inPrison*/
 			this.move = function(){
@@ -25,30 +25,21 @@ function Ghost( initialX, initialY, number ){
 							if(valid==WALL){
 								this.direction = "DOWN";
 							}
-							else{/* if the next position is a EXIT the ghost will go out of the "prison"*/
-								if(valid==EXIT){
-									this.inPrison = false;
-								}
-								/*Function that applies the ghost's moviment*/
-								applyGhostMoviment(this, this.positionX, this.positionY-1);
-							
-							}
+							else
+							/*Function that applies the ghost's moviment*/
+							applyGhostMoviment(this, this.positionX, this.positionY-1);
 					}
 					else if(this.direction=="DOWN"){
 						var valid = validateMoviment( this.positionX , this.positionY+1 );
 							if(valid==WALL){
 								this.direction = "UP";
 							}
-							else{
-								if(valid==EXIT){
-									this.inPrison = false;
-								}
+							else
 								applyGhostMoviment( this, this.positionX, this.positionY+1);
-							}
 					}
 	
 				}/*If the ghost is not in prison it will move using a random direction.*/
-				else if(this.inPrison==false){
+				else if(this.inPrison==false && this.alive){
 					var valid;/*Indicates that the moviment is valid or not*/
 					var trying = 4;/*It keeps track of the number of direction that the random function has called but they are invalid. If all 4 dirctions were invalid the pacman will move back on his path*/
 					var directions = ["UP","DOWN","RIGHT","LEFT"];/*Arry that indicates the name of directions*/
@@ -56,7 +47,7 @@ function Ghost( initialX, initialY, number ){
 					/*Check if the direction 'UP' is available*/
 					valid = validateMoviment( this.positionX , this.positionY-1 );
 					/*if this direction has a wall or is a invalid direction this direction will recive 0 on the availableDirections arry*/
-					if(food==null&&(valid==false || valid==WALL)){
+					if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)){
 						this.availableDirections[0] = 0;
 					}
 					/*If there is food on this direction the ghost will move to this direction*/
@@ -69,7 +60,7 @@ function Ghost( initialX, initialY, number ){
 					}
 					/*Check if the direction 'DOWN' is available*/
 					valid = validateMoviment( this.positionX , this.positionY+1 );
-					if(food==null&&(valid==false || valid==WALL)){
+					if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)){
 						this.availableDirections[1] = 0;
 					}
 					else if(food==null&&valid==FOOD){
@@ -80,7 +71,7 @@ function Ghost( initialX, initialY, number ){
 					}
 					/*Check if the direction 'RIGHT' is available*/
 					valid = validateMoviment( this.positionX+1 , this.positionY );
-					if(food==null&&(valid==false || valid==WALL)){
+					if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)){
 						this.availableDirections[2] = 0;
 					}
 					else if(food==null && valid==FOOD){
@@ -91,7 +82,7 @@ function Ghost( initialX, initialY, number ){
 					}
 					/*Check if the direction 'LEFT' is available*/
 					valid = validateMoviment( this.positionX-1 , this.positionY );
-					if(food==null&&(valid==false || valid==WALL)){
+					if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)){
 						this.availableDirections[3] = 0;
 					}
 					else if(food==null && valid==FOOD){
@@ -143,7 +134,7 @@ function Ghost( initialX, initialY, number ){
 							}while(trying>0);
 						}
 						/*If the function numberOfValidDirections has retruned null it means that none directions is valid, so the ghost will go back on his path */
-						if(numberOfValid==null){
+						else if(numberOfValid==null){
 							//If go backwords is the only direction available do it.
 							moveAccordingDirection(this.oppositeDirection, this);
 						}
@@ -158,6 +149,13 @@ function Ghost( initialX, initialY, number ){
 			}
 			
 			this.die = function(){
+				if(MATRIX[this.positionY][this.positionX]!=PACMAN){
+					document.getElementById("tableGame").rows[this.positionY].cells[this.positionX].style.backgroundImage = IMG_EMPTY;
+				}
+				this.alive = false;
+				//this.weak  = false;
+				//this.inPrison = true;
+				this.savedObject = EMPTY;
 				this.positionX = this.initialX;
 				this.positionY = this.initialY;
 				
@@ -188,77 +186,108 @@ function Ghost( initialX, initialY, number ){
 			
 			/*Move the ghost according to the direction*/
 			function moveAccordingDirection(direction, ghost){
-				/*If the ghost is weak it will change color*/
-				if(ghost.weak){
-					IMG_GHOST = IMG_GHOST_WEEK;
-				}else{
-					IMG_GHOST = IMG_GHOST_NORMAL;
-				}
-				switch(direction){
-					case "UP":
-						ghost.direction="UP";
-						/*If there is food in the future ghost position the quantityOfFood will be decreased by 1*/
-						if(MATRIX[ghost.positionY-1][ghost.positionX]==FOOD){
-						 	game.quantityOfFood--;
-						}
-						/*If the pacman is in the future ghost position his quantity of lives will be decreased*/
-						else if(MATRIX[ghost.positionY-1][ghost.positionX]==PACMAN){
-							/*Just if pacman in not immune and the ghost is not weak*/
-							if(!pacman.immune && !this.weak){
-								pacman.lives--;
-								alert("You Died!!");
-								pacman.immune = true;
-								pacman.deathTime = game.time;
+			//	if(ghost.alive){
+					/*If the ghost is weak it will change color*/
+					if(ghost.weak){
+						IMG_GHOST = IMG_GHOST_WEEK;
+					}else{
+						IMG_GHOST = IMG_GHOST_NORMAL;
+					}
+					switch(direction){
+						case "UP":
+							ghost.direction="UP";
+							/*If there is food in the future ghost position the quantityOfFood will be decreased by 1*/
+							if(MATRIX[ghost.positionY-1][ghost.positionX]==FOOD){
+							 	game.quantityOfFood--;
+							 	applyGhostMoviment(ghost, ghost.positionX, ghost.positionY-1);
 							}
-						}
-						applyGhostMoviment(ghost, ghost.positionX, ghost.positionY-1);
-						break;
-					case "DOWN":
-						ghost.direction="DOWN";
-						if(MATRIX[ghost.positionY+1][ghost.positionX]==FOOD){
-						 	game.quantityOfFood--;
-						}
-						else if(MATRIX[ghost.positionY+1][ghost.positionX]==PACMAN){
-							if(!pacman.immune && !this.weak){
-								pacman.lives--;
-								alert("You Died!!");
-								pacman.immune = true;
-								pacman.deathTime = game.time;
+							/*If the pacman is in the future ghost position his quantity of lives will be decreased*/
+							else if(MATRIX[ghost.positionY-1][ghost.positionX]==PACMAN){
+								/*Just if pacman in not immune and the ghost is not weak*/
+								if(!pacman.immune && !ghost.weak && !pacman.superPower){
+									pacman.lives--;
+									//alert("You Died!!");
+									pacman.immune = true;
+									pacman.deathTime = game.time;
+									applyGhostMoviment(ghost, ghost.positionX, ghost.positionY-1);
+								}
+								else if(pacman.superPower){
+									game.score += 100;
+									ghost.die();
+								}
+							}else{
+								applyGhostMoviment(ghost, ghost.positionX, ghost.positionY-1);
 							}
-						}
-						applyGhostMoviment(ghost, ghost.positionX, ghost.positionY+1);
-						break;
-					case "RIGHT":
-						ghost.direction="RIGHT";
-						if(MATRIX[ghost.positionY][ghost.positionX+1]==FOOD){
-						 	game.quantityOfFood--;
-						}
-						else if(MATRIX[ghost.positionY][ghost.positionX+1]==PACMAN){
-							if(!pacman.immune && !this.weak){
-								pacman.lives--;
-								alert("You Died!!");
-								pacman.immune = true;
-								pacman.deathTime = game.time;
+							break;
+						case "DOWN":
+							ghost.direction="DOWN";
+							if(MATRIX[ghost.positionY+1][ghost.positionX]==FOOD){
+							 	game.quantityOfFood--;
+							 	applyGhostMoviment(ghost, ghost.positionX, ghost.positionY+1);
 							}
-						}
-						applyGhostMoviment(ghost, ghost.positionX+1, ghost.positionY);
-						break;
-					case "LEFT":
-						ghost.direction="LEFT";
-						if(MATRIX[ghost.positionY][ghost.positionX-1]==FOOD){
-						 	game.quantityOfFood--;
-						}
-						else if(MATRIX[ghost.positionY][ghost.positionX-1]==PACMAN){
-							if(!pacman.immune && !this.weak){
-								pacman.lives--;
-								alert("You Died!!");
-								pacman.immune = true;
-								pacman.deathTime = game.time;
+							else if(MATRIX[ghost.positionY+1][ghost.positionX]==PACMAN){
+								if(!pacman.immune && !ghost.weak  && !pacman.superPower){
+									pacman.lives--;
+									//alert("You Died!!");
+									pacman.immune = true;
+									pacman.deathTime = game.time;
+									applyGhostMoviment(ghost, ghost.positionX, ghost.positionY+1);
+								}
+								else if(pacman.superPower){
+									game.score += 100;
+									ghost.die();
+								}
+							}else {
+								applyGhostMoviment(ghost, ghost.positionX, ghost.positionY+1);
 							}
-						}
-						applyGhostMoviment(ghost, ghost.positionX-1, ghost.positionY);
-						break;		
-				}
+							break;
+						case "RIGHT":
+							ghost.direction="RIGHT";
+							if(MATRIX[ghost.positionY][ghost.positionX+1]==FOOD){
+							 	game.quantityOfFood--;
+							 	applyGhostMoviment(ghost, ghost.positionX+1, ghost.positionY);
+							}
+							else if(MATRIX[ghost.positionY][ghost.positionX+1]==PACMAN){
+								if(!pacman.immune && !ghost.weak && !pacman.superPower){
+									pacman.lives--;
+									//alert("You Died!!");
+									pacman.immune = true;
+									pacman.deathTime = game.time;
+									applyGhostMoviment(ghost, ghost.positionX+1, ghost.positionY);
+								}
+								else if(pacman.superPower){
+									game.score += 100;
+									ghost.die();
+								}
+							}
+							else{
+								applyGhostMoviment(ghost, ghost.positionX+1, ghost.positionY);
+							}
+							break;
+						case "LEFT":
+							ghost.direction="LEFT";
+							if(MATRIX[ghost.positionY][ghost.positionX-1]==FOOD){
+							 	game.quantityOfFood--;
+							 	applyGhostMoviment(ghost, ghost.positionX-1, ghost.positionY);
+							}
+							else if(MATRIX[ghost.positionY][ghost.positionX-1]==PACMAN){
+								if(!pacman.immune && !ghost.weak  && !pacman.superPower){
+									pacman.lives--;
+									//alert("You Died!!");
+									pacman.immune = true;
+									pacman.deathTime = game.time;
+									applyGhostMoviment(ghost, ghost.positionX-1, ghost.positionY);
+								}
+								else if(pacman.superPower){
+									game.score += 100;
+									ghost.die();
+								}
+							}
+							else{
+								applyGhostMoviment(ghost, ghost.positionX-1, ghost.positionY);
+							}
+							break;		
+					}
 			
 		}
 		
@@ -281,8 +310,8 @@ function Ghost( initialX, initialY, number ){
 				/*Save the element that is present on the future ghost position*/
 				if(MATRIX[newPositionY][newPositionX] == SPECIAL_FOOD){
 					ghost.savedObject = SPECIAL_FOOD
-				}else if(MATRIX[newPositionY][newPositionX] == PACMAN){
-					ghost.savedObject = EMPTY;//Has to change
+				}else if(MATRIX[newPositionY][newPositionX] == PACMAN && pacman.blocked){
+					ghost.savedObject = PACMAN;//Has to change
 				}else{
 					ghost.savedObject = EMPTY;
 				}

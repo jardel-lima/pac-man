@@ -105,28 +105,30 @@ function Pacman(){
 						}
 						else if(validMoviment==SPECIAL_FOOD){
 							/*If pacman finds a specil food his super power will be activated*/
-							applyPacmanMoviment(this, xAux, yAux);
 							this.superPower = true;
 							this.superPowerTime = game.time;
-							game.quantityOfFood--;
+							//game.quantityOfFood--;
 							game.score+=20;
+							applyPacmanMoviment(this, xAux, yAux);
 						}
 						else if(validMoviment.search(GHOST)!=-1){
 							/*If pacman finds a ghost and his super power has beem activated or he is immune it will move normally as there is no ghost*/
 							if(this.superPower||this.immune){
 								if(this.superPower){
 									this.ghostKilled = validMoviment;
+									game.score+=100;
 								}
-								applyPacmanMoviment(this, xAux, yAux);
+								
 							} 
 							/*If pacman has not super power or he is not immune he will die*/
 							else{
 								//TODO 
-								pacman.lives--;
+								this.lives--;
 								this.immune = true;
 								this.deathTime = game.time;
-								alert("You Died!!!");
+								//alert("You Died!!!");
 							}
+							applyPacmanMoviment(this, xAux, yAux);	
 						}
 						/*If he finds a empty space or an exit it will move normally*/
 						else if(validMoviment==EMPTY||validMoviment==EXIT){

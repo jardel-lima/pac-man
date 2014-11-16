@@ -15,7 +15,7 @@
 			 table+="</table>";
              document.getElementById("divGame").innerHTML= table;
              document.getElementById("divInfo").setAttribute("style","width:"+divWidth+"px");
-              document.getElementById("divFoot").setAttribute("style","width:"+divWidth*0.6+"px");
+             // document.getElementById("divFoot").setAttribute("style","width:"+divWidth*0.6+"px");
 			
 		}
 		
@@ -79,7 +79,7 @@
 			
 			pacman = new Pacman();//create a pacman
 			MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
-			quantityOfFood = quantityOfFood - 1;/*pacman*/
+			quantityOfFood = quantityOfFood - 1- NUMBER_OF_SPECIAL_FOOD;/*pacman*/
 			return quantityOfFood;
 		}
 		

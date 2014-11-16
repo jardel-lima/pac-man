@@ -63,10 +63,16 @@ function Game(){
 			}
 			/*If the game time is equal 2 exits will be created in the prison, allowing the ghost to go out*/
 			if(this.time==2){
-			 	MATRIX[16][8]= EXIT;
-				MATRIX[12][9]= EXIT;
-				MATRIX[16][10]= EXIT;
-				MATRIX[12][11]= EXIT;
+			 	MATRIX[16][8]= EMPTY;
+				//MATRIX[12][9]= EXIT;
+				//MATRIX[16][10]= EXIT;
+				MATRIX[12][11]= EMPTY;
+				document.getElementById("tableGame").rows[16].cells[8].style.backgroundImage = IMG_EMPTY;
+				document.getElementById("tableGame").rows[12].cells[11].style.backgroundImage = IMG_EMPTY;
+				ghost1.inPrison = false;
+				ghost2.inPrison = false;
+				ghost3.inPrison = false;
+				ghost4.inPrison = false;
 			}
 		}
 	}
@@ -91,8 +97,7 @@ function Game(){
 	
 	/*Function that controls the game's actions*/
 	this.gameController = function(pacman, ghost1, ghost2, ghost3, ghost4){
-		/*call ghost's controller'*/
-		this.ghostController(ghost1, ghost2, ghost3, ghost4);
+		
 		/*If the game's status is "PLAY" */
 		if(this.status=="PLAY"){
 				
@@ -106,7 +111,7 @@ function Game(){
 				 /*If pacman has no more lives the game is over*/
 				 if(pacman.lives<=0){
 				 	game.status="PAUSE";
-				 	alert("You do not have any live!!");
+				 	alert("You do not have any live left!!");
 				 }
 				 
 				 /*Call pacman's controller*/
@@ -121,8 +126,22 @@ function Game(){
 						ghost3.weak = false;
 						ghost4.weak = false;
 				 	}
+				 }else{
+				 	if(!ghost1.alive){
+				 		ghost1.alive = true;
+				 	}
+				 	if(!ghost2.alive){
+				 		ghost2.alive = true;
+				 	}
+				 	if(!ghost3.alive){
+				 		ghost3.alive = true;
+				 	}
+				 	if(!ghost4.alive){
+				 		ghost4.alive = true;
+				 	}
 				 }
-				 
+				
+		
 				 if(pacman.ghostKilled!=null){
 				 	switch(pacman.ghostKilled){
 				 		case GHOST+1:
@@ -145,8 +164,13 @@ function Game(){
 		
 				 }
 				 
-				
-				
+				  /*call ghost's controller'*/
+				this.ghostController(ghost1, ghost2, ghost3, ghost4);
+				 
+    	 }
+    	 else if(this.status=="STOP"){
+    	 	/*call ghost's controller'*/
+			this.ghostController(ghost1, ghost2, ghost3, ghost4);
     	 }
 	}
 	
