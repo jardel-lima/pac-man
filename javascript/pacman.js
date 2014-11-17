@@ -25,7 +25,12 @@ function Pacman(){
 					 	yAux --;/*Changin pacman possition and image*/
 					 	//Check if the pacman's mouth is opened or closed, it will change the pacman's image
                         if(this.openMouth){
-                            IMG_PACMAN = IMG_PACMAN_UP;
+                        	if(this.immune){
+                        		 IMG_PACMAN = IMG_PACMAN_UP_IMMUNE;
+                        	}
+                        	else{
+                        		 IMG_PACMAN = IMG_PACMAN_UP;
+                        	}
                             this.openMouth = false;
                         }
                         else{
@@ -43,7 +48,12 @@ function Pacman(){
 					 case "DOWN":
 					 	yAux ++;
 					 	if(this.openMouth){
-                            IMG_PACMAN = IMG_PACMAN_DOWN;
+                            if(this.immune){
+                        		  IMG_PACMAN = IMG_PACMAN_DOWN_IMMUNE;
+                        	}
+                        	else{
+                        		  IMG_PACMAN = IMG_PACMAN_DOWN;
+                        	}
                             this.openMouth = false;
                         }
                         else{
@@ -60,7 +70,12 @@ function Pacman(){
 					 case "RIGHT":
 					 	xAux ++;
 					 	if(this.openMouth){
-                            IMG_PACMAN = IMG_PACMAN_RIGHT;
+                            if(this.immune){
+                        		  IMG_PACMAN = IMG_PACMAN_RIGHT_IMMUNE;
+                        	}
+                        	else{
+                        		 IMG_PACMAN = IMG_PACMAN_RIGHT;
+                        	}
                             this.openMouth = false;
                         }
                         else{
@@ -77,7 +92,12 @@ function Pacman(){
 					 case "LEFT":
 					 	xAux --;
 					 	if(this.openMouth){
-	                        IMG_PACMAN = IMG_PACMAN_LEFT;
+	                        if(this.immune){
+                        		  IMG_PACMAN = IMG_PACMAN_LEFT_IMMUNE;
+                        	}
+                        	else{
+                        		  IMG_PACMAN = IMG_PACMAN_LEFT;
+                        	}
 	                        this.openMouth = false;
 	                    }
 	                    else{
