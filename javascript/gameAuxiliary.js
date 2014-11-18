@@ -126,7 +126,14 @@
 			return MATRIX[y][x];
 			
 	}
-               
+         function loadNextPhase(execute){
+                    game.phase++;                    
+                    mapFile="map"+game.phase+".txt";
+                    loadFile(mapFile);
+                    if(execute)
+                    game.changePhase();
+                    
+                }
                 
 		
 		

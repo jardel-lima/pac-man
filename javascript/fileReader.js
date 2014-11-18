@@ -50,7 +50,7 @@
  			
  			// execute the hi.php page from the server 
  	
- 			xmlHttp.open("GET", "readFile.php?fileName=../maps/"+file, true);   
+ 			xmlHttp.open("GET", "readFile.php?fileName=../maps/"+file, false);   
  				
  			// define the method to handle server responses 
  			xmlHttp.onreadystatechange = handleServerResponse;  

@@ -4,7 +4,7 @@ function Game(){
 	this.score = 0;//The current score of the current player of the game
 	this.quantityOfFood = 0;//Total amount of food present oon the current map
 	this.time = 0;//Time of the game
-	this.phase = 1;//Represent tha phase/map of the game
+	this.phase = 0;//Represent tha phase/map of the game
 	this.status = "STOP";//It represents the status of the game. That can be 'PLAY'(When the user is playing)|'PAUSE'(When a new map is gonna start)|'STOP'(When the game has not started)|'OVER'(When the game is over)
 	this.prisonTime = 0;
 	
@@ -22,12 +22,18 @@ function Game(){
 		}	
 			
 	this.changePhase = function(){
-                this.status = "STOP"; // stop game to load new map
+                //this.status = "STOP"; // stop game to load new map
+                this.phase++;                    
+                mapFile="map"+this.phase+".txt";
+                loadFile(mapFile);
                 map = document.getElementById("divDataMap").innerHTML; // get new map
+                if(map.search("File not found")!=-1){
+                    alert("Server Error!");
+                }
                 IMG_PACMAN = IMG_PACMAN_RIGHT; // update pacman's image to initial position's image
                 this.quantityOfFood= readMap(map); 
                 populateMATRIX(map);
-                document.getElementById('map').innerHTML=this.phase-1;    //update phase html element            
+                document.getElementById('map').innerHTML=this.phase;    //update phase html element            
                 printMatrix();
                 this.prisonTime = 0;
                         
@@ -106,8 +112,8 @@ function Game(){
 				/*Checks the quantity of remaing food, it it is equla to 0 the game is over*/
 				if(this.quantityOfFood<=0){
 				 	game.status="PAUSE";
-				 	alert("The game is over");
-                    document.getElementById("nextPhase").setAttribute("style","Display:inline");
+				 	//alert("The game is over");
+                                        //document.getElementById("nextPhase").setAttribute("style","Display:inline");
 				 }
 				 
 				 /*If pacman has no more lives the game is over*/
@@ -180,7 +186,13 @@ function Game(){
     	 /*When the game is over ask the plyer to enter a user name and save his score and time on the DB*/
     	 else if(this.status=="OVER"){
     	 	//TODO
-    	 }
+    	 }else if(this.status=="PAUSE"){
+           var choice= window.confirm("Do you want to go to the next Phase?");        
+           if(choice){
+               this.changePhase();
+               this.status="STOP";
+           }
+            }
 	}
 	
 }

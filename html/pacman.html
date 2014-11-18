@@ -14,7 +14,7 @@
     <script type="text/javascript" src="../javascript/Game.js"></script>
     <script type="text/javascript" src="../javascript/fileReader.js"></script>
 </head>
-<body onload="loadNextPhase(false);"> 
+<body> 
     <div class="divInfo" id="divInfo">
         <div>Map: <div class="edtWhite"><span id="map"> </span></div></div>
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
@@ -28,40 +28,15 @@
         <div class="divButton" onclick="game.restart();">Restart Game</div>
         <div class="divButton" id="nextPhase" onclick="loadNextPhase(true);" >Next Phase</div>
     </div>
+    <div id="divDataMap"></div>
 	<script>
 	
 	var game = new Game();
         //var map = readFile("maps/map1.txt");
-	var map = 	"00000000000000000000"+
-				  	"0                  0"+
-					"0 0000000  0000000 0"+
-					"0       0        0 0"+
-					"0 0000000  0000000 0"+
-					"0 0        0       0"+
-					"0 0000000  0000000 0"+
-					"0       0        0 0"+
-					"0 0000000  0000000 0"+
-					"0 0        0       0"+
-					"0 0000000  0000000 0"+
-					"0                  0"+
-					"0 0000000000000000 0"+
-					"0      0eeee000000 0"+
-					"0 000000GGGG0      0"+
-					"0      0eeee000000 0"+
-					"0 0000000000000000 0"+
-					"0                  0"+
-					"0 0000000  0000000 0"+
-					"0       0        0 0"+
-					"0 0000000  0000000 0"+
-					"0 0        0       0"+
-					"0 0000000  0000000 0"+
-					"0       0        0 0"+
-					"0 0000000  0000000 0"+
-					"0 0        0       0"+
-					"0 0000000  0000000 0"+
-					"0 00  000    000   0"+
-					"0                  0"+
-					"00000000000000000000";
+        game.phase++;                    
+        mapFile="map"+game.phase+".txt";
+        loadFile(mapFile);
+	var map = document.getElementById("divDataMap").innerHTML; // get new map
 	game.initiate(map);
          
         
@@ -130,14 +105,7 @@
 			}
 			
 		}
-                function loadNextPhase(execute){
-                    game.phase++;                    
-                    mapFile="map"+game.phase+".txt";
-                    loadFile(mapFile);
-                    if(execute)
-                    game.changePhase();
-                    
-                }
+                
 		//Loop-------------------------
 		/*Loop of the game*/
 		var loop = function(){
@@ -169,6 +137,6 @@
 	
 		
 	</script>
-        <div id="divDataMap"></div>
+        
 </body>
 </html>
