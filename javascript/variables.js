@@ -42,5 +42,5 @@
     var ghost4;
     var tableHeight= window.innerHeight*0.8;
     var tableWidth = tableHeight*0.625;
-    var divWidth = tableWidth*1.3;
+    var divWidth = tableWidth*1.5;
     var wait =true;

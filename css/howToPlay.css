@@ -22,6 +22,11 @@ body{
     /*background-image: */
     
 }
+img{
+    width: 90px;
+    height: 90px;
+    background-color: black;
+}
 .pnlBody{
     width: 800px;
     height: 340px;
@@ -71,7 +76,7 @@ body{
 #textD{
      position: relative;
      top: -170px;
-     right: -560px;
+     right: -540px;
      
      
 }
