@@ -7,13 +7,14 @@ function Game(){
 	this.phase = 1;//Represent tha phase/map of the game
 	this.status = "STOP";//It represents the status of the game. That can be 'PLAY'(When the user is playing)|'PAUSE'(When a new map is gonna start)|'STOP'(When the game has not started)|'OVER'(When the game is over)
 	this.prisonTime = 0;
+	
 	//Function that initiate a game, creating the matrix, table, read the map and populate the matrix and table
 	this.initiate = function(map){
 			if(this.status == "STOP"){
 				initiateMatrix();
 				this.quantityOfFood = readMap(map);
 				populateMATRIX(map);
-                                document.getElementById('map').innerHTML=game.phase; 
+                document.getElementById('map').innerHTML=game.phase; 
                                 
 			}
 			
@@ -64,11 +65,9 @@ function Game(){
 			if(ghost4.alive==true){
 			 	ghost4.move();
 			}
-			/*If the game time is equal 2 exits will be created in the prison, allowing the ghost to go out*/
-			if(this.time==2){
+			/*If the game time is equal 2 empty spaces will be created in the prison, allowing the ghost to go out*/
+			if(this.prisonTime==2){
 			 	MATRIX[16][8]= EMPTY;
-				//MATRIX[12][9]= EXIT;
-				//MATRIX[16][10]= EXIT;
 				MATRIX[12][11]= EMPTY;
 				document.getElementById("tableGame").rows[16].cells[8].style.backgroundImage = IMG_EMPTY;
 				document.getElementById("tableGame").rows[12].cells[11].style.backgroundImage = IMG_EMPTY;
@@ -108,13 +107,14 @@ function Game(){
 				if(this.quantityOfFood<=0){
 				 	game.status="PAUSE";
 				 	alert("The game is over");
-                                        document.getElementById("nextPhase").setAttribute("style","Display:inline");
+                    document.getElementById("nextPhase").setAttribute("style","Display:inline");
 				 }
 				 
 				 /*If pacman has no more lives the game is over*/
 				 if(pacman.lives<=0){
-				 	game.status="PAUSE";
+				 	game.status="OVER";
 				 	alert("You do not have any live left!!");
+				 	
 				 }
 				 
 				 /*Call pacman's controller*/
@@ -122,14 +122,16 @@ function Game(){
 				 /*If pacman has his super power activated and it has beem activated for 5 seconds his super power will be disabled and the ghosts will be not weak anymore*/
 				 if(pacman.superPower){
 				 	
-				 	if((this.time-pacman.superPowerTime)>10){
+				 	if((this.time-pacman.superPowerTime)>5){
 				 		pacman.superPower = false;
 			 			ghost1.weak = false;
 						ghost2.weak = false;
 						ghost3.weak = false;
 						ghost4.weak = false;
 				 	}
-				 }else{
+				 }
+				 /*If pacman' super power is over and any ghost is not alive it will survive again*/
+				 else{
 				 	if(!ghost1.alive){
 				 		ghost1.alive = true;
 				 	}
@@ -144,7 +146,7 @@ function Game(){
 				 	}
 				 }
 				
-		
+		         /*If during the time that pacman has his super power he killed any ghost the ghost will die and will appear again when pacman's super power is over*/
 				 if(pacman.ghostKilled!=null){
 				 	switch(pacman.ghostKilled){
 				 		case GHOST+1:
@@ -170,10 +172,14 @@ function Game(){
 				  /*call ghost's controller'*/
 				this.ghostController(ghost1, ghost2, ghost3, ghost4);
 				 
-    	 }
+    	 }/*If the game status is equal to STOP just the ghosts will move*/
     	 else if(this.status=="STOP"){
     	 	/*call ghost's controller'*/
 			this.ghostController(ghost1, ghost2, ghost3, ghost4);
+    	 }
+    	 /*When the game is over ask the plyer to enter a user name and save his score and time on the DB*/
+    	 else if(this.status=="OVER"){
+    	 	//TODO
     	 }
 	}
 	

@@ -6,11 +6,13 @@
 	<meta content="utf-8" http-equiv="encoding">
     <link rel="stylesheet" type="text/css" href="../css/pacman.css">
     <script type="text/javascript" src="../javascript/variables.js"></script>
-    <script type="text/javascript" src="../javascript/auxiliary.js"></script>
+    <script type="text/javascript" src="../javascript/gameAuxiliary.js"></script>
+    <script type="text/javascript" src="../javascript/pacmanAuxiliary.js"></script>
+    <script type="text/javascript" src="../javascript/ghostAuxiliary.js"></script>
     <script type="text/javascript" src="../javascript/Pacman.js"></script>
     <script type="text/javascript" src="../javascript/Ghost.js"></script>
     <script type="text/javascript" src="../javascript/Game.js"></script>
-     <script type="text/javascript" src="../javascript/fileReader.js"></script>
+    <script type="text/javascript" src="../javascript/fileReader.js"></script>
 </head>
 <body onload="loadNextPhase(false);"> 
     <div class="divInfo" id="divInfo">
@@ -73,11 +75,13 @@
 
 			if (e.keyCode == '38') {
 				// up arrow
-				//console.log("Up");
+				/*The game will start when any arrow key has been pressed*/
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
+				/*If the game status == "PLAY" and the pacman's direction is different from his current direction he will move toward this another direction'*/
 				if(game.status=="PLAY"  && pacman.direction!="UP"){
+					/*Pac man will not change direction if there is a wall on his next position*/
 					if(MATRIX[pacman.positionY-1][pacman.positionX]!=WALL){
 						pacman.direction = "UP";
 					}
@@ -88,7 +92,6 @@
 			}
 			else if (e.keyCode == '40') {
 				// down arrow
-				//console.log("Down");
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
@@ -101,7 +104,6 @@
 			}
 			else if (e.keyCode == '39') {
 				// right arrow
-				//console.log("Right");
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
@@ -114,7 +116,6 @@
 			}
 			else if (e.keyCode == '37') {
 				// left arrow
-				//console.log("Left");
 				if(game.status=="STOP" )
 					game.status = "PLAY";
 				
@@ -138,8 +139,10 @@
                     
                 }
 		//Loop-------------------------
+		/*Loop of the game*/
 		var loop = function(){
-			
+				
+				/*Function that controls the game by its status*/	
 				 game.gameController(pacman, ghost1, ghost2, ghost3, ghost4);
 				
 				 document.getElementById('score').innerHTML=game.score;
@@ -151,11 +154,12 @@
 		
 		setInterval(loop,250);
 		
+		/*Timer*/
 		var time = function(){
 			if(game.status=="PLAY"){
 					game.time++;
                     game.prisonTime++;
-                                    }
+             }
 		}
 		
 		setInterval(time,1000);
