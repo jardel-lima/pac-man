@@ -74,8 +74,8 @@
 		    	}
 		    }
 		}
-		
-		pacman = new Pacman();//create a pacman
+		if(pacman==null)
+                    pacman = new Pacman();//create a pacman
 		MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
 		quantityOfFood = quantityOfFood - 1/*pacman*/- NUMBER_OF_SPECIAL_FOOD;
 		return quantityOfFood;
@@ -126,15 +126,6 @@
 			return MATRIX[y][x];
 			
 	}
-         function loadNextPhase(execute){
-                    game.phase++;                    
-                    mapFile="map"+game.phase+".txt";
-                    loadFile(mapFile);
-                    if(execute)
-                    game.changePhase();
-                    
-                }
-                
 		
 		
 		
