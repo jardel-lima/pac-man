@@ -23,7 +23,8 @@ function Game(){
 			
 	this.changePhase = function(){
                 //this.status = "STOP"; // stop game to load new map
-                this.phase++;                    
+                this.phase++;   
+                cleanMATRIX();                 
                 mapFile="map"+this.phase+".txt";
                 loadFile(mapFile);
                 map = document.getElementById("divDataMap").innerHTML; // get new map
@@ -187,12 +188,20 @@ function Game(){
     	 else if(this.status=="OVER"){
     	 	//TODO
     	 }else if(this.status=="PAUSE"){
-           var choice= window.confirm("Do you want to go to the next Phase?");        
-           if(choice){
-               this.changePhase();
-               this.status="STOP";
+          if(this.phase<4){
+		       var choice= window.confirm("Do you want to go to the next Phase?");        
+		       if(choice){
+		           this.changePhase();
+		           this.status="STOP";
+		       }
+		       else{
+		       		this.status = "OVER";
+		       }
+          }
+           else{
+           	this.status = "OVER";
            }
-            }
+       }
 	}
 	
 }

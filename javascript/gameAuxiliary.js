@@ -63,10 +63,10 @@
 		var quantityOfFood = 0
 		for(var i = 0; i <  ROWS; i++){
 		    var aux = map.substr(i*(COLUMNS),COLUMNS)
-		    //console.log("sub "+aux);
+		    aux = aux.replace("\n","");
+		    console.log("sub "+aux);
 		    for(var j = 0; j < COLUMNS; j++){
 		    	if(aux.charAt(j)=='0'){
-		    		
 		    		MATRIX[i][j]= WALL;
 		    	}else if(aux.charAt(j)==' '){
 		    		MATRIX[i][j]= FOOD;
@@ -76,6 +76,11 @@
 		}
 		if(pacman==null)
                     pacman = new Pacman();//create a pacman
+        else{
+        	pacman.positionX = 1;
+		    pacman.positionY = 1;
+        }
+        
 		MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
 		quantityOfFood = quantityOfFood - 1/*pacman*/- NUMBER_OF_SPECIAL_FOOD;
 		return quantityOfFood;
@@ -125,6 +130,16 @@
 		else  
 			return MATRIX[y][x];
 			
+	}
+	
+	/*Function that cleans MATRIX*/
+	function cleanMATRIX(){
+		for(var i = 0; i < ROWS; i++){
+			for(var j = 0; j < COLUMNS; j++){
+				MATRIX[i][j] = 0;
+			}
+		}
+	
 	}
 		
 		
