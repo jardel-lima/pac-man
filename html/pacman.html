@@ -23,10 +23,15 @@
         
     </div>
     <div id="divGame"></div>
+    <div id="endPhase" style="display:none;">
+        <div class="msg">This Phase is over. What's next?</div>
+        <div class="divButton" id="endGameButton" onclick="game.status='OVER';" >End Game</div>
+        <div class="divButton" id="nextPhase" onclick="game.changePhase();" >Next Phase</div>            
+    </div>
     <div class="divFoot" id="divFoot" align="center">
         <a href="mainMenu.html"><div class="divButton">Return Menu</div></a>
         <div class="divButton" onclick="game.restart();">Restart Game</div>
-        <div class="divButton" id="nextPhase"  >Next Phase</div>
+        
     </div>
     <div id="divDataMap"></div>
 	<script>

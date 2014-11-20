@@ -44,7 +44,7 @@ table tr,td{
     
 }
 div .edtWhite{
-		background: white;
+		background: goldenrod;
 		border-radius:10px;
 		width: 50%;
 }
@@ -58,7 +58,7 @@ div .edtWhite{
     color: black;
     display: inline;
     text-shadow: 1px 1px 1px white;     
-    background: darkgoldenrod;
+    background: goldenrod;
     border-radius:20px;
      border-top: darkgoldenrod 10px outset ;
     border-bottom: darkgoldenrod 10px outset ;
@@ -75,7 +75,7 @@ a{
 }
 .divFoot div:hover{
     background: blue ;
-     border-top: blue 10px outset ;
+    border-top: blue 10px outset ;
     border-bottom: blue 10px outset ;
     border-left: blue 10px outset ;
     border-right: blue 10px outset ;
@@ -86,4 +86,54 @@ a{
 }
 #divDataMap{
     display: none;
+}
+
+#endPhase{
+    display: none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-150px;
+    margin-top:-100px;
+    padding:10px;
+    width:300px;
+    height:200px;
+    border-top: darkkhaki 10px outset ;
+    border-bottom: darkkhaki 10px outset ;
+    border-left: darkkhaki 10px outset ;
+    border-right: darkkhaki 10px outset ;
+    background-color: darkgoldenrod;
+    border-radius:10px;
+    
+}
+#endPhase .msg{
+    float:top;
+    margin: auto;
+    text-align: center;
+    font-family: Comic Sans Ms;
+    font-size: 1.3em;
+    
+}
+#endPhase .divButton{
+    width: 20%;
+    position: relative;
+    top:50px;
+    left:50px;
+    margin: auto auto auto auto;
+    color: darkkhaki;
+    display: inline;
+    text-shadow: 1px 1px 1px darkgoldenrod;     
+    background: darkblue;
+    border-radius:20px;
+     border-top: darkblue 10px outset ;
+    border-bottom: darkblue 10px outset ;
+    border-left: darkblue 10px outset ;
+    border-right: darkblue 10px outset ;
+    text-align: center;
+    font-family: Comic Sans Ms;
+    font-size: 1.0em;
+}
+#endPhase .divButton:hover{
+cursor: pointer;
+
 }

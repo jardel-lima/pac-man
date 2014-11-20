@@ -14,7 +14,7 @@ function Game(){
 				initiateMatrix();
 				this.quantityOfFood = readMap(map);
 				populateMATRIX(map);
-                document.getElementById('map').innerHTML=game.phase; 
+                                document.getElementById('map').innerHTML=game.phase;
                                 
 			}
 			
@@ -22,7 +22,6 @@ function Game(){
 		}	
 			
 	this.changePhase = function(){
-                //this.status = "STOP"; // stop game to load new map
                 this.phase++;   
                 cleanMATRIX();                 
                 mapFile="map"+this.phase+".txt";
@@ -37,7 +36,7 @@ function Game(){
                 document.getElementById('map').innerHTML=this.phase;    //update phase html element            
                 printMatrix();
                 this.prisonTime = 0;
-                        
+                this.status="STOP";        
                         
 			}
 	
@@ -46,7 +45,7 @@ function Game(){
 			}
 			
 	this.gameOver = function(){
-			
+		document.getElementById('endPhase').style.display='none'; // hide the div endPhase
 			}
 	/*Function that controls ghost's actions*/		
 	this.ghostController = function(ghost1, ghost2, ghost3, ghost4 ){
@@ -114,13 +113,14 @@ function Game(){
 				if(this.quantityOfFood<=0){
 				 	game.status="PAUSE";
 				 	//alert("The game is over");
-                                        //document.getElementById("nextPhase").setAttribute("style","Display:inline");
+                                       
 				 }
 				 
 				 /*If pacman has no more lives the game is over*/
 				 if(pacman.lives<=0){
 				 	game.status="OVER";
-				 	alert("You do not have any live left!!");
+                                        alert("You do not have any live left!!");
+				 	
 				 	
 				 }
 				 
@@ -181,6 +181,7 @@ function Game(){
 				 
     	 }/*If the game status is equal to STOP just the ghosts will move*/
     	 else if(this.status=="STOP"){
+                        document.getElementById("endPhase").setAttribute("style","Display:none");
     	 	/*call ghost's controller'*/
 			this.ghostController(ghost1, ghost2, ghost3, ghost4);
     	 }
@@ -189,14 +190,7 @@ function Game(){
     	 	//TODO
     	 }else if(this.status=="PAUSE"){
           if(this.phase<4){
-		       var choice= window.confirm("Do you want to go to the next Phase?");        
-		       if(choice){
-		           this.changePhase();
-		           this.status="STOP";
-		       }
-		       else{
-		       		this.status = "OVER";
-		       }
+		document.getElementById("endPhase").setAttribute("style","Display:block"); // Show div endPhase with the options to end the game or to go to next phase
           }
            else{
            	this.status = "OVER";
