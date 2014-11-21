@@ -188,6 +188,7 @@ function Game(){
     	 /*When the game is over ask the plyer to enter a user name and save his score and time on the DB*/
     	 else if(this.status=="OVER"){
     	 	//TODO
+    	 	document.getElementById('register').style.display='block';
     	 }else if(this.status=="PAUSE"){
           if(this.phase<4){
 		document.getElementById("endPhase").setAttribute("style","Display:block"); // Show div endPhase with the options to end the game or to go to next phase
