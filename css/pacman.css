@@ -148,7 +148,49 @@ cursor: pointer;
         padding:10px;
         width:500px;
         height:250px;
-        border:1px solid #d0d0d0;
-        background-color:white;
-        
+        border-top: darkkhaki 10px outset ;
+        border-bottom: darkkhaki 10px outset ;
+        border-left: darkkhaki 10px outset ;
+        border-right: darkkhaki 10px outset ;
+        background-color: darkgoldenrod;
+        border-radius:10px;
+        color: black;
+        text-shadow: 1px 1px 1px white;
+        font-size: 1.0em;
         }
+#register h3{
+            text-align: center;
+            font-size: 1.3em;
+            
+        }
+#register form{
+            text-align: left;
+            
+        }    
+        
+ #buttonRegister{
+    float: right;
+    width: 20%;   
+    color: black;
+    text-shadow: 1px 1px 1px white;     
+    background: goldenrod;
+    border-radius:20px;
+     border-top: darkkhaki 10px outset ;
+    border-bottom: darkkhaki 10px outset ;
+    border-left: darkkhaki 10px outset ;
+    border-right: darkkhaki 10px outset ;
+    text-align: center;
+    font-family: Comic Sans Ms;
+    font-size: 0.8em;
+    
+    
+}
+
+  #buttonRegister:hover{
+    background: blue ;
+    border-top: blue 10px outset ;
+    border-bottom: blue 10px outset ;
+    border-left: blue 10px outset ;
+    border-right: blue 10px outset ;
+    cursor: pointer;
+}       
