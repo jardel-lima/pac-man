@@ -119,7 +119,7 @@ function Game(){
 				 /*If pacman has no more lives the game is over*/
 				 if(pacman.lives<=0){
 				 	game.status="OVER";
-                                        alert("You do not have any live left!!");
+                    alert("You do not have any live left!!");
 				 	
 				 	
 				 }
@@ -188,7 +188,11 @@ function Game(){
     	 /*When the game is over ask the plyer to enter a user name and save his score and time on the DB*/
     	 else if(this.status=="OVER"){
     	 	//TODO
+    	 	loadNumberOfPlayers();
+    	 	document.getElementById("player_score").innerHTML=this.score;
+    	 	document.getElementById("player_time").innerHTML=this.time;
     	 	document.getElementById('register').style.display='block';
+    	 	this.status="STOP";
     	 }else if(this.status=="PAUSE"){
           if(this.phase<4){
 		document.getElementById("endPhase").setAttribute("style","Display:block"); // Show div endPhase with the options to end the game or to go to next phase
