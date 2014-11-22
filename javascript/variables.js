@@ -34,6 +34,7 @@
     var IMG_GHOST_NORMAL= 'url(../imgs/ghost.png)';
     var IMG_GHOST_WEEK= 'url(../imgs/ghost_2.png)';
     var IMG_GHOST= IMG_GHOST_NORMAL;
+    var xmlHttp = createXmlHttpRequestObject();
     
     var pacman=null;
     var ghost1=null;

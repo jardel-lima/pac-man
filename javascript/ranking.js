@@ -1,33 +1,5 @@
- var xmlHttp = createXmlHttpRequestObject();
 
-
- function createXmlHttpRequestObject()  {
-                        // will store the reference to the XMLHttpRequest object
-                       // var xmlHttp;
-                        // if running Internet Explorer
-                        if(window.ActiveXObject)   {
-                                try {
-                                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-                                } catch (e)  {
-                                        xmlHttp = false;
-                                }
-                        } else {
-                                // if running Mozilla or other browsers
-                                 try  {
-                                        xmlHttp = new XMLHttpRequest();
-                                 } catch (e)  {
-                                        xmlHttp = false;
-
-                                 }
-                    }
-                    // return the created object or display an error message
-                    if (!xmlHttp)
-                                alert("Error creating the XMLHttpRequest object.");
-                        else
-                                return xmlHttp;
-                }
- 
-       function handleServerResponse()  {
+  function handleRankingServerResponse()  {
                         // move forward only if the transaction has completed
                         if (xmlHttp.readyState == 4)    {
                                 // status of 200 indicates the transaction completed successfully
@@ -48,10 +20,10 @@
  			
  			// execute the hi.php page from the server 
  	
- 			xmlHttp.open("POST", "ranking.php", true);   
+ 			xmlHttp.open("POST", "../php/ranking.php", true);   
  				
  			// define the method to handle server responses 
- 			xmlHttp.onreadystatechange = handleServerResponse;  
+ 			xmlHttp.onreadystatechange = handleRankingServerResponse;  
  				
  			// make the server request 
  			xmlHttp.send(null);   

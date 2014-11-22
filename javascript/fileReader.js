@@ -1,34 +1,6 @@
- var xmlHttp = createXmlHttpRequestObject();
  var dataFile;
 
-
- function createXmlHttpRequestObject()  {
-                        // will store the reference to the XMLHttpRequest object
-                       // var xmlHttp;
-                        // if running Internet Explorer
-                        if(window.ActiveXObject)   {
-                                try {
-                                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-                                } catch (e)  {
-                                        xmlHttp = false;
-                                }
-                        } else {
-                                // if running Mozilla or other browsers
-                                 try  {
-                                        xmlHttp = new XMLHttpRequest();
-                                 } catch (e)  {
-                                        xmlHttp = false;
-
-                                 }
-                    }
-                    // return the created object or display an error message
-                    if (!xmlHttp)
-                                alert("Error creating the XMLHttpRequest object.");
-                        else
-                                return xmlHttp;
-                }
- 
-       function handleServerResponse()  {
+      function handleFileServerResponse()  {
                         // move forward only if the transaction has completed
                         if (xmlHttp.readyState == 4)    {
                                 // status of 200 indicates the transaction completed successfully
@@ -50,10 +22,10 @@
  			
  			// execute the hi.php page from the server 
  	
- 			xmlHttp.open("GET", "readFile.php?fileName=../maps/"+file, false);   
+ 			xmlHttp.open("GET", "../php/readFile.php?fileName=../maps/"+file, false);   
  				
  			// define the method to handle server responses 
- 			xmlHttp.onreadystatechange = handleServerResponse;  
+ 			xmlHttp.onreadystatechange = handleFileServerResponse;  
  				
  			// make the server request 
  			xmlHttp.send(null);   
