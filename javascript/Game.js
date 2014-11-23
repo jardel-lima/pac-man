@@ -36,7 +36,8 @@ function Game(){
                 document.getElementById('map').innerHTML=this.phase;    //update phase html element            
                 printMatrix();
                 this.prisonTime = 0;
-                this.status="STOP";        
+                this.status="STOP";  
+                document.getElementById('fade').style.display='none';      
                         
 			}
 	
@@ -181,7 +182,7 @@ function Game(){
 				 
     	 }/*If the game status is equal to STOP just the ghosts will move*/
     	 else if(this.status=="STOP"){
-                        document.getElementById("endPhase").setAttribute("style","Display:none");
+             document.getElementById("endPhase").setAttribute("style","Display:none");
     	 	/*call ghost's controller'*/
 			this.ghostController(ghost1, ghost2, ghost3, ghost4);
     	 }
@@ -192,10 +193,14 @@ function Game(){
     	 	document.getElementById("player_score").innerHTML=this.score;
     	 	document.getElementById("player_time").innerHTML=this.time;
     	 	document.getElementById('register').style.display='block';
+    	 	document.getElementById('fade').style.display='block';
     	 	this.status="STOP";
     	 }else if(this.status=="PAUSE"){
           if(this.phase<4){
-		document.getElementById("endPhase").setAttribute("style","Display:block"); // Show div endPhase with the options to end the game or to go to next phase
+          document.getElementById('fade').style.display='block';
+		  document.getElementById("endPhase").setAttribute("style","Display:block");
+		
+		 // Show div endPhase with the options to end the game or to go to next phase
           }
            else{
            	this.status = "OVER";

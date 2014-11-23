@@ -27,6 +27,7 @@
             	var response = xmlHttp.responseText; 
             	alert(response);
             	document.getElementById('register').style.display='none';
+            	document.getElementById('fade').style.display='none';   
             	window.location="../html/ranking.html"
             	
              }

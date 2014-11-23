@@ -1,20 +1,20 @@
  var dataFile;
 
-      function handleFileServerResponse()  {
-                        // move forward only if the transaction has completed
-                        if (xmlHttp.readyState == 4)    {
-                                // status of 200 indicates the transaction completed successfully
-                                if (xmlHttp.status == 200)  {
-                                    
-                                	dataFile= xmlHttp.responseText; // the server response 
-                                        document.getElementById("divDataMap").innerHTML=dataFile; // put the new map in a div to get it in game.js
-                                }
-                                // a HTTP status different than 200 signals an error
-                                else  {
-                                        alert("There was a problem accessing the server: " + xmlHttp.statusText);
-                                }
-                        }
-                }                
+	function handleFileServerResponse()  {
+		            // move forward only if the transaction has completed
+		            if (xmlHttp.readyState == 4)    {
+		                    // status of 200 indicates the transaction completed successfully
+		                    if (xmlHttp.status == 200)  {
+		                        
+		                    	dataFile= xmlHttp.responseText; // the server response 
+		                        document.getElementById("divDataMap").innerHTML=dataFile; // put the new map in a div to get it in game.js
+		                    }
+		                    // a HTTP status different than 200 signals an error
+		                    else  {
+		                            alert("There was a problem accessing the server: " + xmlHttp.statusText);
+		                    }
+		            }
+		    }                
  
  function loadFile(file) {
          
