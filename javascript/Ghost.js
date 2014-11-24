@@ -5,12 +5,12 @@ function Ghost( initialX, initialY, number ){
 	this.initialY = initialY;/*Initial ghost's Y position*/
 	this.positionX = initialX;/*Current ghost's X position*/
 	this.positionY = initialY;/*Current ghost's Y position*/
-	this.savedObject = EMPTY;/*Saves the Object that will be in the ghost's future possition, whem the ghost leaves that possition it will be replaced again*/
+	this.savedObject = EMPTY;/*Saves the Object that will be in the ghost's future possition, when the ghost leaves that possition it will be replaced again*/
 	this.weak = false;/*Indicates that pacman has super power*/
 	this.inPrison = true;/*Indicates that the ghost still in prison*/
 	this.direction = "UP";/*Indicates the current ghost direction. Possible values: "UP"|"DOWN"|"LEFT"|"RIGHT"*/
 	this.oppositeDirection = "DOWN";/*Saves the opposite ghost's direction. To avoid the ghost going back on his path, this position will be considered just in the last case.*/
-	this.availableDirections =[1,1,1,1]/*represents the available directions that the ghost can have. Value 1 represents available and value 0 unavailable. The order of the directions are ["UP","DOWN","RIGHT","LEFT"]*/
+	this.availableDirections =[1,1,1,1]/*represents the available directions that the ghost can go. Value 1 represents available and value 0 unavailable. The order of the directions are ["UP","DOWN","RIGHT","LEFT"]*/
 	this.alive = true;/*Idicates that the ghost is alive*/
 	this.number = number;/*Represents the ghost number. It identifies the ghost*/
 	
@@ -44,7 +44,7 @@ function Ghost( initialX, initialY, number ){
 		}/*If the ghost is not in prison and it is alive it will move using a random direction.*/
 		else if(this.inPrison==false && this.alive){
 			var valid;/*Indicates that the moviment is valid or not*/
-			var trying = 4;/*It keeps track of the number of direction that the random function has called but they are invalid. If all 4 dirctions were invalid the pacman will move back on his path*/
+			var trying = 4;/*It keeps track of the number of direction that the random function has called but they are invalid. If all 4 directions were invalid the pacman will move back on his path*/
 			var directions = ["UP","DOWN","RIGHT","LEFT"];/*Arry that indicates the name of directions*/
 			var food=null;/*If one of the possibles directions has a food this variable will recieve the number that corresponds that direction */
 			/*Check if the direction 'UP' is available*/

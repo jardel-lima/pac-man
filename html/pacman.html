@@ -5,7 +5,7 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
     <link rel="stylesheet" type="text/css" href="../css/pacman.css">
-    <script type="text/javascript" src="../javascript/xmlHtml.js"></script>
+    <script type="text/javascript" src="../javascript/xmlHttp.js"></script>
     <script type="text/javascript" src="../javascript/variables.js"></script>
     <script type="text/javascript" src="../javascript/gameAuxiliary.js"></script>
     <script type="text/javascript" src="../javascript/pacmanAuxiliary.js"></script>
@@ -62,14 +62,16 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				/*If the game status == "PLAY" and the pacman's direction is different from his current direction he will move toward this another direction'*/
-				if(game.status=="PLAY"  && pacman.direction!="UP"){
-					/*Pac man will not change direction if there is a wall on his next position*/
-					if(MATRIX[pacman.positionY-1][pacman.positionX]!=WALL){
-						pacman.direction = "UP";
+				/*If the game status == "PLAY" and the pacman's direction is different from his current direction he will move toward to this another direction'*/
+				if(game.status=="PLAY"){
+				 	if(pacman.direction!="UP"){
+				 		/*Pac man will not change direction if there is a wall on his next position*/
+						if(MATRIX[pacman.positionY-1][pacman.positionX]!=WALL){
+							pacman.direction = "UP";
+						}
 					}
-					pacman.move();
-				}	
+					pacman.move();	
+				}
 				
 				
 			}
@@ -78,38 +80,42 @@
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				if(game.status=="PLAY" && pacman.direction!="DOWN"){
-					if(MATRIX[pacman.positionY+1][pacman.positionX]!=WALL){
-						pacman.direction = "DOWN";
+				if(game.status=="PLAY"){
+				 	if(pacman.direction!="DOWN"){
+						if(MATRIX[pacman.positionY+1][pacman.positionX]!=WALL){
+							pacman.direction = "DOWN";
+						}
 					}
-					pacman.move();
-				}	
+					pacman.move();	
+				}
 			}
 			else if (e.keyCode == '39') {
 				// right arrow
 				if(game.status=="STOP")
 					game.status = "PLAY";
 				
-				if(game.status=="PLAY"  && pacman.direction!="RIGHT"){
-					if(MATRIX[pacman.positionY][pacman.positionX+1]!=WALL){
-						pacman.direction = "RIGHT";
+				if(game.status=="PLAY"){
+				 	if(pacman.direction!="RIGHT"){
+						if(MATRIX[pacman.positionY][pacman.positionX+1]!=WALL){
+							pacman.direction = "RIGHT";
+						}
 					}
-					pacman.move();
-				}	
+					pacman.move();	
+				}
 			}
 			else if (e.keyCode == '37') {
 				// left arrow
 				if(game.status=="STOP" )
 					game.status = "PLAY";
 				
-				if(game.status=="PLAY"  && pacman.direction!="LEFT"){
-					if(MATRIX[pacman.positionY][pacman.positionX-1]!=WALL){
-						pacman.direction = "LEFT";
+				if(game.status=="PLAY"){
+				 	if(pacman.direction!="LEFT"){
+						if(MATRIX[pacman.positionY][pacman.positionX-1]!=WALL){
+							pacman.direction = "LEFT";
+						}
 					}
-					pacman.move();
-					
+					pacman.move();	
 				}	
-				
 			}
 			
 		}

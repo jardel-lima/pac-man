@@ -1,5 +1,5 @@
 
- 
+ 	/*function that handles the server's response*/
 	function handleRegisterServerResponse(){
 		// move forward only if the transaction has completed
         if (xmlHttp.readyState == 4){
@@ -18,7 +18,7 @@
              }
 		}
 	}   
-	
+	/*function that handles the server's response*/
 	function handleSubmitServerResponse(){
 		// move forward only if the transaction has completed
         if (xmlHttp.readyState == 4){
@@ -37,7 +37,8 @@
              }
 		}
 	}                             
- 
+ 	
+ 	/*Function that asks the number of players that have beem registered, it will set a sugestion to the player name */
 	function loadNumberOfPlayers() {
 
 		if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0){  
@@ -49,7 +50,8 @@
  			xmlHttp.send(null);   
  		}
 	}
-                
+     
+    /*Function that sends the needed data to the player registration*/            
 	function submitPlayer() {
 		var playerName = document.getElementById("player_name").value;
 		

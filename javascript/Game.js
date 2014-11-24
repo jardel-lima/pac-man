@@ -2,11 +2,11 @@
 function Game(){
 	
 	this.score = 0;//The current score of the current player of the game
-	this.quantityOfFood = 0;//Total amount of food present oon the current map
+	this.quantityOfFood = 0;//Total amount of food present on the current map
 	this.time = 0;//Time of the game
 	this.phase = 0;//Represent tha phase/map of the game
 	this.status = "STOP";//It represents the status of the game. That can be 'PLAY'(When the user is playing)|'PAUSE'(When a new map is gonna start)|'STOP'(When the game has not started)|'OVER'(When the game is over)
-	this.prisonTime = 0;
+	this.prisonTime = 0;//It Will control the time that the ghost will be released from the prison
 	
 	//Function that initiate a game, creating the matrix, table, read the map and populate the matrix and table
 	this.initiate = function(map){
@@ -14,40 +14,49 @@ function Game(){
 				initiateMatrix();
 				this.quantityOfFood = readMap(map);
 				populateMATRIX(map);
-                                document.getElementById('map').innerHTML=game.phase;
+                document.getElementById('map').innerHTML=game.phase;
                                 
 			}
 			
 				
 		}	
-			
+	/*Function that changes the game's map*/		
 	this.changePhase = function(){
-                this.phase++;   
+                this.phase++; 
+                this.prisonTime = 0;
+                this.status = "STOP";
+                var mapFile = "map"+this.phase+".txt";
+                /*Function that cleans the MATRIX*/
                 cleanMATRIX();                 
-                mapFile="map"+this.phase+".txt";
+                /*Function that load the mapFile from the server*/
                 loadFile(mapFile);
-                map = document.getElementById("divDataMap").innerHTML; // get new map
+                /*The read map from the server will be saved in a div called "divDataMap"*/
+                var map = document.getElementById("divDataMap").innerHTML; // get new map
+               
+                /*If the messenge "File not found" was returned from the server the sought file was not found*/
                 if(map.search("File not found")!=-1){
                     alert("Server Error!");
                 }
-                IMG_PACMAN = IMG_PACMAN_RIGHT; // update pacman's image to initial position's image
+               
+                IMG_PACMAN = IMG_PACMAN_RIGHT; // update pacman's image to initial direction
+               
                 this.quantityOfFood= readMap(map); 
                 populateMATRIX(map);
+               
                 document.getElementById('map').innerHTML=this.phase;    //update phase html element            
-                printMatrix();
-                this.prisonTime = 0;
-                this.status="STOP";  
                 document.getElementById('fade').style.display='none';      
                         
 			}
 	
+	/*Function that restarts the game*/
 	this.restart = function(){
 			location.reload();
 			}
-			
+	/*		
 	this.gameOver = function(){
 		document.getElementById('endPhase').style.display='none'; // hide the div endPhase
-			}
+	}*/
+	
 	/*Function that controls ghost's actions*/		
 	this.ghostController = function(ghost1, ghost2, ghost3, ghost4 ){
 		if(this.status!="PAUSE"){
@@ -95,33 +104,45 @@ function Game(){
 			
 			/*If pacman is immune it will be no immune after 3 seconds*/
 			if(pacman.immune){
-				if(pacman.deathTime!=null){
-					if((this.time - pacman.deathTime)>3){
-						pacman.immune = false;
-						pacman.deathTime = null;
-					}
+				if((this.time - pacman.deathTime)>3){
+					pacman.immune = false;
+					pacman.deathTime = null;
+					switch(pacman.direction){
+			 			case "UP":
+			 				IMG_PACMAN = IMG_PACMAN_UP2;
+			 			break;
+			 			case "DOWN":
+			 				IMG_PACMAN = IMG_PACMAN_DOWN2;
+			 			break;
+			 			case "RIGHT":
+			 				IMG_PACMAN = IMG_PACMAN_RIGHT2;
+			 			break;
+			 			case "LEFT":
+			 				IMG_PACMAN = IMG_PACMAN_LEFT2;
+			 			break;
+			 		}
+			 
+					document.getElementById("tableGame").rows[pacman.positionY].cells[pacman.positionX].style.backgroundImage = IMG_PACMAN;
 				}
     	 	}
 	}
 	
-	/*Function that controls the game's actions*/
+	/*Function that controls the game's actions based on the game's status*/
 	this.gameController = function(pacman, ghost1, ghost2, ghost3, ghost4){
 		
 		/*If the game's status is "PLAY" */
 		if(this.status=="PLAY"){
 				
-				/*Checks the quantity of remaing food, it it is equla to 0 the game is over*/
+				/*Checks the quantity of remaing food, it it is equla to 0 the game will be paused*/
 				if(this.quantityOfFood<=0){
-				 	game.status="PAUSE";
-				 	//alert("The game is over");
+				 	this.status="PAUSE";
                                        
 				 }
 				 
 				 /*If pacman has no more lives the game is over*/
 				 if(pacman.lives<=0){
-				 	game.status="OVER";
+				 	this.status="OVER";
                     alert("You do not have any live left!!");
-				 	
 				 	
 				 }
 				 
@@ -182,29 +203,32 @@ function Game(){
 				 
     	 }/*If the game status is equal to STOP just the ghosts will move*/
     	 else if(this.status=="STOP"){
-             document.getElementById("endPhase").setAttribute("style","Display:none");
+            document.getElementById("endPhase").setAttribute("style","Display:none");
     	 	/*call ghost's controller'*/
 			this.ghostController(ghost1, ghost2, ghost3, ghost4);
     	 }
     	 /*When the game is over ask the plyer to enter a user name and save his score and time on the DB*/
     	 else if(this.status=="OVER"){
-    	 	//TODO
+    	 	/*Load the number of Players that have been registered*/
     	 	loadNumberOfPlayers();
+    	 	/*Update the player score and time on the register div*/
     	 	document.getElementById("player_score").innerHTML=this.score;
     	 	document.getElementById("player_time").innerHTML=this.time;
+    	 	/*The register form will be displayed*/
     	 	document.getElementById('register').style.display='block';
     	 	document.getElementById('fade').style.display='block';
     	 	this.status="STOP";
+    	 /*When a map is completed it will ask he user if he wants to play another map*/	
     	 }else if(this.status=="PAUSE"){
-          if(this.phase<4){
-          document.getElementById('fade').style.display='block';
-		  document.getElementById("endPhase").setAttribute("style","Display:block");
-		
-		 // Show div endPhase with the options to end the game or to go to next phase
-          }
-           else{
-           	this.status = "OVER";
-           }
+		     if(this.phase<4){
+	 			// Show div endPhase with the options to end the game or to go to next phase        
+		     	document.getElementById('fade').style.display='block';
+			 	document.getElementById("endPhase").setAttribute("style","Display:block");
+		    }
+		    /*If the player has played all available maps the game will be over*/
+		    else{
+		    	this.status = "OVER";
+		   }	
        }
 	}
 	

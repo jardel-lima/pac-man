@@ -6,11 +6,11 @@ function Pacman(){
 	this.direction = null;//Pacman's direction, it can be "UP"|"DOWN"|"RIGHT"|"LEFT"
 	this.blocked = true;//Variable that represents if pacman is blocked because a wall
 	this.superPower = false;//Indcates that pacman "ate" a especial food, that gives him super power to eat ghosts
-	this.lives = 4;//Number of remainings pacman's lives
+	this.lives = 5;//Number of remainings pacman's lives
     this.openMouth = true;//Indicates if pacman should appear with his mouth opened or closed
     this.immune = false;/*Indicates if pacman is immune to the ghosts. It will happen when pacman dies, it will be immune for 3 seconds  */
     this.deathTime = null;/*Helps to control the immune time*/
-    this.superPowerTime = null;/*Helps to contro the super power time*/
+    this.superPowerTime = null;/*Helps to control the super power time*/
     this.ghostKilled = null;/*Indicates which ghost was killed by the pacman*/
 	
 	//Function that based on the pacman direction validate and change the possition of the pacman
@@ -137,19 +137,17 @@ function Pacman(){
 						if(this.superPower){
 							this.ghostKilled = validMoviment;
 							game.score+=100;
+							
 						}
-						
+						applyPacmanMoviment(this, xAux, yAux);
 					} 
 					/*If pacman has not super power or he is not immune he will die*/
 					else{
-						this.lives--;
-						this.immune = true;
-						this.deathTime = game.time;
+						this.die()
 					}
-					applyPacmanMoviment(this, xAux, yAux);	
 				}
 				/*If he finds a empty space or an exit it will move normally*/
-				else if(validMoviment==EMPTY||validMoviment==EXIT){
+				else if(validMoviment==EMPTY){
 					applyPacmanMoviment(this, xAux, yAux);
 				}
 				/*If he finds a wall he will be blocked*/
@@ -159,6 +157,23 @@ function Pacman(){
 			}
 			
 		}
+	}
+	/*Function that kills pacman*/
+	this.die = function(){
+		this.lives--;
+		this.immune = true;
+		this.deathTime = game.time;
+		
+		this.direction = "RIGHT"
+		IMG_PACMAN = IMG_PACMAN_RIGHT2_IMMUNE;
+		MATRIX[this.positionY][this.positionX] = EMPTY;
+		document.getElementById("tableGame").rows[this.positionY].cells[this.positionX].style.backgroundImage = IMG_EMPTY;
+		this.positionX = 1;
+		this.positionY = 1;
+		MATRIX[this.positionY][this.positionX] = PACMAN;
+		document.getElementById("tableGame").rows[this.positionY].cells[this.positionX].style.backgroundImage = IMG_PACMAN;
+	
+		printMatrix();
 	}
 	
 }
