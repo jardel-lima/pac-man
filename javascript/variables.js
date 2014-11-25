@@ -41,7 +41,9 @@
     var ghost2=null;
     var ghost3=null;
     var ghost4=null;
-    var tableHeight= window.innerHeight*0.8;
+    var tableHeight= window.innerHeight*0.7;
     var tableWidth = tableHeight*0.625;
-    var divWidth = tableWidth*1.5;
+    var divWidth = tableWidth*3.0;
     var wait =true;
+    var rankingTable=null;
+    var updateRankingTime=0;

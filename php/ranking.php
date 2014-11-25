@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$user = "root";//"f2014_user9";
-$password = ""; //"f2014_user9";
+$user = "f2014_user9";
+$password = "f2014_user9";
 $database = "f2014_user9";
 $tableName= "player";
  		
@@ -22,7 +22,7 @@ $myCon = mysqli_connect($host,$user,$password,$database); // try to connect to t
 				print "No Ranking Yet!";
 			}else{
 				
-				$tableFinal="<table><tr><th>Position</th><th>Name</th><th>Score</th><th>Time</th></tr>";
+				$tableFinal="<table id=\"rankingTable\"><tr><th>Position</th><th>Name</th><th>Score</th><th>Time</th></tr>";
 				
 				for($row=1;$row<=mysqli_num_rows($res);$row++){
                                     $aux = $row;

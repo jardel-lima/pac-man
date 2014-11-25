@@ -167,6 +167,37 @@ function afterAlert(){
 	}
 
 }
-		
+
+function checkRanking(score,time){
+        //gets tablescore,time
+    var table = document.getElementById('rankingTable');
+
+    //gets rows of table
+    var rowLength = table.rows.length;
+    if(rowLength<2) // if no one has been played before the actual player is the first
+        return "1st";
+    else
+        var position = table.rows.item(rowLength-1).cells.item(0).innerHTML; // else he or she starts in the last position
+    //loops through rows    
+    for (i = rowLength-1; i > 0; i--){ // starting from the last position to compare
+
+      
+       var cells = table.rows.item(i).cells; //gets cells of current
+       
+       if(score>cells.item(2).innerHTML || (score==cells.item(2).innerHTML && time<cells.item(3).innerHTML)) // if the player's score is bigger or the score is the same but the his time is lower then he get this position
+           position=cells.item(0).innerHTML;
+       else
+           return position; // found his position
+           
+    }
+    return position;
+    
+}
+
+function updatePosition(score,time){
+    newPosition = checkRanking(score,time);
+    document.getElementById('dynamicRanking').innerHTML = newPosition;
+    
+}
 		
 		

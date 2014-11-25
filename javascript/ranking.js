@@ -20,7 +20,7 @@
  			
  			// execute the hi.php page from the server 
  	
- 			xmlHttp.open("POST", "../php/ranking.php", true);   
+ 			xmlHttp.open("POST", "../php/ranking.php", false);   
  				
  			// define the method to handle server responses 
  			xmlHttp.onreadystatechange = handleRankingServerResponse;  
@@ -36,6 +36,6 @@
                 
 function updateHtml(data){
 	//TODO check data and  print correctly
-		document.getElementById("divRanking").innerHTML=data; //just a test
+		document.getElementById("divRanking").innerHTML=data;//the div receive the table which has been resulted from the SQL query
 	
 	}              

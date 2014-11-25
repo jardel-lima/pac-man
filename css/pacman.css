@@ -33,7 +33,7 @@ table tr,td{
     text-align: center;
     margin: auto auto 20px auto;
     font-family: Comic Sans Ms;
-    font-size: 1.3em;
+    font-size: 1.2em;
     width: 600px;
     
     
@@ -42,7 +42,7 @@ table tr,td{
 .divInfo div{
     border-width: 2px;
     display: inline-block;
-    width: 22%;
+    width: 19%;
     vertical-align: top;
     
     
@@ -51,7 +51,7 @@ table tr,td{
 div .edtWhite{
         background: goldenrod;
         border-radius:10px;
-        width: 50%;
+        width: 40%;
 }
 .divFoot {
     margin:20px auto auto auto;
@@ -89,7 +89,7 @@ a{
 #nextPhase{
     display:inline;
 }
-#divDataMap{
+#divDataMap,#divRanking{
     display: none;
 }
 

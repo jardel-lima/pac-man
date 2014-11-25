@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../javascript/Game.js"></script>
     <script type="text/javascript" src="../javascript/fileReader.js"></script>
     <script type="text/javascript" src="../javascript/register.js"></script>
+    <script type="text/javascript" src="../javascript/ranking.js"></script>
 </head>
 <body> 
 	<div id="fade" class="black_overlay"></div>
@@ -23,6 +24,7 @@
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
         <div>Lives:<div class="edtWhite"><span id="lives"> </span></div></div>
         <div>Time: <div class="edtWhite"><span id="time"> </span></div></div>
+        <div>Your Ranking: <div class="edtWhite"><span id="dynamicRanking">&emsp; </span></div></div>
         
     </div>
     <div id="divGame"></div>
@@ -37,6 +39,7 @@
         
     </div>
     <div id="divDataMap"></div>
+    <div id="divRanking"></div>
 	<script>
 	
 	var game = new Game();
@@ -45,8 +48,9 @@
         mapFile="map"+game.phase+".txt";
         loadFile(mapFile);
 	var map = document.getElementById("divDataMap").innerHTML; // get new map
+        loadRanking();
 	game.initiate(map);
-         
+        updatePosition(0,0); 
         
 	printMatrix();
 	
@@ -141,6 +145,12 @@
 			if(game.status=="PLAY"){
 					game.time++;
                     game.prisonTime++;
+                    updateRankingTime++;
+                    if(updateRankingTime>10){
+                        updatePosition(game.score,game.time);
+                        updateRankingTime=0;
+                    }
+                        
              }
 		}
 		
