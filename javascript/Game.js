@@ -7,7 +7,7 @@ function Game(){
 	this.phase = 0;//Represent tha phase/map of the game
 	this.status = "STOP";//It represents the status of the game. That can be 'PLAY'(When the user is playing)|'PAUSE'(When a new map is gonna start)|'STOP'(When the game has not started)|'OVER'(When the game is over)
 	this.prisonTime = 0;//It Will control the time that the ghost will be released from the prison
-	
+
 	//Function that initiate a game, creating the matrix, table, read the map and populate the matrix and table
 	this.initiate = function(map){
 			if(this.status == "STOP"){
@@ -36,6 +36,7 @@ function Game(){
                 /*If the messenge "File not found" was returned from the server the sought file was not found*/
                 if(map.search("File not found")!=-1){
                     alert("Server Error!");
+                    
                 }
                
                 IMG_PACMAN = IMG_PACMAN_RIGHT; // update pacman's image to initial direction
@@ -141,8 +142,9 @@ function Game(){
 				 
 				 /*If pacman has no more lives the game is over*/
 				 if(pacman.lives<=0){
-				 	this.status="OVER";
+				 	
                     alert("You do not have any live left!!");
+                    this.status="OVER";
 				 	
 				 }
 				 
@@ -233,5 +235,4 @@ function Game(){
 	}
 	
 }
-
 
