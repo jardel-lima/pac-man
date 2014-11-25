@@ -26,14 +26,15 @@
             if (xmlHttp.status == 200){
             	var response = xmlHttp.responseText; 
             	alert(response);
-            	document.getElementById('register').style.display='none';
-            	document.getElementById('fade').style.display='none';   
-            	window.location="../html/ranking.html"
             	
+        		document.getElementById('register').style.display='none';
+        		document.getElementById('fade').style.display='none';   
+        		window.location="../html/ranking.html"
              }
              // a HTTP status different than 200 signals an error
              else{
-             	alert("There was a problem accessing the server: " + xmlHttp.statusText);
+             	game.status = "ALERT";
+             	alertMessenge("There was a problem accessing the server: " + xmlHttp.statusText);
              }
 		}
 	}                             

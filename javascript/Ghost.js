@@ -50,7 +50,7 @@ function Ghost( initialX, initialY, number ){
 			/*Check if the direction 'UP' is available*/
 			valid = validateMoviment( this.positionX , this.positionY-1 );
 			/*if this direction has a wall or is a invalid direction this direction will recive 0 on the availableDirections arry*/
-			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)){
+			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)|| (valid==PACMAN && pacman.immune)){
 				this.availableDirections[0] = 0;
 			}
 			/*If there is food on this direction the ghost will move to this direction*/
@@ -63,7 +63,7 @@ function Ghost( initialX, initialY, number ){
 			}
 			/*Check if the direction 'DOWN' is available*/
 			valid = validateMoviment( this.positionX , this.positionY+1 );
-			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)){
+			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
 				this.availableDirections[1] = 0;
 			}
 			else if(food==null&&valid==FOOD){
@@ -74,7 +74,7 @@ function Ghost( initialX, initialY, number ){
 			}
 			/*Check if the direction 'RIGHT' is available*/
 			valid = validateMoviment( this.positionX+1 , this.positionY );
-			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)){
+			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
 				this.availableDirections[2] = 0;
 			}
 			else if(food==null && valid==FOOD){
@@ -85,7 +85,7 @@ function Ghost( initialX, initialY, number ){
 			}
 			/*Check if the direction 'LEFT' is available*/
 			valid = validateMoviment( this.positionX-1 , this.positionY );
-			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)){
+			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
 				this.availableDirections[3] = 0;
 			}
 			else if(food==null && valid==FOOD){
