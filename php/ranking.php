@@ -14,7 +14,7 @@ $myCon = mysqli_connect($host,$user,$password,$database); // try to connect to t
   }	
    else
      {
-		$sql = "Select *  from $tableName ORDER BY player_score-(player_time/10) desc";
+		$sql = "Select *  from $tableName ORDER BY player_score desc, player_time";
 		$res = mysqli_query($myCon,$sql);
 		
 		if($res){
