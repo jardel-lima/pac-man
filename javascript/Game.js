@@ -39,7 +39,7 @@ function Game(){
                     
                 }
                
-                IMG_PACMAN = IMG_PACMAN_RIGHT; // update pacman's image to initial direction
+                IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT.src+')'; // update pacman's image to initial direction
                
                 this.quantityOfFood= readMap(map); 
                 populateMATRIX(map);
@@ -86,8 +86,8 @@ function Game(){
 			if(this.prisonTime==2){
 			 	MATRIX[16][8]= EMPTY;
 				MATRIX[12][11]= EMPTY;
-				document.getElementById("tableGame").rows[16].cells[8].style.backgroundImage = IMG_EMPTY;
-				document.getElementById("tableGame").rows[12].cells[11].style.backgroundImage = IMG_EMPTY;
+				document.getElementById("tableGame").rows[16].cells[8].style.backgroundImage = 'url('+IMG_EMPTY.src+')';
+				document.getElementById("tableGame").rows[12].cells[11].style.backgroundImage = 'url('+IMG_EMPTY.src+')';
 				ghost1.inPrison = false;
 				ghost2.inPrison = false;
 				ghost3.inPrison = false;
@@ -110,16 +110,16 @@ function Game(){
 					pacman.deathTime = null;
 					switch(pacman.direction){
 			 			case "UP":
-			 				IMG_PACMAN = IMG_PACMAN_UP2;
+			 				IMG_PACMAN = 'url('+IMG_PACMAN_UP2.src+')';
 			 			break;
 			 			case "DOWN":
-			 				IMG_PACMAN = IMG_PACMAN_DOWN2;
+			 				IMG_PACMAN = 'url('+IMG_PACMAN_DOWN2.src+')';
 			 			break;
 			 			case "RIGHT":
-			 				IMG_PACMAN = IMG_PACMAN_RIGHT2;
+			 				IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT2.src+')';
 			 			break;
 			 			case "LEFT":
-			 				IMG_PACMAN = IMG_PACMAN_LEFT2;
+			 				IMG_PACMAN = 'url('+IMG_PACMAN_LEFT2.src+')';
 			 			break;
 			 		}
 			 
@@ -235,4 +235,5 @@ function Game(){
 	}
 	
 }
+
 

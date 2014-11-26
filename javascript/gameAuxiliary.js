@@ -34,10 +34,10 @@ function populateTable(){
         	var newImg;
         	var object = (MATRIX[i][j]).toString();
         	if(object==WALL){
-        		newImg = IMG_WALL;
+        		newImg = 'url('+IMG_WALL.src+')';
         	}
         	else if(object==FOOD){
-        		newImg = IMG_FOOD;
+        		newImg = 'url('+IMG_FOOD.src+')';
         	}
         	else if(object==PACMAN){
         		newImg = IMG_PACMAN;
@@ -46,10 +46,10 @@ function populateTable(){
         		newImg = IMG_GHOST;
         	}
         	else if(object==SPECIAL_FOOD){
-        		newImg = IMG_SPECIAL_FOOD;
+        		newImg = 'url('+IMG_SPECIAL_FOOD.src+')';
         	}
         	else{
-        		newImg = IMG_EMPTY;
+        		newImg = 'url('+IMG_EMPTY.src+')';
         	}
 
             document.getElementById("tableGame").rows[i].cells[j].style.backgroundImage = newImg; 

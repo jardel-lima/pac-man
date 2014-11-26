@@ -22,9 +22,9 @@ function setOppositeDirection(ghost){
 function moveAccordingDirection(direction, ghost){
 		/*If the ghost is weak it will change color*/
 		if(ghost.weak){
-			IMG_GHOST = IMG_GHOST_WEEK;
+			IMG_GHOST = 'url('+IMG_GHOST_WEEK.src+')';
 		}else{
-			IMG_GHOST = IMG_GHOST_NORMAL;
+			IMG_GHOST = 'url('+IMG_GHOST_NORMAL.src+')';
 		}
 		switch(direction){
 			case "UP":
@@ -121,13 +121,13 @@ function applyGhostMoviment(ghost, newPositionX, newPositionY){
 	/*Put the last element that was on the current ghost position*/
 	/*Update table*/
 	if(ghost.savedObject==SPECIAL_FOOD) {
-		document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = IMG_SPECIAL_FOOD;
+		document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = 'url('+IMG_SPECIAL_FOOD.src+')';
 	}
 	else if(ghost.savedObject==PACMAN) {
 		document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = IMG_PACMAN;
 	}
 	else{
-		document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = IMG_EMPTY;
+		document.getElementById("tableGame").rows[ghost.positionY].cells[ghost.positionX].style.backgroundImage = 'url('+IMG_EMPTY.src+')';
 	}
 	/*Update Matrix*/
 	MATRIX[ghost.positionY][ghost.positionX] = ghost.savedObject;

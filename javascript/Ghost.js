@@ -155,7 +155,7 @@ function Ghost( initialX, initialY, number ){
 	this.die = function(){
 		/*If the ghost died because the pacman was in the ghost's next position, put an empty space on the ghost position*/
 		if(MATRIX[this.positionY][this.positionX]!=PACMAN){
-			document.getElementById("tableGame").rows[this.positionY].cells[this.positionX].style.backgroundImage = IMG_EMPTY;
+			document.getElementById("tableGame").rows[this.positionY].cells[this.positionX].style.backgroundImage = 'url('+IMG_EMPTY.src+')';
 			MATRIX[this.positionY][this.positionX] = EMPTY;
 		}
 		this.alive = false;

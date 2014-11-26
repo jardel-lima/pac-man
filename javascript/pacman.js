@@ -26,20 +26,20 @@ function Pacman(){
 			 	//Check if the pacman's mouth is opened or closed, it will change the pacman's image
                 if(this.openMouth){
                 	if(this.immune){
-                		 IMG_PACMAN = IMG_PACMAN_UP_IMMUNE;
+                		 IMG_PACMAN = 'url('+IMG_PACMAN_UP_IMMUNE.src+')';
                 	}
                 	else{
-                		 IMG_PACMAN = IMG_PACMAN_UP;
+                		 IMG_PACMAN = 'url('+IMG_PACMAN_UP.src+')';
                 	}
                     this.openMouth = false;
                 }
                 else{
                 	/*If pacman is immune it will change color*/
                 	if(this.immune){
-                		 IMG_PACMAN = IMG_PACMAN_UP2_IMMUNE;
+                		 IMG_PACMAN = 'url('+IMG_PACMAN_UP2_IMMUNE.src+')';
                 	}
                 	else{
-                		 IMG_PACMAN = IMG_PACMAN_UP2;
+                		 IMG_PACMAN = 'url('+IMG_PACMAN_UP2.src+')';
                 	}
                    
                     this.openMouth = true;
@@ -49,19 +49,19 @@ function Pacman(){
 			 	yAux ++;
 			 	if(this.openMouth){
                     if(this.immune){
-                		  IMG_PACMAN = IMG_PACMAN_DOWN_IMMUNE;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_DOWN_IMMUNE.src+')';
                 	}
                 	else{
-                		  IMG_PACMAN = IMG_PACMAN_DOWN;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_DOWN.src+')';
                 	}
                     this.openMouth = false;
                 }
                 else{
                 	if(this.immune){
-                		  IMG_PACMAN = IMG_PACMAN_DOWN2_IMMUNE;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_DOWN2_IMMUNE.src+')';
                 	}
                 	else{
-                		  IMG_PACMAN = IMG_PACMAN_DOWN2;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_DOWN2.src+')';
                 	}
                    
                     this.openMouth = true;
@@ -71,19 +71,19 @@ function Pacman(){
 			 	xAux ++;
 			 	if(this.openMouth){
                     if(this.immune){
-                		  IMG_PACMAN = IMG_PACMAN_RIGHT_IMMUNE;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT_IMMUNE.src+')';
                 	}
                 	else{
-                		 IMG_PACMAN = IMG_PACMAN_RIGHT;
+                		 IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT.src+')';
                 	}
                     this.openMouth = false;
                 }
                 else{
                 	if(this.immune){
-                		  IMG_PACMAN = IMG_PACMAN_RIGHT2_IMMUNE;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT2_IMMUNE.src+')';
                 	}
                 	else{
-                		 IMG_PACMAN = IMG_PACMAN_RIGHT2;
+                		 IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT2.src+')';
                 	}
                     
                     this.openMouth = true;
@@ -93,19 +93,19 @@ function Pacman(){
 			 	xAux --;
 			 	if(this.openMouth){
                     if(this.immune){
-                		  IMG_PACMAN = IMG_PACMAN_LEFT_IMMUNE;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_LEFT_IMMUNE.src+')';
                 	}
                 	else{
-                		  IMG_PACMAN = IMG_PACMAN_LEFT;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_LEFT.src+')';
                 	}
                     this.openMouth = false;
                 }
                 else{
                 	if(this.immune){
-                		  IMG_PACMAN = IMG_PACMAN_LEFT2_IMMUNE;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_LEFT2_IMMUNE.src+')';
                 	}
                 	else{
-                		  IMG_PACMAN = IMG_PACMAN_LEFT2;
+                		  IMG_PACMAN = 'url('+IMG_PACMAN_LEFT2.src+')';
                 	}
                     
                     this.openMouth = true;
@@ -165,9 +165,9 @@ function Pacman(){
 		this.deathTime = game.time;
 		
 		this.direction = "RIGHT"
-		IMG_PACMAN = IMG_PACMAN_RIGHT2_IMMUNE;
+		IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT2_IMMUNE.src+')';
 		MATRIX[this.positionY][this.positionX] = EMPTY;
-		document.getElementById("tableGame").rows[this.positionY].cells[this.positionX].style.backgroundImage = IMG_EMPTY;
+		document.getElementById("tableGame").rows[this.positionY].cells[this.positionX].style.backgroundImage = 'url('+IMG_EMPTY.src+')';
 		this.positionX = 1;
 		this.positionY = 1;
 		MATRIX[this.positionY][this.positionX] = PACMAN;
