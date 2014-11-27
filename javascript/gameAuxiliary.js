@@ -223,7 +223,7 @@ function afterAlert(){
 	}
 	else if(game.alert=="ERROR"){
 		game.status = "STOP"
-		window.location="../html/mainMenu.html"
+		window.location="../index.html"
 	}
 	else if(game.alert=="REGISTER"){
 		document.getElementById('register').style.display='none';
