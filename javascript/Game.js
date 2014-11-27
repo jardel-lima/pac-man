@@ -7,7 +7,8 @@ function Game(){
 	this.phase = 0;//Represent tha phase/map of the game
 	this.status = "STOP";//It represents the status of the game. That can be 'PLAY'(When the user is playing)|'PAUSE'(When a new map is gonna start)|'STOP'(When the game has not started)|'OVER'(When the game is over)
 	this.prisonTime = 0;//It Will control the time that the ghost will be released from the prison
-
+	this.alert = "SUBMIT";/*SUBMIT|REGISTER|ERROR*/
+	
 	//Function that initiate a game, creating the matrix, table, read the map and populate the matrix and table
 	this.initiate = function(map){
 			if(this.status == "STOP"){
@@ -35,7 +36,9 @@ function Game(){
                
                 /*If the messenge "File not found" was returned from the server the sought file was not found*/
                 if(map.search("File not found")!=-1){
-                    alert("Server Error!");
+                    
+                    this.alert="ERROR";
+                    alertBox("Server Error!");
                     
                 }
                
@@ -143,8 +146,10 @@ function Game(){
 				 /*If pacman has no more lives the game is over*/
 				 if(pacman.lives<=0){
 				 	
-                    alert("You do not have any live left!!");
-                    this.status="OVER";
+                    //alert("You do not have any live left!!");
+                    this.alert = "SUBMIT"
+                    alertBox("You do not have any live left!!");
+                    //this.status="OVER";
 				 	
 				 }
 				 
@@ -222,15 +227,19 @@ function Game(){
     	 	this.status="STOP";
     	 /*When a map is completed it will ask he user if he wants to play another map*/	
     	 }else if(this.status=="PAUSE"){
-		     if(this.phase<4){
+		     if(this.phase<NUMBER_OF_MAPS){
 	 			// Show div endPhase with the options to end the game or to go to next phase        
 		     	document.getElementById('fade').style.display='block';
 			 	document.getElementById("endPhase").setAttribute("style","Display:block");
 		    }
 		    /*If the player has played all available maps the game will be over*/
 		    else{
-		    	this.status = "OVER";
+		    	this.alert = "SUBMIT";
+		    	alertBox("Congratulations! You completed all available maps.")
 		   }	
+       }
+       else if(this.status = "ALERT"){
+       
        }
 	}
 	

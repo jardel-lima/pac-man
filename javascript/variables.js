@@ -1,6 +1,7 @@
 	// Variables----------------------------------------------
 	var ROWS    = 30;
 	var COLUMNS = 20;
+	var NUMBER_OF_MAPS = 2;
 	var MATRIX = [];
 	var WALL = 'W';
 	var FOOD = '-';

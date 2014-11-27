@@ -112,6 +112,7 @@ a{
     z-index:1002;
     
 }
+
 #endPhase .msg{
     float:top;
     margin: auto;
@@ -139,9 +140,9 @@ a{
     font-family: Comic Sans Ms;
     font-size: 1.0em;
 }
-#endPhase .divButton:hover{
-cursor: pointer;
 
+#endPhase .divButton:hover{
+    cursor: pointer;
 }
 
 #register{
@@ -221,4 +222,56 @@ cursor: pointer;
         opacity:.80;
         filter: alpha(opacity=80);
     }
+
+#alertBox{
+    display: none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-150px;
+    margin-top:-100px;
+    padding:10px;
+    width:300px;
+    height:150px;
+    border-top: darkkhaki 10px outset ;
+    border-bottom: darkkhaki 10px outset ;
+    border-left: darkkhaki 10px outset ;
+    border-right: darkkhaki 10px outset ;
+    background-color: darkgoldenrod;
+    border-radius:10px;
+    z-index:1003;
+    
+}
+
+#alertBox p{
+    text-align: center;
+    font-weight: bold;
+}
+
+.divButton{
+    float: center;
+    width: 20%; 
+    position: relative;
+    margin: -20px auto 20px auto;      
+    color: black;
+    text-shadow: 1px 1px 1px white;     
+    background: goldenrod;
+    border-radius:20px;
+    border-top: darkkhaki 10px outset ;
+    border-bottom: darkkhaki 10px outset ;
+    border-left: darkkhaki 10px outset ;
+    border-right: darkkhaki 10px outset ;
+    text-align: center;
+    font-family: Comic Sans Ms;
+    font-size: 0.8em;
+}
+
+.divButton:hover{
+    background: blue ;
+    border-top: blue 10px outset ;
+    border-bottom: blue 10px outset ;
+    border-left: blue 10px outset ;
+    border-right: blue 10px outset ;
+    cursor: pointer;
+}
 

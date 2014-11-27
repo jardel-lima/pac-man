@@ -19,6 +19,11 @@
 </head>
 <body> 
 	<div id="fade" class="black_overlay"></div>
+	<div id="alertBox">
+		<p id="messenge"></p>
+		<br />
+		<div class="divButton" onclick="afterAlert();">  OK  </div>
+	</div>
     <div class="divInfo" id="divInfo">
         <div>Map: <div class="edtWhite"><span id="map"> </span></div></div>
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
@@ -33,11 +38,25 @@
         <div class="divButton" id="endGameButton" onclick="game.status='OVER';" >End Game</div>
         <div class="divButton" id="nextPhase" onclick="game.changePhase();" >Next Phase</div>            
     </div>
+    
     <div class="divFoot" id="divFoot" align="center">
         <a href="mainMenu.html"><div class="divButton">Return Menu</div></a>
         <div class="divButton" onclick="game.restart();">Restart Game</div>
-        
     </div>
+    
+    <div id="register">
+		<h3>Register</h3>
+		<p>Please tell us your name. <br /><small><small>(Those information will appear in our ranking page)</small></small></p>
+		<p>
+		<form>
+		Your name: <input type="text" id="player_name" name="player_name" size="20" placeholder="Your Name"/><br />
+		Your score: <span id="player_score">0</span><br />
+		Your time: <span id="player_time">0</span><br />
+		<div  id="buttonRegister" align="right" onclick="submitPlayer();">Submit<div/>
+		</form>
+		</p>
+	</div>
+	
     <div id="divDataMap"></div>
     <div id="divRanking"></div>
 	<script>
@@ -73,11 +92,9 @@
 						if(MATRIX[pacman.positionY-1][pacman.positionX]!=WALL){
 							pacman.direction = "UP";
 						}
+						pacman.move();
 					}
-					pacman.move();	
 				}
-				
-				
 			}
 			else if (e.keyCode == '40') {
 				// down arrow
@@ -89,8 +106,8 @@
 						if(MATRIX[pacman.positionY+1][pacman.positionX]!=WALL){
 							pacman.direction = "DOWN";
 						}
+						pacman.move();
 					}
-					pacman.move();	
 				}
 			}
 			else if (e.keyCode == '39') {
@@ -103,8 +120,8 @@
 						if(MATRIX[pacman.positionY][pacman.positionX+1]!=WALL){
 							pacman.direction = "RIGHT";
 						}
+						pacman.move();	
 					}
-					pacman.move();	
 				}
 			}
 			else if (e.keyCode == '37') {
@@ -117,11 +134,10 @@
 						if(MATRIX[pacman.positionY][pacman.positionX-1]!=WALL){
 							pacman.direction = "LEFT";
 						}
+						pacman.move();
 					}
-					pacman.move();	
 				}	
 			}
-			
 		}
                 
 		//Loop-------------------------
@@ -150,7 +166,6 @@
                         updatePosition(game.score,game.time);
                         updateRankingTime=0;
                     }
-                        
              }
 		}
 		
@@ -158,20 +173,5 @@
 		
 	</script>
 	
-	<div id="register">
-		<h3>Register</h3>
-		<p>Please tell us your name. <br /><small><small>(Those information will appear in our ranking page)</small></small></p>
-		<p>
-		<form>
-		Your name: <input type="text" id="player_name" name="player_name" size="20" placeholder="Your Name"/><br />
-		Your score: <span id="player_score">0</span><br />
-		Your time: <span id="player_time">0</span><br />
-		<div  id="buttonRegister" align="right" onclick="submitPlayer();">Submit<div/>
-		</form>
-		</p>
-	</div>
-	
-	 
-        
 </body>
 </html>

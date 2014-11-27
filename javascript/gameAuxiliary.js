@@ -199,5 +199,37 @@ function updatePosition(score,time){
     document.getElementById('dynamicRanking').innerHTML = newPosition;
     
 }
+
+function alertBox(messenge){
+	
+	game.status = "ALERT";
+	
+	document.getElementById('messenge').innerHTML = messenge;
+	document.getElementById('alertBox').style.display = 'block';
+	document.getElementById('fade').style.display = 'block';
+	
+	if(game.alert=="REGISTER"){
+		document.getElementById('register').style.display='none';
+	}
+}
+
+function afterAlert(){
+	
+	document.getElementById('alertBox').style.display = 'none';
+	document.getElementById('fade').style.display = 'none';
+	
+	if(game.alert=="SUBMIT"){
+		game.status = "OVER"
+	}
+	else if(game.alert=="ERROR"){
+		game.status = "STOP"
+		window.location="../html/mainMenu.html"
+	}
+	else if(game.alert=="REGISTER"){
+		document.getElementById('register').style.display='none';
+        window.location="../html/ranking.html"
+	}
+	
+}
 		
 		

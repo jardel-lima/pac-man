@@ -14,7 +14,8 @@
              }
              // a HTTP status different than 200 signals an error
              else{
-             	alert("There was a problem accessing the server: " + xmlHttp.statusText);
+             	game.alert = "ERROR";
+             	alertBox("There was a problem accessing the server: " + xmlHttp.statusText);
              }
 		}
 	}   
@@ -25,16 +26,14 @@
         	// status of 200 indicates the transaction completed successfully
             if (xmlHttp.status == 200){
             	var response = xmlHttp.responseText; 
-            	alert(response);
+            	game.alert = "REGISTER";
+            	alertBox(response);
             	
-        		document.getElementById('register').style.display='none';
-        		document.getElementById('fade').style.display='none';   
-        		window.location="../html/ranking.html"
              }
              // a HTTP status different than 200 signals an error
              else{
-             	game.status = "ALERT";
-             	alertMessenge("There was a problem accessing the server: " + xmlHttp.statusText);
+             	game.alert = "ERROR";
+             	alertBox("There was a problem accessing the server: " + xmlHttp.statusText);
              }
 		}
 	}                             
@@ -59,7 +58,8 @@
 		playerName = playerName.trim();
 		
 		if(playerName.length==0){
-			alert("Please informe your name.");
+			game.alert = "SUBMIT";
+			alertBox("Please informe your name.");
 			return;
 		}
 
