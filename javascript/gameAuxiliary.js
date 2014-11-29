@@ -64,7 +64,6 @@ function readMap(map){
 	for(var i = 0; i <  ROWS; i++){
 	    var aux = map.substr(i*(COLUMNS),COLUMNS)
 	    aux = aux.replace("\n","");
-	    console.log("sub "+aux);
 	    for(var j = 0; j < COLUMNS; j++){
 	    	if(aux.charAt(j)=='0'){
 	    		MATRIX[i][j]= WALL;
@@ -79,12 +78,15 @@ function readMap(map){
                 pacman = new Pacman();
     /*If the pacman has been created just change his positions*/
     else{
+    //reset pacman's properties
     	pacman.positionX = 1;
 	    pacman.positionY = 1;
+	    pacman.superPower = false;
+	    pacman.superPowerTime = null;
+	    pacman.immune = false;
     }
-    
 	MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
-	quantityOfFood = quantityOfFood - 1/*pacman*/- NUMBER_OF_SPECIAL_FOOD;/*Just normal(yellow) food will be considered to finish the map*/
+	quantityOfFood = quantityOfFood - NUMBER_OF_SPECIAL_FOOD;/*Just normal(yellow) food will be considered to finish the map*/
 	return quantityOfFood;
 }
 		
