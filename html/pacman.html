@@ -5,6 +5,8 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
     <link rel="stylesheet" type="text/css" href="../css/pacman.css">
+    <link rel="SHORTCUT ICON" href="../imgs/pacman_icon.ico" type="image/x-icon" />
+	<link rel="ICON" href="../imgs/pacman_icon.ico" type="image/ico" />
     <script type="text/javascript" src="../javascript/xmlHttp.js"></script>
     <script type="text/javascript" src="../javascript/variables.js"></script>
     <script type="text/javascript" src="../javascript/gameAuxiliary.js"></script>
@@ -19,43 +21,61 @@
 </head>
 <body> 
 	<div id="fade" class="black_overlay"></div>
-	<div id="fadeAlert" class="black_overlay"></div>
+	
 	<div id="alertBox">
 		<p id="messenge"></p>
 		<br />
 		<div class="divButton" onclick="afterAlert();">  OK  </div>
 	</div>
+	
     <div class="divInfo" id="divInfo">
         <div>Map: <div class="edtWhite"><span id="map"> </span></div></div>
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
         <div>Lives:<div class="edtWhite"><span id="lives"> </span></div></div>
         <div>Time: <div class="edtWhite"><span id="time"> </span></div></div>
         <div>Your Ranking: <div class="edtWhite"><span id="dynamicRanking">&emsp; </span></div></div>
-        
     </div>
+    
     <div id="divGame"></div>
+    
     <div id="endPhase" style="display:none;">
         <div class="msg">This Phase is over. What's next?</div>
         <div class="divButton" id="endGameButton" onclick="game.status='OVER';" >End Game</div>
         <div class="divButton" id="nextPhase" onclick="game.changePhase();" >Next Phase</div>            
     </div>
+    
     <div class="divFoot" id="divFoot" align="center">
         <a href="../index.html"><div class="divButton">Return Menu</div></a>
         <div class="divButton" onclick="game.restart();">Restart Game</div>
-        
     </div>
+    
+    <div id="register">
+		<h3>Register</h3>
+		<p>Please tell us your name. <br /><small><small>(Those information will appear in our ranking page)</small></small></p>
+		<p>
+		<form>
+		Your name: <input type="text" id="player_name" name="player_name" size="20" placeholder="Your Name"/><br />
+		Your score: <span id="player_score">0</span><br />
+		Your time: <span id="player_time">0</span><br />
+		<div  id="buttonRegister" align="right" onclick="submitPlayer();">Submit<div/>
+		</form>
+		</p>
+	</div>
+    
     <div id="divDataMap"></div>
+    
     <div id="divRanking"></div>
+    
 	<script>
 	
 	var game = new Game();
-        //var map = readFile("maps/map1.txt");
+
         game.phase++;                    
         mapFile="map"+game.phase+".txt";
         loadFile(mapFile);
 	var map = document.getElementById("divDataMap").innerHTML; // get new map
         loadRanking();
-	game.initiate(map);
+		game.initiate(map);
         updatePosition(0,0); 
         
 	printMatrix();
@@ -149,9 +169,10 @@
 					game.time++;
                     game.prisonTime++;
                     updateRankingTime++;
-                    if(updateRankingTime>10){
+                    if(updateRankingTime>5){
                         updatePosition(game.score,game.time);
                         updateRankingTime=0;
+              
                     }
              }
 		}
@@ -160,20 +181,5 @@
 		
 	</script>
 	
-	<div id="register">
-		<h3>Register</h3>
-		<p>Please tell us your name. <br /><small><small>(Those information will appear in our ranking page)</small></small></p>
-		<p>
-		<form>
-		Your name: <input type="text" id="player_name" name="player_name" size="20" placeholder="Your Name"/><br />
-		Your score: <span id="player_score">0</span><br />
-		Your time: <span id="player_time">0</span><br />
-		<div  id="buttonRegister" align="right" onclick="submitPlayer();">Submit<div/>
-		</form>
-		</p>
-	</div>
-	
-	 
-        
 </body>
 </html>

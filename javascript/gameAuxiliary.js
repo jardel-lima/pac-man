@@ -146,30 +146,6 @@ function cleanMATRIX(){
 
 }
 
-function alertMessenge(messenge){
-	game.status = "ALERT";
-	document.getElementById("alert").innerHTML =  messenge;
-	document.getElementById("alertBox").style.display = 'block';
-	document.getElementById('fade').style.display='block';
-
-}
-
-function afterAlert(){
-	if(game.registering==true){
-		document.getElementById('alertBox').style.display = 'none';
-		document.getElementById('fade').style.display='none';
-		document.getElementById('register').style.display='none';
-		document.getElementById('fade').style.display='none';   
-		window.location="../html/ranking.html"
-	}
-	else{
-		document.getElementById('alertBox').style.display = 'none';
-		document.getElementById('fade').style.display='none';
-		game.status = "OVER";  
-	}
-
-}
-
 function checkRanking(score,time){
         //gets tablescore,time
     var table = document.getElementById('rankingTable');
@@ -202,6 +178,7 @@ function updatePosition(score,time){
     
 }
 
+/*Actives the alert Box*/
 function alertBox(messenge){
 	
 	game.status = "ALERT";
@@ -215,6 +192,7 @@ function alertBox(messenge){
 	}
 }
 
+/*Actions that happen after the alert Box*/
 function afterAlert(){
 	
 	document.getElementById('alertBox').style.display = 'none';

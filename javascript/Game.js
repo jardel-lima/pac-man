@@ -15,7 +15,7 @@ function Game(){
 				initiateMatrix();
 				this.quantityOfFood = readMap(map);
 				populateMATRIX(map);
-                document.getElementById('map').innerHTML=game.phase;
+                document.getElementById('map').innerHTML=this.phase+"/"+NUMBER_OF_MAPS;
                                 
 			}
 			
@@ -47,7 +47,7 @@ function Game(){
                 this.quantityOfFood= readMap(map); 
                 populateMATRIX(map);
                
-                document.getElementById('map').innerHTML=this.phase;    //update phase html element            
+                document.getElementById('map').innerHTML = this.phase+"/"+NUMBER_OF_MAPS;    //update phase html element            
                 document.getElementById('fade').style.display='none';      
                         
 			}
@@ -239,7 +239,7 @@ function Game(){
 		   }	
        }
        else if(this.status = "ALERT"){
-       
+       	/*In this case nothing will happen, just the alert messenge will be displayed*/
        }
 	}
 	
