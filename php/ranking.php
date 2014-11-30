@@ -1,9 +1,9 @@
 <?php
 $host = "localhost";
-$user = "f2014_user9";
-$password = "f2014_user9";
-$database = "f2014_user9";
-$tableName= "player";
+$user = "f2014_user24";
+$password = "f2014_user24";
+$database = "f2014_user24";
+$tableName= "players";
  		
 $myCon = mysqli_connect($host,$user,$password,$database); // try to connect to the mysql server
   
