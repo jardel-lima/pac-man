@@ -67,6 +67,5 @@
     var tableHeight= window.innerHeight*0.7;
     var tableWidth = tableHeight*0.625;
     var divWidth = tableWidth*3.0;
-    var wait =true;
     var rankingTable=null;
     var updateRankingTime=0;

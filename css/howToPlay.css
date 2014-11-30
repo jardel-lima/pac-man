@@ -29,7 +29,7 @@ img{
 }
 .pnlBody{
     width: 800px;
-    height: 340px;
+    
     font-family: Comic Sans Ms;
     color: darkgoldenrod;
     border-top: darkgoldenrod 10px ridge ;
@@ -125,4 +125,21 @@ a {
     border-left: blue 10px outset ;
     border-right: blue 10px outset ;
     cursor: pointer;
+}
+.right{
+    float: right;
+    
+}
+.center{
+    text-align: center;
+    
+}
+.left{
+    float: left;
+    
+}
+.imgSize{
+    width: 20px;
+    height: 20px;
+    
 }
