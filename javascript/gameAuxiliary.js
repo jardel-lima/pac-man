@@ -87,8 +87,8 @@ function readMap(map){
 	    pacman.immune = false;
     }
 	MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
-	quantityOfFood = quantityOfFood - NUMBER_OF_SPECIAL_FOOD;/*Just normal(yellow) food will be considered to finish the map*/
-	return quantityOfFood;
+	//quantityOfFood = quantityOfFood - NUMBER_OF_SPECIAL_FOOD;/*Just normal(yellow) food will be considered to finish the map*/
+	return quantityOfFood - 1;
 }
 		
 //Create 4 ghosts that will start always in the same position

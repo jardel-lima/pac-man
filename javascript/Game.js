@@ -222,7 +222,7 @@ function Game(){
     	 	document.getElementById("player_score").innerHTML=this.score;
     	 	document.getElementById("player_time").innerHTML=this.time;
     	 	/*The register form will be displayed*/
-    	 	document.getElementById('register').style.display='block';
+    	 	//document.getElementById('register').style.display='block';
     	 	document.getElementById('fade').style.display='block';
     	 	this.status="STOP";
     	 /*When a map is completed it will ask he user if he wants to play another map*/	

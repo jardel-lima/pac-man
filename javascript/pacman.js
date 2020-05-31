@@ -128,6 +128,7 @@ function Pacman(){
 					this.superPower = true;
 					this.superPowerTime = game.time;
 					game.score+=20;
+					game.quantityOfFood--;
 					applyPacmanMoviment(this, xAux, yAux);
 				}
 				else if(validMoviment.search(GHOST)!=-1){

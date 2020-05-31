@@ -29,7 +29,7 @@ img{
 }
 .pnlBody{
     width: 800px;
-    
+    padding-bottom: 20px;
     font-family: Comic Sans Ms;
     color: darkgoldenrod;
     border-top: darkgoldenrod 10px ridge ;
@@ -58,8 +58,8 @@ img{
 }
 #imgW{
     position: relative;
-     top: -50px;
-     right: -450px;
+     top: -70px;
+     right: -460px;
 }
 #textA{
      position: relative;
