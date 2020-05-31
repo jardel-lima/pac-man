@@ -217,7 +217,7 @@ function Game(){
     	 /*When the game is over ask the plyer to enter a user name and save his score and time on the DB*/
     	 else if(this.status=="OVER"){
     	 	/*Load the number of Players that have been registered*/
-    	 	loadNumberOfPlayers();
+    	 	//loadNumberOfPlayers();
     	 	/*Update the player score and time on the register div*/
     	 	document.getElementById("player_score").innerHTML=this.score;
     	 	document.getElementById("player_time").innerHTML=this.time;

@@ -8,12 +8,12 @@
     <link rel="SHORTCUT ICON" href="../imgs/pacman_icon.ico" type="image/x-icon" />
 	<link rel="ICON" href="../imgs/pacman_icon.ico" type="image/ico" />
     <script type="text/javascript" src="../javascript/xmlHttp.js"></script>
-    <script type="text/javascript" src="../javascript/variables.js"></script>
+	<script type="text/javascript" src="../javascript/variables.js"></script>
+	<script type="text/javascript" src="../javascript/pacman.js"></script>
+    <script type="text/javascript" src="../javascript/Ghost.js"></script>
     <script type="text/javascript" src="../javascript/gameAuxiliary.js"></script>
     <script type="text/javascript" src="../javascript/pacmanAuxiliary.js"></script>
-    <script type="text/javascript" src="../javascript/ghostAuxiliary.js"></script>
-    <script type="text/javascript" src="../javascript/Pacman.js"></script>
-    <script type="text/javascript" src="../javascript/Ghost.js"></script>
+    <script type="text/javascript" src="../javascript/ghostAuxiliary.js"></script>    
     <script type="text/javascript" src="../javascript/Game.js"></script>
     <script type="text/javascript" src="../javascript/fileReader.js"></script>
     <script type="text/javascript" src="../javascript/register.js"></script>
@@ -70,13 +70,13 @@
 	
 	var game = new Game();
 
-        game.phase++;                    
-        mapFile="map"+game.phase+".txt";
-        loadFile(mapFile);
+	game.phase++;                    
+	mapFile="map"+game.phase+".txt";
+	loadLocalFile(mapFile);
 	var map = document.getElementById("divDataMap").innerHTML; // get new map
-        loadRanking();
-		game.initiate(map);
-        updatePosition(0,0); 
+	//loadRanking();
+	game.initiate(map);
+	//updatePosition(0,0); 
         
 	printMatrix();
 	
@@ -170,7 +170,7 @@
                     game.prisonTime++;
                     updateRankingTime++;
                     if(updateRankingTime>5){
-                        updatePosition(game.score,game.time);
+                        //updatePosition(game.score,game.time);
                         updateRankingTime=0;
               
                     }

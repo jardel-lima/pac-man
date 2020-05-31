@@ -34,5 +34,44 @@
  			setTimeout('loadFile('+file+')', 1000); 
  		} 
  		//setInterval('checkData()', 1000);
+
+} 
+
+function loadLocalFile(file){
+	
+dataFile= `00000000000000000000
+0                  0
+0 0000000  0000000 0
+0       0        0 0
+0 0000000  0000000 0
+0 0        0       0
+0 0000000  0000000 0
+0       0        0 0
+0 0000000  0000000 0
+0 0        0       0
+0 0000000  0000000 0
+0                  0
+0 0000000000000000 0
+0      0eeee000000 0
+0 000000GGGG0      0
+0      0eeee000000 0
+0 0000000000000000 0
+0                  0
+0 0000000  0000000 0
+0       0        0 0
+0 0000000  0000000 0
+0 0        0       0
+0 0000000  0000000 0
+0       0        0 0
+0 0000000  0000000 0
+0 0        0       0
+0 0000000  0000000 0
+0 00  000    000   0
+0                  0
+00000000000000000000`; // the server response 
+	document.getElementById("divDataMap").innerHTML=dataFile; // put the new map in a div to get it in game.js
+
+	console.log(dataFile);
+	
                 } 
                          

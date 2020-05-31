@@ -3,7 +3,7 @@ function initiateMatrix() {
 		var table="<table border='"+1+"' width='"+tableWidth+"px'  height='"+tableHeight+"px' align='center' id=\"tableGame\">";
 		for(var i = 0; i < ROWS; i++){
 			var matrix = [];
-			table+="<tr height='"+5+"'>"
+			table+="<tr height='"+20+"'>"
 			for(var j = 0; j < COLUMNS; j++){
 				matrix.push(0);
 				table+="<td></td>"; 
@@ -61,9 +61,10 @@ function populateTable(){
 //Read a map form a string and return the quantity of food on that map
 function readMap(map){
 	var quantityOfFood = 0
+	map = map.replace(/\n/g,"")
 	for(var i = 0; i <  ROWS; i++){
 	    var aux = map.substr(i*(COLUMNS),COLUMNS)
-	    aux = aux.replace("\n","");
+	    //aux = aux.replace("\n","");
 	    for(var j = 0; j < COLUMNS; j++){
 	    	if(aux.charAt(j)=='0'){
 	    		MATRIX[i][j]= WALL;
@@ -75,7 +76,7 @@ function readMap(map){
 	}
 	/*If the pacman has not been created it will create him*/
 	if(pacman==null)
-                pacman = new Pacman();
+        pacman = new Pacman();
     /*If the pacman has been created just change his positions*/
     else{
     //reset pacman's properties
