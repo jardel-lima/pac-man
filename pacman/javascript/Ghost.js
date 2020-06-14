@@ -14,7 +14,7 @@ function Ghost( initialX, initialY, number ){
 	this.alive = true;/*Idicates that the ghost is alive*/
 	this.number = number;/*Represents the ghost number. It identifies the ghost*/
 	
-	/*Function that moves the ghost based on his satatus: inPrison or no inPrison*/
+	/*Function that moves the ghost based on his satatus: inPrison or not inPrison*/
 	this.move = function(){
 		/*If the ghost still in "prison" it will move just UP and DOWN*/
 		if(this.inPrison==true){
@@ -47,108 +47,117 @@ function Ghost( initialX, initialY, number ){
 			var trying = 4;/*It keeps track of the number of direction that the random function has called but they are invalid. If all 4 directions were invalid the pacman will move back on his path*/
 			var directions = ["UP","DOWN","RIGHT","LEFT"];/*Arry that indicates the name of directions*/
 			var food=null;/*If one of the possibles directions has a food this variable will recieve the number that corresponds that direction */
-			/*Check if the direction 'UP' is available*/
-			valid = validateMoviment( this.positionX , this.positionY-1 );
-			/*if this direction has a wall or is a invalid direction this direction will recive 0 on the availableDirections arry*/
-			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)|| (valid==PACMAN && pacman.immune)){
-				this.availableDirections[0] = 0;
-			}
-			/*If there is food on this direction the ghost will move to this direction*/
-			else if(food==null&&valid==FOOD){
-				food = 0;
-			}
-			/*Else, this direction will be marked as valid on the availableDirections arry*/
-			else{	
-				this.availableDirections[0] = 1;
-			}
-			/*Check if the direction 'DOWN' is available*/
-			valid = validateMoviment( this.positionX , this.positionY+1 );
-			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
-				this.availableDirections[1] = 0;
-			}
-			else if(food==null&&valid==FOOD){
-				food = 1;
+			
+			pacmanDirection = this.sense()
+
+			if(pacmanDirection != null){
+				moveAccordingDirection(pacmanDirection, this)
 			}
 			else{
-				this.availableDirections[1] = 1;
-			}
-			/*Check if the direction 'RIGHT' is available*/
-			valid = validateMoviment( this.positionX+1 , this.positionY );
-			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
-				this.availableDirections[2] = 0;
-			}
-			else if(food==null && valid==FOOD){
-				food = 2;
-			}
-			else{
-				this.availableDirections[2] = 1;
-			}
-			/*Check if the direction 'LEFT' is available*/
-			valid = validateMoviment( this.positionX-1 , this.positionY );
-			if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
-				this.availableDirections[3] = 0;
-			}
-			else if(food==null && valid==FOOD){
-				food = 3;
-			}
-			else{
-				this.availableDirections[3] = 1;
+				/*Check if the direction 'UP' is available*/
+				valid = validateMoviment( this.positionX , this.positionY-1 );
+				/*if this direction has a wall or is a invalid direction this direction will recive 0 on the availableDirections arry*/
+				if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1)|| (valid==PACMAN && pacman.immune)){
+					this.availableDirections[0] = 0;
+				}
+				/*If there is food on this direction the ghost will move to this direction*/
+				else if(food==null&&valid==FOOD){
+					food = 0;
+				}
+				/*Else, this direction will be marked as valid on the availableDirections arry*/
+				else{	
+					this.availableDirections[0] = 1;
+				}
+				/*Check if the direction 'DOWN' is available*/
+				valid = validateMoviment( this.positionX , this.positionY+1 );
+				if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
+					this.availableDirections[1] = 0;
+				}
+				else if(food==null&&valid==FOOD){
+					food = 1;
+				}
+				else{
+					this.availableDirections[1] = 1;
+				}
+				/*Check if the direction 'RIGHT' is available*/
+				valid = validateMoviment( this.positionX+1 , this.positionY );
+				if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
+					this.availableDirections[2] = 0;
+				}
+				else if(food==null && valid==FOOD){
+					food = 2;
+				}
+				else{
+					this.availableDirections[2] = 1;
+				}
+				/*Check if the direction 'LEFT' is available*/
+				valid = validateMoviment( this.positionX-1 , this.positionY );
+				if(food==null&&(valid==false || valid==WALL || valid.search(GHOST)!=-1) || (valid==PACMAN && pacman.immune)){
+					this.availableDirections[3] = 0;
+				}
+				else if(food==null && valid==FOOD){
+					food = 3;
+				}
+				else{
+					this.availableDirections[3] = 1;
+				}
+				
+				/* If any food was found on any direction the ghost will move to this direction*/
+				if(food!= null){
+					moveAccordingDirection(directions[food], this);
+				}
+				/*Using the availableDirections arry a random function will choose one of the valid directions*/
+				else{
+					/*Set the opposite direction, it makes the opposit direction invalid(avoid the ghost go back on his path)*/
+					setOppositeDirection(this)
+					/*Check the number of valid directions*/
+					var numberOfValid  =  numberOfValidDirections(this);
+					/*If the function has retruned 4, it means that there are 2 or more valid directions, so the random function will be used*/
+					if(numberOfValid==4){
+						do{
+							/*Generates a random number between 0 and 1000*/
+							var direction = Math.round(Math.random()*1000);
+							/*If the number is multiple of 5 the ghost will move right*/
+							if(direction%5==0)
+								direction = 2;
+							/*If the number is multiple of 3 the ghost will move down*/
+							else if(direction%3==0)
+								direction = 1;
+							/*If the number is multiple of 2 the ghost will move up*/
+							else if(direction%2==0)
+								direction = 0;
+							/*Else the ghost will move to left*/
+							else
+								direction = 3;
+						
+							/*If that direction is a valid direction the ghost will move towards to this direction*/
+							if(this.availableDirections[direction]==1){
+								moveAccordingDirection(directions[direction], this);
+								break;	
+							}/*Else if this direction has not been called by the random funcion the position that represents that direction will recieve value 2, and the number of tryings will be decreased*/
+							else{
+								if(this.availableDirections[direction]!=2){
+									this.availableDirections[direction]=2;
+									trying--;
+								}
+							}	
+						/*In the worst case all directions (4) will be invalid*/					
+						}while(trying>0);
+					}
+					/*If the function numberOfValidDirections has retruned null it means that none directions is valid, so the ghost will go back on his path */
+					else if(numberOfValid==null){
+						//If go backwords is the only direction available do it.
+						moveAccordingDirection(this.oppositeDirection, this);
+					}
+					/*Else there is just one possible direction and it was retruned by the function numberOfValidDirections*/
+					else{
+						moveAccordingDirection(directions[numberOfValid], this)
+					}
+					
+					
+				}
 			}
 			
-			/* If any food was found on any direction the ghost will move to this direction*/
-			if(food!= null){
-				moveAccordingDirection(directions[food], this);
-			}
-			/*Using the availableDirections arry a random function will choose one of the valid directions*/
-			else{
-				/*Set the opposite direction, it makes the opposit direction invalid(avoid the ghost go back on his path)*/
-				setOppositeDirection(this)
-				/*Check the number of valid directions*/
-				var numberOfValid  =  numberOfValidDirections(this);
-				/*If the function has retruned 4, it means that there are 2 or more valid directions, so the random function will be used*/
-				if(numberOfValid==4){
-					do{
-						/*Generates a random number between 0 and 1000*/
-						var direction = Math.round(Math.random()*1000);
-						/*If the number is multiple of 5 the ghost will move right*/
-						if(direction%5==0)
-							direction = 2;
-						/*If the number is multiple of 3 the ghost will move down*/
-						else if(direction%3==0)
-							direction = 1;
-						/*If the number is multiple of 5 the ghost will move up*/
-						else if(direction%2==0)
-							direction = 0;
-						/*Else the ghost will move to left*/
-						else
-							direction = 3;
-					
-						/*If that direction is a valid direction the ghost will move towards to this direction*/
-						if(this.availableDirections[direction]==1){
-							moveAccordingDirection(directions[direction], this);
-							break;	
-						}/*Else if this direction has not been called by the random funcion the position that represents that direction will recieve value 2, and the number of tryings will be decreased*/
-						else{
-							if(this.availableDirections[direction]!=2){
-								this.availableDirections[direction]=2;
-								trying--;
-							}
-						}	
-					/*In the worst case all directions (4) will be invalid*/					
-					}while(trying>0);
-				}
-				/*If the function numberOfValidDirections has retruned null it means that none directions is valid, so the ghost will go back on his path */
-				else if(numberOfValid==null){
-					//If go backwords is the only direction available do it.
-					moveAccordingDirection(this.oppositeDirection, this);
-				}
-				/*Else there is just one possible direction and it was retruned by the function numberOfValidDirections*/
-				else{
-					moveAccordingDirection(directions[numberOfValid], this)
-				}
-				
-				
-			}
 		}
 	}
 	/*Function that "kills" the ghost*/
@@ -165,6 +174,26 @@ function Ghost( initialX, initialY, number ){
 		this.positionY = this.initialY;
 		
 	}
+
+	this.sense = function () {
+		possiblePositions = [[this.positionX+1, this.positionY, "RIGHT"],
+							 [this.positionX-1, this.positionY, "LEFT"],
+							 [this.positionX, this.positionY+1, "DOWN"],
+							 [this.positionX, this.positionY-1, "UP"],
+							]
+		possition = null;
+		for( i=0; i<pacman.path.length; i++){
+			for(j=0; j < possiblePositions.length; j++){
+				if(pacman.path[i][0] == possiblePositions[j][0] && 
+				   pacman.path[i][1] == possiblePositions[j][1]){
+					return possiblePositions[j][2];
+				}
+			}
+		}
+		
+		return possition;
+		
+	  } 
 	
 }
 	

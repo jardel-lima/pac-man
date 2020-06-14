@@ -11,7 +11,8 @@ function Pacman(){
     this.immune = false;/*Indicates if pacman is immune to the ghosts. It will happen when pacman dies, it will be immune for 3 seconds  */
     this.deathTime = null;/*Helps to control the immune time*/
     this.superPowerTime = null;/*Helps to control the super power time*/
-    this.ghostKilled = null;/*Indicates which ghost was killed by the pacman*/
+	this.ghostKilled = null;/*Indicates which ghost was killed by the pacman*/
+	this.path = []
 	
 	//Function that based on the pacman direction validate and change the possition of the pacman
 	this.move = function(){
@@ -164,6 +165,7 @@ function Pacman(){
 		this.lives--;
 		this.immune = true;
 		this.deathTime = game.time;
+		this.path = []
 		
 		this.direction = "RIGHT"
 		IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT2_IMMUNE.src+')';

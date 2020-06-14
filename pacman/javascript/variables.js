@@ -10,7 +10,8 @@
 	var PACMAN = 'P';
 	var EMPTY = 'e';
 	var EXIT = 'E';
-	var NUMBER_OF_SPECIAL_FOOD = 5;
+    var NUMBER_OF_SPECIAL_FOOD = 10;
+    var PACMAN_PATH_LENGTH = 8;
 	var IMG_PACMAN_RIGHT = new Image();
 	IMG_PACMAN_RIGHT.src = '../imgs/p_right.png';
 	var IMG_PACMAN_RIGHT_IMMUNE = new Image();

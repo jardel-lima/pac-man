@@ -21,9 +21,14 @@ function initiateMatrix() {
 //Print Matrix on browser's console
 function printMatrix(){
 	var rows = MATRIX.length;
+	MATRIX_COPY = JSON.parse(JSON.stringify(MATRIX));
+	for(i=0; i < pacman.path.length; i++){
+		if(MATRIX_COPY[pacman.path[i][1]][pacman.path[i][0]]==EMPTY)
+			MATRIX_COPY[pacman.path[i][1]][pacman.path[i][0]] = i
+	}
 	console.log("\n Matrix  \n");
 	for( var i = 0; i < rows; i++){
-		console.log("Row "+i+" "+MATRIX[i]);
+		console.log("Row "+i+" "+MATRIX_COPY[i]);
 	}
 }
 		
