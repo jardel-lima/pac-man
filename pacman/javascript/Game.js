@@ -56,10 +56,10 @@ function Game(){
 	this.restart = function(){
 			location.reload();
 			}
-	/*		
+			
 	this.gameOver = function(){
 		document.getElementById('endPhase').style.display='none'; // hide the div endPhase
-	}*/
+	}
 	
 	/*Function that controls ghost's actions*/		
 	this.ghostController = function(ghost1, ghost2, ghost3, ghost4 ){
@@ -224,7 +224,8 @@ function Game(){
     	 	/*The register form will be displayed*/
     	 	//document.getElementById('register').style.display='block';
     	 	document.getElementById('fade').style.display='block';
-    	 	this.status="STOP";
+			this.status="STOP";
+			window.location.href='../index.html' 
     	 /*When a map is completed it will ask he user if he wants to play another map*/	
     	 }else if(this.status=="PAUSE"){
 		     if(this.phase<NUMBER_OF_MAPS){
