@@ -54,7 +54,7 @@
 		<p>Please tell us your name. <br /><small><small>(Those information will appear in our ranking page)</small></small></p>
 		<p>
 		<form>
-		Your name: <input type="text" id="player_name" name="player_name" size="20" placeholder="Your Name"/><br />
+		Your name: <input type="text" id="player_name" name="player_name" size="15" placeholder="Your Name"/><br />
 		Your score: <span id="player_score">0</span><br />
 		Your time: <span id="player_time">0</span><br />
 		<div  id="buttonRegister" align="right" onclick="submitPlayer();">Submit<div/>
@@ -74,9 +74,9 @@
 	mapFile="map"+game.phase+".txt";
 	loadFile(mapFile);
 	var map = document.getElementById("divDataMap").innerHTML; // get new map
-	//loadRanking();
+	loadRanking();
 	game.initiate(map);
-	//updatePosition(0,0); 
+	updatePosition(0,0); 
         
 	printMatrix();
 	
@@ -170,7 +170,7 @@
                     game.prisonTime++;
                     updateRankingTime++;
                     if(updateRankingTime>5){
-                        //updatePosition(game.score,game.time);
+                        updatePosition(game.score,game.time);
                         updateRankingTime=0;
               
                     }

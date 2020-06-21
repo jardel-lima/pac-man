@@ -1,0 +1,21 @@
+version: '2'
+services:
+  pacman:
+    build: .
+    volumes:
+      - ./pacman:/var/www/html
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - pacman-db
+  pacman-db:
+    image: mysql/mysql-server
+    volumes:
+      - ./pacman/sql:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+          - MYSQL_ROOT_PASSWORD=root#123
+          - MYSQL_DATABASE=pacman
+          - MYSQL_USER=pacman
+          - MYSQL_PASSWORD=pacman#123

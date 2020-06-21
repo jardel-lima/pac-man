@@ -1,13 +1,13 @@
 <?php
-$host = "localhost";
-$user = "f2014_user24";
-$password = "f2014_user24";
-$database = "f2014_user24";
-$tableName= "players";
+$host = "pacman-db";
+$user = "pacman";
+$password = "pacman#123";
+$database = "pacman";
+$tableName= "players_ranking";
  		
 $myCon = mysqli_connect($host,$user,$password,$database); // try to connect to the mysql server
   
-  if(mysqli_connect_errno())
+  if(!$myCon)
   {
   	echo "error connection";
 	exit();
@@ -32,12 +32,12 @@ $myCon = mysqli_connect($host,$user,$password,$database); // try to connect to t
                                             $aux-=10;
                                     if($aux==1)
                                         $word="st";
-                                        elseif ($aux==2)
-                                               $word = "nd";
-                                        elseif($aux==3)
-                                                $word ="rd";
-                                        else
-                                            $word= "th";
+									elseif ($aux==2)
+											$word = "nd";
+									elseif($aux==3)
+											$word ="rd";
+									else
+										$word= "th";
                                    
 					$tableFinal=$tableFinal."<tr>";
 					

@@ -217,15 +217,15 @@ function Game(){
     	 /*When the game is over ask the plyer to enter a user name and save his score and time on the DB*/
     	 else if(this.status=="OVER"){
     	 	/*Load the number of Players that have been registered*/
-    	 	//loadNumberOfPlayers();
+    	 	loadNumberOfPlayers();
     	 	/*Update the player score and time on the register div*/
     	 	document.getElementById("player_score").innerHTML=this.score;
     	 	document.getElementById("player_time").innerHTML=this.time;
     	 	/*The register form will be displayed*/
-    	 	//document.getElementById('register').style.display='block';
+    	 	document.getElementById('register').style.display='block';
     	 	document.getElementById('fade').style.display='block';
 			this.status="STOP";
-			window.location.href='../index.html' 
+			/*window.location.href='../index.html'*/
     	 /*When a map is completed it will ask he user if he wants to play another map*/	
     	 }else if(this.status=="PAUSE"){
 		     if(this.phase<NUMBER_OF_MAPS){
