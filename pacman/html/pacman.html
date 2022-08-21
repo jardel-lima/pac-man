@@ -8,16 +8,16 @@
     <link rel="SHORTCUT ICON" href="../imgs/pacman_icon.ico" type="image/x-icon" />
 	<link rel="ICON" href="../imgs/pacman_icon.ico" type="image/ico" />
     <script type="text/javascript" src="../javascript/xmlHttp.js"></script>
-    <script type="text/javascript" src="../javascript/variables.js"></script>
+	<script type="text/javascript" src="../javascript/variables.js"></script>
+	<script type="text/javascript" src="../javascript/pacman.js"></script>
+    <script type="text/javascript" src="../javascript/Ghost.js"></script>
     <script type="text/javascript" src="../javascript/gameAuxiliary.js"></script>
     <script type="text/javascript" src="../javascript/pacmanAuxiliary.js"></script>
-    <script type="text/javascript" src="../javascript/ghostAuxiliary.js"></script>
-    <script type="text/javascript" src="../javascript/Pacman.js"></script>
-    <script type="text/javascript" src="../javascript/Ghost.js"></script>
+    <script type="text/javascript" src="../javascript/ghostAuxiliary.js"></script>    
     <script type="text/javascript" src="../javascript/Game.js"></script>
     <script type="text/javascript" src="../javascript/fileReader.js"></script>
     <script type="text/javascript" src="../javascript/register.js"></script>
-    <script type="text/javascript" src="../javascript/ranking.js"></script>
+    <!-- <script type="text/javascript" src="../javascript/ranking.js"></script> -->
 </head>
 <body> 
 	<div id="fade" class="black_overlay"></div>
@@ -33,7 +33,6 @@
         <div>Score: <div class="edtWhite"><span id="score"> 0</span></div></div>
         <div>Lives:<div class="edtWhite"><span id="lives"> </span></div></div>
         <div>Time: <div class="edtWhite"><span id="time"> </span></div></div>
-        <div>Your Ranking: <div class="edtWhite"><span id="dynamicRanking">&emsp; </span></div></div>
     </div>
     
     <div id="divGame"></div>
@@ -43,6 +42,9 @@
         <div class="divButton" id="endGameButton" onclick="game.status='OVER';" >End Game</div>
         <div class="divButton" id="nextPhase" onclick="game.changePhase();" >Next Phase</div>            
     </div>
+	<audio controls loop>
+		<source src="../audio/pacman_beginning.wav" type="audio/wav">
+	</audio>
     
     <div class="divFoot" id="divFoot" align="center">
         <a href="../index.html"><div class="divButton">Return Menu</div></a>
@@ -54,7 +56,7 @@
 		<p>Please tell us your name. <br /><small><small>(Those information will appear in our ranking page)</small></small></p>
 		<p>
 		<form>
-		Your name: <input type="text" id="player_name" name="player_name" size="20" placeholder="Your Name"/><br />
+		Your name: <input type="text" id="player_name" name="player_name" size="15" placeholder="Your Name"/><br />
 		Your score: <span id="player_score">0</span><br />
 		Your time: <span id="player_time">0</span><br />
 		<div  id="buttonRegister" align="right" onclick="submitPlayer();">Submit<div/>
@@ -70,15 +72,21 @@
 	
 	var game = new Game();
 
-        game.phase++;                    
-        mapFile="map"+game.phase+".txt";
-        loadFile(mapFile);
+	game.phase++;                    
+	mapFile="map"+game.phase+".txt";
+
+	callback = function(map, game_instance){
+		game_instance.initiate(map);
+		updatePosition(0,0); 
+		printMatrix();
+	}
+
+	loadFile(mapFile, callback, game);
+	//loadLocalFile(mapFile);
 	var map = document.getElementById("divDataMap").innerHTML; // get new map
-        loadRanking();
-		game.initiate(map);
-        updatePosition(0,0); 
-        
-	printMatrix();
+	//loadRanking();
+	//game.initiate(map);
+	
 	
 	//keyboard events----------------------------------------------------
 		document.onkeydown = checkKey;

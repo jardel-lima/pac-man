@@ -10,7 +10,8 @@
 	var PACMAN = 'P';
 	var EMPTY = 'e';
 	var EXIT = 'E';
-	var NUMBER_OF_SPECIAL_FOOD = 5;
+    var NUMBER_OF_SPECIAL_FOOD = 10;
+    var PACMAN_PATH_LENGTH = 8;
 	var IMG_PACMAN_RIGHT = new Image();
 	IMG_PACMAN_RIGHT.src = '../imgs/p_right.png';
 	var IMG_PACMAN_RIGHT_IMMUNE = new Image();
@@ -64,9 +65,9 @@
     var ghost2=null;
     var ghost3=null;
     var ghost4=null;
-    var tableHeight= window.innerHeight*0.7;
-    var tableWidth = tableHeight*0.625;
-    var divWidth = tableWidth*3.0;
+    var tableHeight= window.innerHeight*0.8;
+    var tableWidth = tableHeight*0.8;
+    var divWidth = tableWidth*3;
     //var wait =true;
     var rankingTable=null;
     var updateRankingTime=0;

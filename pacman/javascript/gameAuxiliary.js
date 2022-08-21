@@ -3,7 +3,7 @@ function initiateMatrix() {
 		var table="<table border='"+1+"' width='"+tableWidth+"px'  height='"+tableHeight+"px' align='center' id=\"tableGame\">";
 		for(var i = 0; i < ROWS; i++){
 			var matrix = [];
-			table+="<tr height='"+5+"'>"
+			table+="<tr height='"+25+"'>"
 			for(var j = 0; j < COLUMNS; j++){
 				matrix.push(0);
 				table+="<td></td>"; 
@@ -21,9 +21,14 @@ function initiateMatrix() {
 //Print Matrix on browser's console
 function printMatrix(){
 	var rows = MATRIX.length;
+	MATRIX_COPY = JSON.parse(JSON.stringify(MATRIX));
+	for(i=0; i < pacman.path.length; i++){
+		if(MATRIX_COPY[pacman.path[i][1]][pacman.path[i][0]]==EMPTY)
+			MATRIX_COPY[pacman.path[i][1]][pacman.path[i][0]] = i
+	}
 	console.log("\n Matrix  \n");
 	for( var i = 0; i < rows; i++){
-		console.log("Row "+i+" "+MATRIX[i]);
+		console.log("Row "+i+" "+MATRIX_COPY[i]);
 	}
 }
 		
@@ -61,9 +66,10 @@ function populateTable(){
 //Read a map form a string and return the quantity of food on that map
 function readMap(map){
 	var quantityOfFood = 0
+	map = map.replace(/\n/g,"")
 	for(var i = 0; i <  ROWS; i++){
 	    var aux = map.substr(i*(COLUMNS),COLUMNS)
-	    aux = aux.replace("\n","");
+	    //aux = aux.replace("\n","");
 	    for(var j = 0; j < COLUMNS; j++){
 	    	if(aux.charAt(j)=='0'){
 	    		MATRIX[i][j]= WALL;
@@ -75,7 +81,7 @@ function readMap(map){
 	}
 	/*If the pacman has not been created it will create him*/
 	if(pacman==null)
-                pacman = new Pacman();
+        pacman = new Pacman();
     /*If the pacman has been created just change his positions*/
     else{
     //reset pacman's properties
@@ -86,8 +92,8 @@ function readMap(map){
 	    pacman.immune = false;
     }
 	MATRIX[pacman.positionY][pacman.positionX] = PACMAN;// The pacman will start in the same possition
-	quantityOfFood = quantityOfFood - NUMBER_OF_SPECIAL_FOOD;/*Just normal(yellow) food will be considered to finish the map*/
-	return quantityOfFood;
+	//quantityOfFood = quantityOfFood - NUMBER_OF_SPECIAL_FOOD;/*Just normal(yellow) food will be considered to finish the map*/
+	return quantityOfFood - 1;
 }
 		
 //Create 4 ghosts that will start always in the same position
@@ -173,8 +179,8 @@ function checkRanking(score,time){
 }
 
 function updatePosition(score,time){
-    newPosition = checkRanking(score,time);
-    document.getElementById('dynamicRanking').innerHTML = newPosition;
+    //newPosition = checkRanking(score,time);
+    //document.getElementById('dynamicRanking').innerHTML = newPosition;
     
 }
 
@@ -206,8 +212,8 @@ function afterAlert(){
 		window.location="../index.html"
 	}
 	else if(game.alert=="REGISTER"){
-		document.getElementById('register').style.display='none';
-        window.location="../html/ranking.html"
+		//document.getElementById('register').style.display='none';
+        //window.location="../html/ranking.html"
 	}
 	
 }
