@@ -3,7 +3,7 @@ function initiateMatrix() {
 		var table="<table border='"+1+"' width='"+tableWidth+"px'  height='"+tableHeight+"px' align='center' id=\"tableGame\">";
 		for(var i = 0; i < ROWS; i++){
 			var matrix = [];
-			table+="<tr height='"+20+"'>"
+			table+="<tr height='"+25+"'>"
 			for(var j = 0; j < COLUMNS; j++){
 				matrix.push(0);
 				table+="<td></td>"; 
@@ -179,8 +179,8 @@ function checkRanking(score,time){
 }
 
 function updatePosition(score,time){
-    newPosition = checkRanking(score,time);
-    document.getElementById('dynamicRanking').innerHTML = newPosition;
+    //newPosition = checkRanking(score,time);
+    //document.getElementById('dynamicRanking').innerHTML = newPosition;
     
 }
 
@@ -212,8 +212,8 @@ function afterAlert(){
 		window.location="../index.html"
 	}
 	else if(game.alert=="REGISTER"){
-		document.getElementById('register').style.display='none';
-        window.location="../html/ranking.html"
+		//document.getElementById('register').style.display='none';
+        //window.location="../html/ranking.html"
 	}
 	
 }

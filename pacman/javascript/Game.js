@@ -13,14 +13,18 @@ function Game(){
 	this.initiate = function(map){
 			if(this.status == "STOP"){
 				initiateMatrix();
-				this.quantityOfFood = readMap(map);
-				populateMATRIX(map);
-                document.getElementById('map').innerHTML=this.phase+"/"+NUMBER_OF_MAPS;
-                                
+				this.loadMap(map, this);                      
 			}
 			
 				
-		}	
+		}
+
+	this.loadMap = function(map, game_instance){
+		game_instance.quantityOfFood= readMap(map); 
+        populateMATRIX(map);
+		document.getElementById('map').innerHTML=this.phase+"/"+NUMBER_OF_MAPS;
+	}
+
 	/*Function that changes the game's map*/		
 	this.changePhase = function(){
                 this.phase++; 
@@ -30,24 +34,24 @@ function Game(){
                 /*Function that cleans the MATRIX*/
                 cleanMATRIX();                 
                 /*Function that load the mapFile from the server*/
-                loadFile(mapFile);
+                loadFile(mapFile, this.loadMap, this);
                 /*The read map from the server will be saved in a div called "divDataMap"*/
-                var map = document.getElementById("divDataMap").innerHTML; // get new map
+               // var map = document.getElementById("divDataMap").innerHTML; // get new map
                
                 /*If the messenge "File not found" was returned from the server the sought file was not found*/
-                if(map.search("File not found")!=-1){
+                /*
+				if(map.search("File not found")!=-1){
                     
                     this.alert="ERROR";
                     alertBox("Server Error!");
                     
-                }
+                }*/
+
+				//loadMap(map);
                
                 IMG_PACMAN = 'url('+IMG_PACMAN_RIGHT.src+')'; // update pacman's image to initial direction
                
-                this.quantityOfFood= readMap(map); 
-                populateMATRIX(map);
-               
-                document.getElementById('map').innerHTML = this.phase+"/"+NUMBER_OF_MAPS;    //update phase html element            
+        		//update phase html element            
                 document.getElementById('fade').style.display='none';      
                         
 			}
@@ -222,10 +226,10 @@ function Game(){
     	 	document.getElementById("player_score").innerHTML=this.score;
     	 	document.getElementById("player_time").innerHTML=this.time;
     	 	/*The register form will be displayed*/
-    	 	document.getElementById('register').style.display='block';
-    	 	document.getElementById('fade').style.display='block';
+    	 	//document.getElementById('register').style.display='block';
+    	 	//document.getElementById('fade').style.display='block';
 			this.status="STOP";
-			/*window.location.href='../index.html'*/
+			window.location.href='../index.html'
     	 /*When a map is completed it will ask he user if he wants to play another map*/	
     	 }else if(this.status=="PAUSE"){
 		     if(this.phase<NUMBER_OF_MAPS){

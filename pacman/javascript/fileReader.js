@@ -1,22 +1,22 @@
  var dataFile;
 
-	function handleFileServerResponse()  {
-		            // move forward only if the transaction has completed
-		            if (xmlHttp.readyState == 4)    {
-		                    // status of 200 indicates the transaction completed successfully
-		                    if (xmlHttp.status == 200)  {
-		                        
-		                    	dataFile= xmlHttp.responseText; // the server response 
-		                        document.getElementById("divDataMap").innerHTML=dataFile; // put the new map in a div to get it in game.js
-		                    }
-		                    // a HTTP status different than 200 signals an error
-		                    else  {
-		                            alert("There was a problem accessing the server: " + xmlHttp.statusText);
-		                    }
-		            }
-		    }                
+function handleFileServerResponse()  {
+				// move forward only if the transaction has completed
+				if (xmlHttp.readyState == 4)    {
+						// status of 200 indicates the transaction completed successfully
+						if (xmlHttp.status == 200)  {
+							
+							dataFile= xmlHttp.responseText; // the server response 
+							document.getElementById("divDataMap").innerHTML=dataFile; // put the new map in a div to get it in game.js
+						}
+						// a HTTP status different than 200 signals an error
+						else  {
+								alert("There was a problem accessing the server: " + xmlHttp.statusText);
+						}
+				}
+		}                
  
- function loadFile(file) {
+ function loadFileFromServer(file) {
          
 	if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0)   {  
  			
@@ -37,7 +37,7 @@
 
 } 
 
-function loadLocalFile(file){
+async function loadLocalFile(file){
 	
 dataFile= `00000000000000000000
 0                  0
@@ -74,4 +74,13 @@ dataFile= `00000000000000000000
 	console.log(dataFile);
 	
                 } 
-                         
+
+async function loadFile(file, callbak){
+	console.log(file);
+	response =   await fetch("/maps/"+file);
+	dataFile =   await response.text();
+	console.log(dataFile);
+	callbak(dataFile, arguments[2]);
+
+}
+
